@@ -3,7 +3,7 @@ extends Node2D
 var pressed = false
 var old_position
 
-var initial_position
+var initial_position = null
 var speed = 10.0
 
 var max_x
@@ -18,7 +18,8 @@ func _ready():
 	var height = $card.get_texture().get_size().y
 	max_x = get_viewport().get_visible_rect().size.x - width
 	max_y = get_viewport().get_visible_rect().size.y - height
-	initial_position = position
+	if(initial_position == null):
+		initial_position = position
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
@@ -53,8 +54,10 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 
 
 func _on_Area2D_mouse_entered():
+	scale = Vector2(2, 2)
 	$selection.visible = true
 
 
 func _on_Area2D_mouse_exited():
+	scale = Vector2(1, 1)
 	$selection.visible = false

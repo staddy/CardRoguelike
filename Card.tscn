@@ -9,13 +9,17 @@
 custom_solver_bias = 0.0
 extents = Vector2( 13, 13 )
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Node2D" index="0"]
 
+position = Vector2( 20, 30 )
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="card" type="Sprite" parent="." index="0"]
 
-position = Vector2( 20, 30 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -23,6 +27,7 @@ __meta__ = {
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
 
+position = Vector2( -20, -30 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -47,7 +52,6 @@ __meta__ = {
 [node name="selection" type="Sprite" parent="." index="2"]
 
 visible = false
-position = Vector2( 20, 30 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Visibility" ]
 __meta__ = {

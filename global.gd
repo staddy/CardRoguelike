@@ -6,8 +6,44 @@ var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
 
+var cards = { 0 : {
+				   "name" : "Attack",
+				   "cost" : 1,
+				   "description" : "Deals 10 damage",
+				   "type" : "attack"
+				  },
+			  1 : {
+				   "name" : "Defence",
+				   "cost" : 1,
+				   "description" : "Increases block by 10",
+				   "type" : "skill"
+				  }
+			}
+
 var default_hand_size = 5
 var deck = []
+
+func init_card(card, id):
+	card.card_name = cards[id].name
+	card.cost = cards[id].cost
+	card.description = cards[id].description
+	card.type = cards[id].type
+
+func shuffle_list(list):
+    var shuffledList = [] 
+    var indexList = range(list.size())
+    for i in range(list.size()):
+        var x = randi()%indexList.size()
+        shuffledList.append(list[indexList[x]])
+        indexList.remove(x)
+    return shuffledList
+
+func init_deck():
+	deck.clear()
+	for i in range(5):
+		deck.append(0)
+	for i in range(5):
+		deck.append(1)
 
 signal unselect_all()
 

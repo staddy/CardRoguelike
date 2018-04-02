@@ -22,4 +22,5 @@ func _on_Button_pressed():
 
 
 func _on_Button2_pressed():
+	global.init_deck()
 	global.goto_scene(global.Battle)

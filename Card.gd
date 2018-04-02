@@ -1,5 +1,22 @@
 extends Node2D
 
+var card_name setget set_card_name
+var cost setget set_cost
+var description setget set_description
+var type
+
+func set_card_name(value):
+	card_name = value
+	$Name.text = value
+
+func set_cost(value):
+	cost = value
+	$Cost.text = str(value)
+
+func set_description(value):
+	description = value
+	$Description.text = value
+
 var pressed = false
 var selected = false setget set_selected
 var scale_factor = 1.5

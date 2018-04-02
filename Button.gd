@@ -23,7 +23,7 @@ func _ready():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if global.lock():
-		if (event is InputEventMouseButton and event.is_pressed()) or event is InputEventScreenTouch:
+		if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
 			emit_signal("pressed")
 		global.unlock()
 

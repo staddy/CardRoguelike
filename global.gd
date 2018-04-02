@@ -2,9 +2,14 @@ extends Node
 
 var current_scene = null
 var Battle = preload("res://Battle.tscn")
+var mutex = Mutex.new()
+var mutex_selection = Mutex.new()
+var locked = false
 
 var default_hand_size = 5
 var deck = []
+
+signal unselect_all()
 
 func _ready():
 	var root = get_tree().get_root()
@@ -30,3 +35,18 @@ func _deferred_goto_scene(scene):
 
     # optional, to make it compatible with the SceneTree.change_scene() API
     get_tree().set_current_scene(current_scene)
+
+func lock():
+	mutex.lock()
+	if locked:
+		mutex.unlock()
+		return false
+	else:
+		locked = true
+		mutex.unlock()
+		return true
+
+func unlock():
+	mutex.lock()
+	locked = false
+	mutex.unlock()

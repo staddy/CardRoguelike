@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Card.gd" type="Script" id=1]
 [ext_resource path="res://card.png" type="Texture" id=2]
 [ext_resource path="res://selection.png" type="Texture" id=3]
+[ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 13, 13 )
+extents = Vector2( 26, 26 )
 
 [node name="Card" type="Node2D" index="0"]
 
@@ -27,7 +28,7 @@ __meta__ = {
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
 
-position = Vector2( -20, -30 )
+position = Vector2( -40, -60 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -35,14 +36,14 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
-position = Vector2( 20, 30 )
+position = Vector2( 40, 60 )
 scale = Vector2( 1.53846, 2.30769 )
 shape = SubResource( 1 )
 __meta__ = {
@@ -52,6 +53,7 @@ __meta__ = {
 [node name="selection" type="Sprite" parent="." index="2"]
 
 visible = false
+scale = Vector2( 0.666667, 0.666667 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Visibility" ]
 __meta__ = {
@@ -64,17 +66,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -17.0
-margin_top = -29.0
-margin_right = -1.0
-margin_bottom = -14.0
-rect_scale = Vector2( 0.7, 0.7 )
+margin_left = -32.0
+margin_top = -55.0
+margin_right = -22.0
+margin_bottom = -44.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = false
 bbcode_text = ""
 visible_characters = -1
@@ -97,17 +99,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -8.0
-margin_top = -27.0
-margin_right = 32.0
-margin_bottom = -11.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -17.0
+margin_top = -54.0
+margin_right = 33.0
+margin_bottom = -38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = false
 bbcode_text = ""
 visible_characters = -1
@@ -119,7 +121,7 @@ scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "Mouse", "Rect" ]
+_sections_unfolded = [ "Mouse", "Rect", "custom_colors", "custom_fonts" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -130,17 +132,18 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -16.0
-margin_top = 3.0
-margin_right = 94.0
-margin_bottom = 83.0
-rect_scale = Vector2( 0.3, 0.3 )
+margin_left = -33.0
+margin_top = 5.0
+margin_right = 64.0
+margin_bottom = 76.0
+rect_scale = Vector2( 0.7, 0.7 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = false
 bbcode_text = ""
 visible_characters = -1
@@ -152,10 +155,7 @@ scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "Mouse", "Rect" ]
-__meta__ = {
-"_edit_lock_": true
-}
+_sections_unfolded = [ "Mouse", "Rect", "custom_fonts" ]
 
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 

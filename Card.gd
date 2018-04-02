@@ -2,9 +2,10 @@ extends Node2D
 
 var pressed = false
 var selected = false setget set_selected
+var scale_factor = 1.5
 func set_selected(value):
 	if value:
-		scale = Vector2(1.5, 1.5)
+		scale = Vector2(scale_factor, scale_factor)
 		$selection.visible = true
 		selected = true
 		z_index = 1
@@ -23,6 +24,9 @@ var old_position
 var initial_position = null
 var speed = 10.0
 
+var width
+var height
+
 var max_x
 var max_y
 
@@ -32,10 +36,10 @@ func _ready():
 	#set_process_input(false)
 	#$Area2D.visible = false
 	global.connect("unselect_all", self, "unselect")
-	var width = $card.get_texture().get_size().x
-	var height = $card.get_texture().get_size().y
-	max_x = get_viewport().get_visible_rect().size.x - width
-	max_y = get_viewport().get_visible_rect().size.y - height
+	width = $card.get_texture().get_size().x
+	height = $card.get_texture().get_size().y
+	max_x = get_viewport().get_visible_rect().size.x - width / 2
+	max_y = get_viewport().get_visible_rect().size.y - height / 2
 	if(initial_position == null):
 		initial_position = position
 
@@ -52,12 +56,12 @@ func _input(event):
 	if pressed and selected:
 		if (event is InputEventMouseMotion or event is InputEventScreenDrag) and pressed:
 			self.position += (event.position - old_position)
-			if(self.position.x < 0):
-				self.position.x = 0
+			if(self.position.x < width / 2):
+				self.position.x = width / 2
 			elif(self.position.x > max_x):
 				self.position.x = max_x
-			if(self.position.y < 0):
-				self.position.y = 0
+			if(self.position.y < height / 2):
+				self.position.y = height / 2
 			elif(self.position.y > max_y):
 				self.position.y = max_y
 			old_position = event.position

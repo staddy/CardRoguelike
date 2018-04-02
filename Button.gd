@@ -14,6 +14,9 @@ func set_selected(value):
 		selected = false
 		z_index = 0
 
+func unselect():
+	self.selected = false
+
 func _ready():
 	global.connect("unselect_all", self, "unselect")
 

@@ -19,18 +19,29 @@ func _ready():
 
 func draw_cards():
 	for i in range(global.default_hand_size):
-		var card = Card.instance()
-		#card.initial_position = Vector2(i * 50, 100)
-		card.position = Vector2(0, 0)
-		var id = draw_pile.pop_back()
-		global.init_card(card, id)
-		cards.append(card)
-		add_child(card)
-	reposition_cards()
+		draw_card()
 	pass
 
 func discard_card(card):
+	discard_pile.append(card.card_id)
+	cards.remove(cards.find(card))
+	card.queue_free()
 	pass
+
+func reshuffle():
+	draw_pile = global.shuffle_list(discard_pile)
+	discard_pile.clear()
+
+func draw_card():
+	if draw_pile.size() == 0:
+		reshuffle()
+	var card = Card.instance()
+	card.position = Vector2(0, 0)
+	var id = draw_pile.pop_back()
+	global.init_card(card, id)
+	cards.append(card)
+	add_child(card)
+	reposition_cards()
 
 func play_card(card):
 	if selected_card and selected_enemy:

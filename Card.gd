@@ -49,8 +49,6 @@ var max_x
 var max_y
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
 	#set_process_input(false)
 	#$Area2D.visible = false
 	global.connect("unselect_all", self, "unselect")
@@ -62,8 +60,6 @@ func _ready():
 		initial_position = position
 
 #func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
 #	pass
 
 func _process(delta):

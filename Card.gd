@@ -6,6 +6,10 @@ var cost setget set_cost
 var description setget set_description
 var type
 
+var selection_ = preload("res://selection.png")
+var selection_play = preload("res://selection_play.png")
+var selection_attack = preload("res://selection_attack.png")
+
 func set_card_name(value):
 	card_name = value
 	$Name.text = value
@@ -58,6 +62,8 @@ func _ready():
 	max_y = get_viewport().get_visible_rect().size.y - height / 2
 	if(initial_position == null):
 		initial_position = position
+	if get_parent().is_in_group("battle"):
+		get_parent().cards.append(self)
 
 #func _process(delta):
 #	pass
@@ -68,6 +74,7 @@ func _process(delta):
 
 func _input(event):
 	if pressed and selected:
+		var parent = get_parent()
 		if (event is InputEventMouseMotion or event is InputEventScreenDrag) and pressed:
 			self.position += (event.position - old_position)
 			if(self.position.x < width / 2):
@@ -79,14 +86,28 @@ func _input(event):
 			elif(self.position.y > max_y):
 				self.position.y = max_y
 			old_position = event.position
+			if parent.is_in_group("battle"):
+				if type == "attack" and parent.selected_enemy != null:
+					$selection.texture = selection_attack
+				elif type != "attack" and event.position.y < parent.get_node("Play").position.y:
+					$selection.texture = selection_play
+				else:
+					$selection.texture = selection_
 		elif not event.is_pressed():
 			self.selected = false
 			pressed = false
-			if get_parent().is_in_group("battle"):
-				if event.position.y < get_parent().get_node("Play").position.y:
-					get_parent().play_card(self)
-				get_parent().selected_card = null
+			if parent.is_in_group("battle"):
+				if event.position.y < parent.get_node("Play").position.y:
+					parent.play_card(self)
 			global.unlock()
+
+func remove():
+	var parent = get_parent()
+	if parent.is_in_group("battle"):
+		parent.cards.remove(parent.cards.find(self))
+		if parent.selected_card == self:
+			parent.selected_card = null
+	queue_free()
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):

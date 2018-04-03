@@ -7,9 +7,9 @@ extends Node2D
 func _ready():
 	# Called every time the node is added to the scene.
 	#OS.set_window_maximized(true)
-	OS.set_window_fullscreen(true)
+	#OS.set_window_fullscreen(true)
 	# Initialization here
-	#pass
+	pass
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

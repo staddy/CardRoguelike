@@ -1,5 +1,6 @@
 extends Node2D
 
+var card_id
 var card_name setget set_card_name
 var cost setget set_cost
 var description setget set_description
@@ -85,6 +86,10 @@ func _input(event):
 		elif not event.is_pressed():
 			self.selected = false
 			pressed = false
+			if get_parent().is_in_group("battle"):
+				if event.position.y < get_parent().get_node("Play").position.y:
+					get_parent().play_card(self)
+				get_parent().selected_card = null
 			global.unlock()
 
 
@@ -95,6 +100,9 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 			global.emit_signal("unselect_all")
 			self.selected = true
 			pressed = true
+			if get_parent().is_in_group("battle"):
+				get_parent().selected_card = self
+			
 
 
 func _on_Area2D_mouse_entered():

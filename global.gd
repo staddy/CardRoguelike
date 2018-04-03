@@ -24,6 +24,7 @@ var default_hand_size = 5
 var deck = []
 
 func init_card(card, id):
+	card.card_id = id
 	card.card_name = cards[id].name
 	card.cost = cards[id].cost
 	card.description = cards[id].description

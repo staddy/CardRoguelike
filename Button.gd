@@ -1,4 +1,10 @@
+tool
 extends Node2D
+
+export var text = "" setget set_text
+func set_text(value):
+	text = value
+	$Label.text = value
 
 signal pressed()
 
@@ -18,21 +24,22 @@ func unselect():
 	self.selected = false
 
 func _ready():
-	global.connect("unselect_all", self, "unselect")
+	if(!Engine.editor_hint):
+		get_node("/root/global").connect("unselect_all", self, "unselect")
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	if global.lock():
+	if get_node("/root/global").lock():
 		if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
 			emit_signal("pressed")
-		global.unlock()
+		get_node("/root/global").unlock()
 
 func _on_Area2D_mouse_entered():
-	if !global.locked:
-		global.emit_signal("unselect_all")
+	if !get_node("/root/global").locked:
+		get_node("/root/global").emit_signal("unselect_all")
 		self.selected = true
 
 
 func _on_Area2D_mouse_exited():
-	if !global.locked:
+	if !get_node("/root/global").locked:
 		self.selected = false

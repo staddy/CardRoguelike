@@ -22,10 +22,12 @@ position = Vector2( 108, 164 )
 [node name="Button" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 284.802, 211.651 )
+text = "EXIT"
 
 [node name="Button2" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 210.703, 106.046 )
+text = "START"
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

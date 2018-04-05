@@ -78,7 +78,7 @@ func _process(delta):
 func _input(event):
 	if pressed and selected:
 		var parent = get_parent()
-		if (event is InputEventMouseMotion or event is InputEventScreenDrag) and pressed:
+		if event is InputEventMouseMotion or event is InputEventScreenDrag:
 			self.position += (event.position - old_position)
 			if(self.position.x < width / 2):
 				self.position.x = width / 2
@@ -96,7 +96,7 @@ func _input(event):
 					$selection.texture = selection_play
 				else:
 					$selection.texture = selection_
-		elif not event.is_pressed():
+		elif (event is InputEventMouseButton or event is InputEventScreenTouch) and not event.is_pressed():
 			self.selected = false
 			pressed = false
 			if parent.is_in_group("battle"):

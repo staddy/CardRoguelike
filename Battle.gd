@@ -17,15 +17,17 @@ var enemies = []
 var selected_card = null
 var selected_enemy = null
 
-var hp setget set_hp
+var hp = 10 setget set_hp
 func set_hp(value):
-	# TODO: update value on the scene
 	hp = value
+	$TextureProgress.value = value
+	$TextureProgress.get_node("Label").text = str(hp) + " of " + str(max_hp)
 
-var max_hp setget set_max_hp
+var max_hp = 10 setget set_max_hp
 func set_max_hp(value):
-	# TODO: update value on the scene
 	max_hp = value
+	$TextureProgress.max_value = value
+	$TextureProgress.get_node("Label").text = str(hp) + " of " + str(max_hp)
 
 var mana setget set_mana
 func set_mana(value):
@@ -38,6 +40,8 @@ func set_max_mana(value):
 	max_mana = value
 
 func _ready():
+	self.max_hp = 70
+	self.hp = 70
 	draw_pile = global.shuffle_list(global.deck)
 	draw_cards()
 	pass

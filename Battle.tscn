@@ -103,4 +103,6 @@ __meta__ = {
 position = Vector2( 757, 237 )
 text = "END TURN"
 
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+
 

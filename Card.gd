@@ -26,18 +26,23 @@ func set_description(value):
 var pressed = false
 var selected = false setget set_selected
 var scale_factor = 1.5
+
+var old_z_index = 0
+
 func set_selected(value):
-	if value:
-		scale = Vector2(scale_factor, scale_factor)
-		$selection.visible = true
-		selected = true
-		z_index = 1
-		#get_parent().move_child(self, get_parent().get_child_count() - 1)
-	else:
-		scale = Vector2(1, 1)
-		$selection.visible = false
-		selected = false
-		z_index = 0
+	if selected != value:
+		if value:
+			scale = Vector2(scale_factor, scale_factor)
+			$selection.visible = true
+			selected = true
+			old_z_index = z_index
+			z_index = 1
+			#get_parent().move_child(self, get_parent().get_child_count() - 1)
+		else:
+			scale = Vector2(1, 1)
+			$selection.visible = false
+			selected = false
+			z_index = old_z_index
 
 func unselect():
 	self.selected = false

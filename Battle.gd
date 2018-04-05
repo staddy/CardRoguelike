@@ -17,6 +17,9 @@ var enemies = []
 var selected_card = null
 var selected_enemy = null
 
+var enemy_turn = false
+var current_enemy = 0
+
 var hp = 10 setget set_hp
 func set_hp(value):
 	hp = value
@@ -86,7 +89,32 @@ func reposition_cards():
 	var i = 1
 	for c in cards:
 		c.initial_position = Vector2($CardsStart.position.x + i * offset, $CardsStart.position.y)
+		c.z_index = -i
 		i += 1
+
+func damage_player(value):
+	self.hp = (self.hp - value)
+	pass
+
+func enemy_finished():
+	if current_enemy < enemies.size():
+		current_enemy += 1
+		enemies[current_enemy - 1].turn()
+	else:
+		enemy_turn = false
+		draw_cards()
+	pass
+
+func end_turn():
+	enemy_turn = true
+	current_enemy = 0
+	enemy_finished()
+	pass
 
 #func _process(delta):
 #	pass
+
+
+func _on_Button_pressed():
+	end_turn()
+	pass # replace with function body

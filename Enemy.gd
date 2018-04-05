@@ -44,3 +44,18 @@ func remove():
 		if parent.selected_enemy == self:
 			parent.selected_enemy = null
 	queue_free()
+
+func turn():
+	$AnimationPlayer.play("attack")
+
+func attack():
+	var parent = get_parent()
+	if parent.is_in_group("battle"):
+		parent.damage_player(7)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if get_parent().is_in_group("battle"):
+		if anim_name == "attack":
+			get_parent().enemy_finished()
+	pass # replace with function body

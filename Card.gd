@@ -107,12 +107,13 @@ func _input(event):
 			if parent.is_in_group("battle"):
 				if event.position.y < parent.get_node("Play").position.y:
 					parent.play_card(self)
+				parent.selected_card = null
 			global.unlock()
 
 func remove():
 	var parent = get_parent()
 	if parent.is_in_group("battle"):
-		parent.cards.remove(parent.cards.find(self))
+		parent.cards.erase(self)
 		if parent.selected_card == self:
 			parent.selected_card = null
 	queue_free()
@@ -131,9 +132,11 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 
 
 func _on_Area2D_mouse_entered():
-	if !global.locked:
-		global.emit_signal("unselect_all")
-		self.selected = true
+	if get_parent().is_in_group("battle"):
+		if get_parent().selected_card != null:
+			return
+	global.emit_signal("unselect_all")
+	self.selected = true
 
 
 func _on_Area2D_mouse_exited():

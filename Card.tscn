@@ -48,7 +48,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Audio Bus", "Collision", "Pickable", "Transform", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -58,6 +58,7 @@ __meta__ = {
 position = Vector2( 40, 60 )
 scale = Vector2( 1.53846, 2.30769 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }

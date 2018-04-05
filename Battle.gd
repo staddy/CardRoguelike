@@ -34,15 +34,31 @@ func set_max_hp(value):
 
 var mana setget set_mana
 func set_mana(value):
-	# TODO: update value on the scene
-	mana = value
+	if value > 9:
+		show_warning("You have reached maximum mana available")
+		mana = 9
+	else:
+		mana = value
+	$Mana.text = str(mana)
+	if mana == 0:
+		$Mana.set("custom_colors/font_color", Color(0.4, 0.4, 0.4))
+		$MaxMana.set("custom_colors/font_color", Color(0.4, 0.4, 0.4))
+	else:
+		$Mana.set("custom_colors/font_color", Color(1, 1, 1))
+		$MaxMana.set("custom_colors/font_color", Color(1, 1, 1))
 
 var max_mana setget set_max_mana
 func set_max_mana(value):
-	# TODO: update value on the scene
-	max_mana = value
+	if value > 9:
+		show_warning("You have reached maximum mana available")
+		max_mana = 9
+	else:
+		max_mana = value
+	$MaxMana.text = str(max_mana)
 
 func _ready():
+	self.mana = global.current_max_mana
+	self.max_mana = global.current_max_mana
 	self.max_hp = 70
 	self.hp = 70
 	draw_pile = global.shuffle_list(global.deck)
@@ -50,7 +66,7 @@ func _ready():
 	pass
 
 func draw_cards():
-	for i in range(global.default_hand_size):
+	for i in range(global.default_draw_size):
 		draw_card()
 	pass
 
@@ -68,8 +84,14 @@ func reshuffle():
 # create a random card from draw pile as a scene object
 # if draw pile is empty move shuffled cards from discard pile to it first
 func draw_card():
+	if cards.size() == global.max_hand_size:
+		show_warning("Your hand is full")
+		return
 	if draw_pile.size() == 0:
 		reshuffle()
+	if draw_pile.size() == 0:
+		show_warning("No cards to draw")
+		return
 	var card = Card.instance()
 	card.position = Vector2(0, 0)
 	var id = draw_pile.pop_back()
@@ -107,6 +129,8 @@ func enemy_finished():
 
 func end_turn():
 	enemy_turn = true
+	for i in range(cards.size() - 1, -1, -1):
+		discard_card(cards[i])
 	current_enemy = 0
 	enemy_finished()
 	pass
@@ -114,7 +138,16 @@ func end_turn():
 #func _process(delta):
 #	pass
 
+func show_warning(message):
+	$Warning.text = message
+	$Warning.get_node("AnimationPlayer").play("visible")
+	$Warning.get_node("Timer").start()
 
 func _on_Button_pressed():
 	end_turn()
+	pass # replace with function body
+
+
+func _on_Timer_timeout():
+	$Warning.get_node("AnimationPlayer").play("fade_out")
 	pass # replace with function body

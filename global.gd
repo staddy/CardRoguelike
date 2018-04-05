@@ -25,7 +25,12 @@ var cards = { 0 : {
 				  }
 			}
 
-var default_hand_size = 5
+var default_draw_size = 5
+var max_hand_size = 10
+var max_mana = 9
+
+var current_max_mana = 0
+
 var deck = []
 
 func init_card(card, id):

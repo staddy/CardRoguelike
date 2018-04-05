@@ -4,7 +4,8 @@ var card_id
 var card_name setget set_card_name
 var cost setget set_cost
 var description setget set_description
-var type
+var type = null
+var image = null
 
 var selection_ = preload("res://selection.png")
 var selection_play = preload("res://selection_play.png")
@@ -55,6 +56,8 @@ var max_y
 func _ready():
 	#set_process_input(false)
 	#$Area2D.visible = false
+	if(image != null):
+		$picture.texture = load(image)
 	global.connect("unselect_all", self, "unselect")
 	width = $card.get_texture().get_size().x
 	height = $card.get_texture().get_size().y

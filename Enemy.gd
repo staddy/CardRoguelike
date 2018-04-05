@@ -10,14 +10,14 @@ func _ready():
 
 
 func _on_Area2D_mouse_entered():
-	$selection.visible = true
+	$sprite.material = global.outlined_material
 	if get_parent().is_in_group("battle"):
 		get_parent().selected_enemy = self
 	pass # replace with function body
 
 
 func _on_Area2D_mouse_exited():
-	$selection.visible = false
+	$sprite.material = global.material_
 	if get_parent().is_in_group("battle"):
 		get_parent().selected_enemy = null
 	pass # replace with function body

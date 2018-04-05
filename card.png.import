@@ -7,10 +7,10 @@ path="res://.import/card.png-64c918157f3a6a11954489d0951be861.stex"
 [deps]
 
 source_file="res://card.png"
-source_md5="8fb1132fc85b5780ac30b5d789fb585a"
+source_md5="f4fc994d58bdb7eae540bfa816057e65"
 
 dest_files=[ "res://.import/card.png-64c918157f3a6a11954489d0951be861.stex" ]
-dest_md5="bc4c9bed4f0af4d305e0e45405e222dc"
+dest_md5="d2cbd71b9027f148eab8228e63234fd8"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

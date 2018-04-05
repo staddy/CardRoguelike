@@ -10,7 +10,7 @@ source_file="res://selection.png"
 source_md5="7c6e13d9106c7d03e609d82e7a3c28ff"
 
 dest_files=[ "res://.import/selection.png-9afcbfee80b52259f363fc780247c9b5.stex" ]
-dest_md5="f829b519fe6ab4d844599563ab3dfff6"
+dest_md5="52e4536646efbaf8e7a13a1f216e0410"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

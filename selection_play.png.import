@@ -10,7 +10,7 @@ source_file="res://selection_play.png"
 source_md5="823b7fa5faa2231f3b12a1c10deb7a90"
 
 dest_files=[ "res://.import/selection_play.png-86a716fa0ef9d497a774c7e53851eb6c.stex" ]
-dest_md5="4934d4ebed6f9e95096f62ecc9e2e0fc"
+dest_md5="c4cac5352673a146f2fc2c34724fcedf"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

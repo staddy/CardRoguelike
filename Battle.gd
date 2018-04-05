@@ -3,14 +3,39 @@ extends Node2D
 var turn = 0
 var Card = preload("res://Card.tscn")
 
+# holds cards ids
 var draw_pile = []
+# auto managed list of cards on screen
 var cards = []
+# holds cards ids
 var discard_pile = []
 
+# auto managed list of enemies on screen
 var enemies = []
 
+# auto managed
 var selected_card = null
 var selected_enemy = null
+
+var hp setget set_hp
+func set_hp(value):
+	# TODO: update value on the scene
+	hp = value
+
+var max_hp setget set_max_hp
+func set_max_hp(value):
+	# TODO: update value on the scene
+	max_hp = value
+
+var mana setget set_mana
+func set_mana(value):
+	# TODO: update value on the scene
+	mana = value
+
+var max_mana setget set_max_mana
+func set_max_mana(value):
+	# TODO: update value on the scene
+	max_mana = value
 
 func _ready():
 	draw_pile = global.shuffle_list(global.deck)
@@ -22,15 +47,19 @@ func draw_cards():
 		draw_card()
 	pass
 
+# remove card as a scene object, add it's id to discard pile
 func discard_card(card):
 	discard_pile.append(card.card_id)
 	card.remove()
 	reposition_cards()
 
+# move shuffled cards from discard pile to draw pile
 func reshuffle():
 	draw_pile = global.shuffle_list(discard_pile)
 	discard_pile.clear()
 
+# create a random card from draw pile as a scene object
+# if draw pile is empty move shuffled cards from discard pile to it first
 func draw_card():
 	if draw_pile.size() == 0:
 		reshuffle()
@@ -47,6 +76,7 @@ func play_card(card):
 		discard_card(card)
 	pass
 
+# move cards on screen to proper locations
 func reposition_cards():
 	var offset = ($CardsEnd.position.x - $CardsStart.position.x) / (cards.size() + 1)
 	var i = 1

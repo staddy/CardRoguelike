@@ -6,17 +6,22 @@ var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
 
+var material_ = preload("res://material.tres")
+var outlined_material = preload("res://outlined_material.tres")
+
 var cards = { 0 : {
 				   "name" : "Attack",
 				   "cost" : 1,
 				   "description" : "Deals 10 damage",
-				   "type" : "attack"
+				   "type" : "attack",
+				   "image" : "res://card_placeholder.png"
 				  },
 			  1 : {
 				   "name" : "Defence",
 				   "cost" : 1,
 				   "description" : "Increases block by 10",
-				   "type" : "skill"
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png"
 				  }
 			}
 
@@ -29,6 +34,7 @@ func init_card(card, id):
 	card.cost = cards[id].cost
 	card.description = cards[id].description
 	card.type = cards[id].type
+	card.image = cards[id].image
 
 func shuffle_list(list):
     var shuffledList = [] 

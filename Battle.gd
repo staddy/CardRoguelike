@@ -142,6 +142,7 @@ func damage_player(value):
 		self.block = block - value
 		return
 	self.hp = (self.hp - (value - self.block))
+	self.block = 0
 	pass
 
 func enemy_finished():

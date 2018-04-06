@@ -12,20 +12,29 @@ var outlined_material = preload("res://outlined_material.tres")
 var cards = { 0 : {
 				   "name" : "Attack",
 				   "cost" : 1,
-				   "description" : "Deals 10 damage",
+				   "description" : "Deals 7 damage",
 				   "type" : "attack",
 				   "image" : "res://card_placeholder.png",
-				   "value" : 10,
+				   "value" : 7,
 				   "effect" : ""
 				  },
 			  1 : {
 				   "name" : "Defence",
 				   "cost" : 1,
-				   "description" : "Increases block by 10",
+				   "description" : "Increases block by 7",
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
-				   "value" : 10,
+				   "value" : 7,
 				   "effect" : "block"
+				  },
+			  2 : {
+				   "name" : "Burst",
+				   "cost" : 3,
+				   "description" : "Deals 25 damage",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 25,
+				   "effect" : ""
 				  }
 			}
 
@@ -62,6 +71,7 @@ func init_deck():
 		deck.append(0)
 	for i in range(5):
 		deck.append(1)
+	deck.append(2)
 
 signal unselect_all()
 

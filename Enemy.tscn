@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://material.tres" type="Material" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://under.png" type="Texture" id=4]
 [ext_resource path="res://progress.png" type="Texture" id=5]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://block.png" type="Texture" id=7]
+[ext_resource path="res://attack_icon.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -149,6 +151,77 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/attack = SubResource( 2 )
 blend_times = [  ]
+
+[node name="block_sprite" type="Sprite" parent="." index="5"]
+
+position = Vector2( 55, 65 )
+scale = Vector2( 0.6666, 0.6666 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Block" type="Label" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 46.0
+margin_top = 59.0
+margin_right = 67.0
+margin_bottom = 73.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 6 )
+text = "99"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="intent_icon" type="Sprite" parent="." index="7"]
+
+position = Vector2( -8, -72 )
+scale = Vector2( 0.6666, 0.6666 )
+texture = ExtResource( 8 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Intent" type="Label" parent="." index="8"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -3.0
+margin_top = -78.0
+margin_right = 16.0
+margin_bottom = -64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 6 )
+text = "99"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_fonts" ]
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 

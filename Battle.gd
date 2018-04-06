@@ -1,6 +1,6 @@
 extends Node2D
 
-var turn = 0
+var turn = -1
 var Card = preload("res://Card.tscn")
 
 # holds cards ids
@@ -32,6 +32,17 @@ func set_max_hp(value):
 	$TextureProgress.max_value = value
 	$TextureProgress.get_node("Label").text = str(hp) + " of " + str(max_hp)
 
+var block = 0 setget set_block
+func set_block(value):
+	block = value
+	if block == 0:
+		$block_sprite.visible = false
+		$Block.visible = false
+	else:
+		$block_sprite.visible = true
+		$Block.visible = true
+		$Block.text = str(block)
+
 var mana setget set_mana
 func set_mana(value):
 	if value > 9:
@@ -57,12 +68,11 @@ func set_max_mana(value):
 	$MaxMana.text = str(max_mana)
 
 func _ready():
-	self.mana = global.current_max_mana
-	self.max_mana = global.current_max_mana
 	self.max_hp = 70
 	self.hp = 70
+	self.max_mana = global.current_max_mana
 	draw_pile = global.shuffle_list(global.deck)
-	draw_cards()
+	new_turn()
 	pass
 
 func draw_cards():
@@ -100,9 +110,22 @@ func draw_card():
 	reposition_cards()
 
 func play_card(card):
-	if selected_card and selected_enemy:
-		selected_enemy.remove()
-		discard_card(card)
+	if enemy_turn:
+		return
+	if card.type == "attack":
+		if selected_enemy == null:
+			return
+	if self.mana < card.cost:
+		show_warning("Not enough mana")
+		return
+	self.mana = self.mana - card.cost
+	
+	if card.type == "attack":
+		selected_enemy.damage(card.value)
+	elif card.type == "skill":
+		if card.effect == "block":
+			self.block += card.value
+	discard_card(card)
 	pass
 
 # move cards on screen to proper locations
@@ -115,25 +138,38 @@ func reposition_cards():
 		i += 1
 
 func damage_player(value):
-	self.hp = (self.hp - value)
+	if value <= block:
+		self.block = block - value
+		return
+	self.hp = (self.hp - (value - self.block))
 	pass
 
 func enemy_finished():
+	# ATTENTION! (enemy can die during his turn)
 	if current_enemy < enemies.size():
 		current_enemy += 1
 		enemies[current_enemy - 1].turn()
 	else:
-		enemy_turn = false
-		draw_cards()
+		new_turn()
 	pass
 
 func end_turn():
+	# TODO: disable button and cards
+	if enemy_turn:
+		return
 	enemy_turn = true
 	for i in range(cards.size() - 1, -1, -1):
 		discard_card(cards[i])
 	current_enemy = 0
 	enemy_finished()
 	pass
+
+func new_turn():
+	enemy_turn = false
+	turn += 1
+	self.block = 0
+	self.mana = self.max_mana
+	draw_cards()
 
 #func _process(delta):
 #	pass

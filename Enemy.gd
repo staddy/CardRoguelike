@@ -53,6 +53,12 @@ func attack():
 	if parent.is_in_group("battle"):
 		parent.damage_player(7)
 
+func damage(value):
+	if self.hp <= value:
+		remove()
+		return
+	self.hp = self.hp - value
+
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if get_parent().is_in_group("battle"):

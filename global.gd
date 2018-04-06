@@ -14,14 +14,18 @@ var cards = { 0 : {
 				   "cost" : 1,
 				   "description" : "Deals 10 damage",
 				   "type" : "attack",
-				   "image" : "res://card_placeholder.png"
+				   "image" : "res://card_placeholder.png",
+				   "value" : 10,
+				   "effect" : ""
 				  },
 			  1 : {
 				   "name" : "Defence",
 				   "cost" : 1,
 				   "description" : "Increases block by 10",
 				   "type" : "skill",
-				   "image" : "res://card_placeholder2.png"
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 10,
+				   "effect" : "block"
 				  }
 			}
 
@@ -29,7 +33,7 @@ var default_draw_size = 5
 var max_hand_size = 10
 var max_mana = 9
 
-var current_max_mana = 0
+var current_max_mana = 3
 
 var deck = []
 
@@ -40,6 +44,8 @@ func init_card(card, id):
 	card.description = cards[id].description
 	card.type = cards[id].type
 	card.image = cards[id].image
+	card.value = cards[id].value
+	card.effect = cards[id].effect
 
 func shuffle_list(list):
     var shuffledList = [] 

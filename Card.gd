@@ -6,6 +6,8 @@ var cost setget set_cost
 var description setget set_description
 var type = null
 var image = null
+var value = 0
+var effect = ""
 
 var selection_ = preload("res://selection.png")
 var selection_play = preload("res://selection_play.png")

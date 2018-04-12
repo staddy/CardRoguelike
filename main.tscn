@@ -1,33 +1,119 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Card.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://background.png" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Card.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=5]
 
-[node name="main" type="Node2D"]
+[sub_resource type="Gradient" id=1]
+
+offsets = PoolRealArray( 0.0295858, 0.142012, 0.52071, 0.857988 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 0, 1, 1, 0.69383, 0.335766, 1, 0.996094, 0.0763607, 0.0311279, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+
+flags = 4
+gradient = SubResource( 1 )
+width = 2048
+
+[sub_resource type="ParticlesMaterial" id=3]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 2
+emission_box_extents = Vector3( 10, 4, 1 )
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 6.05168e+10
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 27.12
+damping_random = 0.76
+angle = 0.0
+angle_random = 0.0
+scale = 4.0
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color", "Damping", "Emission Shape", "Gravity", "Hue Variation", "Initial Velocity", "Scale", "Spread", "Trail" ]
+
+[node name="main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="icon" type="Sprite" parent="." index="0"]
+[node name="background" type="Sprite" parent="." index="0"]
+
+position = Vector2( 480, 270 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="icon" type="Sprite" parent="." index="1"]
 
 position = Vector2( 420, 71 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Card" parent="." index="1" instance=ExtResource( 3 )]
+[node name="Card" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 108, 164 )
 
-[node name="Button" parent="." index="2" instance=ExtResource( 4 )]
+[node name="Button" parent="." index="3" instance=ExtResource( 5 )]
 
 position = Vector2( 284.802, 211.651 )
 text = "EXIT"
 
-[node name="Button2" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Button2" parent="." index="4" instance=ExtResource( 5 )]
 
 position = Vector2( 210.703, 106.046 )
 text = "START"
+
+[node name="Particles2D" type="Particles2D" parent="." index="5"]
+
+position = Vector2( 479, 429 )
+emitting = true
+amount = 1000
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 0.5
+explosiveness = 0.0
+randomness = 1.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 3 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Time", "Transform" ]
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

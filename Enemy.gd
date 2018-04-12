@@ -47,7 +47,7 @@ func set_basic_intents():
 		self.intent_value = 7 + randi()%4
 	else:
 		self.intent = "attack"
-		self.intent_value = 11 + randi()%3
+		self.intent_value = 4 + randi()%2
 
 func _ready():
 	if get_parent().is_in_group("battle"):

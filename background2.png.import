@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+path="res://.import/background2.png-f31d5d1d201be48ff8d6f3f822c6d3f0.stex"
 
 [deps]
 
-source_file="res://icon.png"
-source_md5="badd446433ac96301a2487a0eb38a10d"
+source_file="res://background2.png"
+source_md5="f2b29957d58af0c88f9ea70d3a543b39"
 
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
-dest_md5="c663218ae41559466e9fa259d7838ae0"
+dest_files=[ "res://.import/background2.png-f31d5d1d201be48ff8d6f3f822c6d3f0.stex" ]
+dest_md5="265c036fd38e6bcaf4fa642705a25493"
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

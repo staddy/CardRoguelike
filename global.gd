@@ -2,6 +2,7 @@ extends Node
 
 var current_scene = null
 var Battle = preload("res://Battle.tscn")
+var Map = preload("res://map/Map.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false

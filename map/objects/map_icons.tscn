@@ -1,0 +1,241 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://map/objects/map_icons.gd" type="Script" id=1]
+[ext_resource path="res://map/objects/monster.gd" type="Script" id=2]
+[ext_resource path="res://map/images/monster2_icon.png" type="Texture" id=3]
+[ext_resource path="res://map/objects/monster2.gd" type="Script" id=4]
+[ext_resource path="res://map/images/monster_icon.png" type="Texture" id=5]
+[ext_resource path="res://map/objects/camp.gd" type="Script" id=6]
+[ext_resource path="res://map/images/rest_icon.png" type="Texture" id=7]
+[ext_resource path="res://map/objects/_random.gd" type="Script" id=8]
+[ext_resource path="res://map/images/random_icon.png" type="Texture" id=9]
+[ext_resource path="res://map/objects/market.gd" type="Script" id=10]
+[ext_resource path="res://map/images/market.png" type="Texture" id=11]
+[ext_resource path="res://map/objects/chest.gd" type="Script" id=12]
+[ext_resource path="res://map/images/chest_icon.png" type="Texture" id=13]
+[ext_resource path="res://map/objects/boss.gd" type="Script" id=14]
+[ext_resource path="res://map/images/boss.png" type="Texture" id=15]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = PoolVector2Array( 0, -10, 8.66025, 5, -8.66025, 5 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 22.2449
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 10.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="map_icons" type="Area2D"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="monster" type="Area2D" parent="." index="0" groups=[
+"icon",
+]]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 2 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="monster" index="0"]
+
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="monster" index="1"]
+
+position = Vector2( -0.125, 1.5 )
+scale = Vector2( 1.25962, 0.706522 )
+shape = SubResource( 1 )
+
+[node name="monster2" type="Area2D" parent="." index="1" groups=[
+"icon",
+]]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 4 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="monster2" index="0"]
+
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="monster2" index="1"]
+
+position = Vector2( -0.125, 1.5 )
+scale = Vector2( 1.25962, 0.706522 )
+shape = SubResource( 1 )
+
+[node name="camp" type="Area2D" parent="." index="2" groups=[
+"icon",
+]]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="camp" index="0"]
+
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="camp" index="1"]
+
+position = Vector2( -0.125, 3.93452 )
+scale = Vector2( 1.92963, 2.02381 )
+shape = SubResource( 2 )
+
+[node name="_random" type="Area2D" parent="." index="3" groups=[
+"icon",
+]]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 8 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="_random" index="0"]
+
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="_random" index="1"]
+
+position = Vector2( 0.250001, -0.5 )
+scale = Vector2( 0.894231, 0.647737 )
+shape = SubResource( 3 )
+
+[node name="market" type="Area2D" parent="." index="4" groups=[
+"icon",
+]]
+
+editor/display_folded = true
+position = Vector2( 0.25, 0 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 10 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="market" index="0"]
+
+texture = ExtResource( 11 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="market" index="1"]
+
+position = Vector2( 5.90583e-07, 0.5 )
+rotation = 1.5708
+scale = Vector2( 1.375, 0.581522 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="chest" type="Area2D" parent="." index="5" groups=[
+"icon",
+]]
+
+editor/display_folded = true
+position = Vector2( 0.25, 0 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 12 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="chest" index="0"]
+
+texture = ExtResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chest" index="1"]
+
+position = Vector2( -0.0625001, 2.5 )
+rotation = 1.5708
+scale = Vector2( 0.875, 1.42788 )
+shape = SubResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="boss" type="Area2D" parent="." index="6" groups=[
+"icon",
+"boss",
+]]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 14 )
+_sections_unfolded = [ "Pickable" ]
+
+[node name="Sprite" type="Sprite" parent="boss" index="0"]
+
+texture = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss" index="1"]
+
+position = Vector2( 2.14577e-06, 4.5 )
+scale = Vector2( 5.50962, 1.36413 )
+shape = SubResource( 1 )
+
+

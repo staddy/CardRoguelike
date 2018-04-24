@@ -131,10 +131,10 @@ func play_card(card):
 	self.mana = self.mana - card.cost
 	
 	if card.type == "attack":
-		selected_enemy.damage(card.value)
 		var e = effectsMas[0].duplicate()
 		e.position = selected_enemy.position
 		add_child(e)
+		selected_enemy.damage(card.value)
 	elif card.type == "skill":
 		if card.effect == "block":
 			self.block += card.value

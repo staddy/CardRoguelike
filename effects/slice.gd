@@ -9,6 +9,7 @@ func _ready():
 func _process(delta):
 	if visible == false and $Animation.stop():
 		queue_free()
+		#self.get_parent().remove_child(self)
 
 func _on_Timer_timeout():
 	position += slide_x

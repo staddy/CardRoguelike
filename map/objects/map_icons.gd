@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var root_scene = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
+onready var map = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
 
 var offset = 16
 
@@ -26,9 +26,9 @@ func init():
 	connect("body_entered", self, "_on_map_icons_body_entered")
 
 func action():
-	if root_scene.player.townLvl == self.level-1:
+	if map.player.townLvl == self.level-1:
 		print("Let`s go!")
-		root_scene.player.townLvl = self.level
+		map.player.townLvl = self.level
 	else:
 		 print("Sorry. No passage.")
 	"""

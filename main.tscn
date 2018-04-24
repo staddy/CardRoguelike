@@ -208,13 +208,10 @@ tracks/3/keys = {
 "values": [ 0.00444444, 0.0, 2.4, 0.0, 0.0, 3.0, 1.0, 3.0, 0.0, 0.0, 2.0, 0.0, 0.0, 3.0, 0.0, 0.0, 2.0, 0.0 ]
 }
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Light2D" type="Light2D" parent="." index="0"]
 
@@ -271,7 +268,7 @@ shadow_gradient_length = 0.0
 shadow_filter = 0
 shadow_filter_smooth = 0.0
 shadow_item_cull_mask = 1
-_sections_unfolded = [ "Range", "Shadow" ]
+_sections_unfolded = [ "Material", "Range", "Shadow" ]
 __meta__ = {
 "_edit_lock_": true
 }

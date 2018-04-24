@@ -1,4 +1,4 @@
-extends 'res://map/objects/town.gd'
+extends 'town.gd'
 
 var windows = {"a" : {}, "b" : {}, "c" : {}}
 

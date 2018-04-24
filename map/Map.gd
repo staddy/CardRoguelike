@@ -25,6 +25,9 @@ func initing():
 	add_classes()
 	town_create()
 
+func camera_settings():
+	$Camera2D.set_limit(1,  -(town.h*townMas[1].get_node("Sprite").get_texture().get_size().y))
+
 func add_classes():
 	var m = map_icons.instance()
 	for i in m.get_children().size():
@@ -106,3 +109,9 @@ func town_create():
 	this.size = t.get_node("Sprite").get_texture().get_size()
 	t.position = Vector2(step.x, step.y - this.size.y/4)
 	add_child(t)
+	#set camera limit
+	camera_settings()
+
+func _on_Timer_timeout():
+	global.init_deck()
+	global.goto_scene(global.Battle)

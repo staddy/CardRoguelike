@@ -1,5 +1,5 @@
-extends 'res://map/objects/town.gd'
+extends 'town.gd'
 
 func _ready():
 	type = "top"
-	level = root_scene.town.h+1
+	level = map.town.h+1

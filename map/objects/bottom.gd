@@ -1,4 +1,4 @@
-extends 'res://map/objects/town.gd'
+extends 'town.gd'
 
 func _ready():
 	pass

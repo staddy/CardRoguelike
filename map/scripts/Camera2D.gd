@@ -1,6 +1,7 @@
 extends Camera2D
 
-var touch_top = false
+onready var root_scene = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
+
 var touch_bottom = false
 
 var old_position

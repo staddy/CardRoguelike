@@ -1,6 +1,6 @@
 extends Camera2D
 
-onready var root_scene = get_parent()
+onready var map = get_parent()
 
 var touch_bottom = false
 

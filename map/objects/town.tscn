@@ -43,7 +43,7 @@ height = 33.0
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="town" type="StaticBody2D"]
+[node name="town" type="StaticBody2D" index="0"]
 
 input_pickable = true
 collision_layer = 1
@@ -80,8 +80,8 @@ scale = Vector2( 14.3462, 0.968085 )
 shape = SubResource( 1 )
 
 [node name="middle" type="StaticBody2D" parent="." index="1" groups=[
-"middle",
 "town",
+"middle",
 ]]
 
 editor/display_folded = true

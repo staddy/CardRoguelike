@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-onready var map = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
+onready var map = get_parent()
 
 var type = null
 var level = null

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://effects/slice.png" type="Texture" id=1]
-[ext_resource path="res://effects/slice.gd" type="Script" id=2]
-[ext_resource path="res://light.png" type="Texture" id=3]
+[ext_resource path="res://effects/Effects.gd" type="Script" id=1]
+[ext_resource path="res://effects/slice.png" type="Texture" id=2]
+[ext_resource path="res://effects/slice.gd" type="Script" id=3]
+[ext_resource path="res://light.png" type="Texture" id=4]
+[ext_resource path="res://sounds/sword_sound2.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -35,22 +37,33 @@ tracks/1/keys = {
 "values": [ 0.5, 0.7, 0.4 ]
 }
 
-[node name="slice" type="Sprite" index="0"]
+[node name="Effects" type="Sprite" index="0"]
 
-editor/display_folded = true
 z_index = 5
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
-[node name="Light2D" type="Light2D" parent="." index="0"]
+[node name="slice" type="Sprite" parent="." index="0" groups=[
+"effect",
+]]
+
+position = Vector2( -6.75, -21 )
+scale = Vector2( 1.55078, 1 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Visibility" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Light2D" type="Light2D" parent="slice" index="0"]
 
 position = Vector2( -2.047, -0.356802 )
 rotation = -0.0548015
 scale = Vector2( 0.701414, 0.121161 )
 enabled = true
 editor_only = false
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 offset = Vector2( 0, 0 )
 texture_scale = 1.0
 color = Color( 0.90625, 0.506226, 0.506226, 1 )
@@ -70,7 +83,7 @@ shadow_filter = 0
 shadow_filter_smooth = 0.0
 shadow_item_cull_mask = 1
 
-[node name="Animation" type="AnimationPlayer" parent="." index="1"]
+[node name="Animation" type="AnimationPlayer" parent="slice" index="1"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -80,13 +93,23 @@ playback_speed = 1.0
 anims/attack = SubResource( 1 )
 blend_times = [  ]
 
-[node name="Timer" type="Timer" parent="." index="2"]
+[node name="Timer" type="Timer" parent="slice" index="2"]
 
 process_mode = 1
 wait_time = 0.1
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="sound" type="AudioStreamPlayer2D" parent="slice" index="3"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+autoplay = true
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="timeout" from="slice/Timer" to="slice" method="_on_Timer_timeout"]
 
 

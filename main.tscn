@@ -7,7 +7,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=5]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://effects/slice.tscn" type="PackedScene" id=8]
+[ext_resource path="res://effects/Effects.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Gradient" id=1]
 
@@ -209,7 +209,7 @@ tracks/3/keys = {
 "values": [ 0.00444444, 0.0, 2.4, 0.0, 0.0, 3.0, 1.0, 3.0, 0.0, 0.0, 2.0, 0.0, 0.0, 3.0, 0.0, 0.0, 2.0, 0.0 ]
 }
 
-[node name="main" type="Node2D" index="0"]
+[node name="main" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

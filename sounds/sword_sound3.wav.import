@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword_sound3.wav-a23c10d299101a767ce975f325f7abf6.sample"
+
+[deps]
+
+source_file="res://sounds/sword_sound3.wav"
+source_md5="b8e3d8009c22fe491b96d83cc5178ade"
+
+dest_files=[ "res://.import/sword_sound3.wav-a23c10d299101a767ce975f325f7abf6.sample" ]
+dest_md5="6aca61b3efead55e9cfd43ee52bd1aaf"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

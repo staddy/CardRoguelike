@@ -100,15 +100,13 @@ wait_time = 0.1
 one_shot = true
 autostart = true
 
-[node name="sound" type="AudioStreamPlayer2D" parent="slice" index="3"]
+[node name="sound" type="AudioStreamPlayer" parent="slice" index="3"]
 
 stream = ExtResource( 5 )
-volume_db = 0.0
+volume_db = -10.0
 autoplay = true
-max_distance = 2000.0
-attenuation = 1.0
+mix_target = 0
 bus = "Master"
-area_mask = 1
 
 [connection signal="timeout" from="slice/Timer" to="slice" method="_on_Timer_timeout"]
 

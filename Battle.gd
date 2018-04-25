@@ -3,9 +3,6 @@ extends Node2D
 var turn = -1
 var Card = preload("res://Card.tscn")
 
-var effectsMas = []
-var effects = preload("res://effects/Effects.tscn")
-
 # holds cards ids
 var draw_pile = []
 # auto managed list of cards on screen
@@ -22,12 +19,6 @@ var selected_enemy = null
 
 var enemy_turn = false
 var current_enemy = 0
-
-func add_classes():
-	var e = effects.instance()
-	for i in e.get_children().size():
-		if e.get_child(i).is_in_group("effect"):
-			effectsMas.append(e.get_child(i))
 
 var hp = 10 setget set_hp
 func set_hp(value):
@@ -82,7 +73,6 @@ func _ready():
 	self.max_mana = global.current_max_mana
 	draw_pile = global.shuffle_list(global.deck)
 	new_turn()
-	add_classes()
 	pass
 
 func draw_cards():
@@ -131,9 +121,7 @@ func play_card(card):
 	self.mana = self.mana - card.cost
 	
 	if card.type == "attack":
-		var e = effectsMas[0].duplicate()
-		e.position = selected_enemy.position
-		add_child(e)
+		Effects.add_effect(0, selected_enemy.position)
 		selected_enemy.damage(card.value)
 	elif card.type == "skill":
 		if card.effect == "block":

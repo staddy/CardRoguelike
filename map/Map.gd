@@ -30,13 +30,13 @@ func camera_settings():
 
 func add_classes():
 	var m = map_icons.instance()
-	for i in m.get_children().size():
-		if m.get_child(i).is_in_group("icon"):
-			iconsMas.append(m.get_child(i))
+	for c in m.get_children():
+		if c.is_in_group("icon"):
+			iconsMas.append(c)
 	var t = parts_town.instance()
-	for i in t.get_children().size():
-		if t.get_child(i).is_in_group("town"):
-			townMas.append(t.get_child(i))
+	for c in t.get_children():
+		if c.is_in_group("town"):
+			townMas.append(c)
 
 func icon_gen(line, h):
 	#проверка на повторение

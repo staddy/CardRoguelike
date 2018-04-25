@@ -47,6 +47,7 @@ _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 "effect",
 ]]
 
+editor/display_folded = true
 position = Vector2( -6.75, -21 )
 scale = Vector2( 1.55078, 1 )
 texture = ExtResource( 2 )

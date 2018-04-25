@@ -1,4 +1,4 @@
-extends Sprite
+extends Node2D
 
 var effects = preload("res://effects/Effects.tscn")
 # 0 - basic sword attack

@@ -18,7 +18,15 @@ func set_intent(value):
 var intent_value = 7 setget set_intent_value
 func set_intent_value(value):
 	intent_value = value
-	$Intent.text = str(intent_value)
+	if intent == "attack":
+		$Intent.text = str(global.get_damage_to_player(intent_value, modifiers, get_parent().modifiers))
+	elif intent == "block":
+		$Intent.text = str(global.get_block_enemy(intent_value, modifiers))
+	else:
+		$Intent.text = ""
+
+func update_intent_value():
+	set_intent_value(intent_value)
 
 var hp = 10 setget set_hp
 func set_hp(value):
@@ -51,14 +59,15 @@ func set_basic_intents():
 		self.intent = "attack"
 		self.intent_value = 4 + randi()%2
 
-func _ready():
-	if get_parent().is_in_group("battle"):
-		get_parent().enemies.append(self)
+func init():
 	set_basic_intents()
 	self.block = 0
 	self.max_hp = 30 + randi()%3
 	self.hp = self.max_hp
-	pass
+
+func _ready():
+	if get_parent().is_in_group("battle"):
+		get_parent().enemies.append(self)
 
 #func _process(delta):
 #	pass
@@ -93,11 +102,12 @@ func turn():
 func attack():
 	self.block = 0
 	if self.intent == "block":
-		self.block = self.intent_value
+		self.block = global.get_block_enemy(self.intent_value, modifiers)
 	elif self.intent == "attack":
 		var parent = get_parent()
 		if parent.is_in_group("battle"):
-			parent.damage_player(self.intent_value)
+			parent.damage_player(global.get_damage_to_player(self.intent_value, modifiers, get_parent().modifiers))
+	modifiers.process()
 	set_basic_intents()
 
 func damage(value):

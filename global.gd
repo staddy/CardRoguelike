@@ -11,6 +11,58 @@ var material_ = preload("res://material.tres")
 var outlined_material = preload("res://outlined_material.tres")
 
 enum Modifiers {DEXTERITY, STRENGTH, WEAKNESS, VULNERABILITY}
+var decrease_every_turn = [WEAKNESS, VULNERABILITY]
+
+func does_decrease(modifier):
+	if modifier in decrease_every_turn:
+		return true
+	else:
+		return false
+
+func vulnerability_damage_to_enemies():
+	return 1.5
+
+func vulnerability_damage_to_player():
+	return 1.5
+
+func weakness_damage_to_enemies():
+	return 0.75
+
+func weakness_damage_to_player():
+	return 0.75
+
+func get_damage_to_enemy(base, modifiers, enemy_modifiers):
+	var value = (base + modifiers.get(STRENGTH))
+	if value <= 0:
+		return 0
+	if modifiers.has(WEAKNESS):
+		value *= weakness_damage_to_enemies()
+	if enemy_modifiers.has(VULNERABILITY):
+		value *= vulnerability_damage_to_enemies()
+	return int(value)
+
+func get_damage_to_player(base, modifiers, player_modifiers):
+	var value = (base + modifiers.get(STRENGTH))
+	if value <= 0:
+		return 0
+	if modifiers.has(WEAKNESS):
+		value *= weakness_damage_to_player()
+	if player_modifiers.has(VULNERABILITY):
+		value *= vulnerability_damage_to_player()
+	return int(value)
+
+func get_block_player(base, modifiers):
+	var value = (base + modifiers.get(DEXTERITY))
+	if value <= 0:
+		return 0
+	return value
+
+func get_block_enemy(base, modifiers):
+	var value = (base + modifiers.get(DEXTERITY))
+	if value <= 0:
+		return 0
+	return value
+
 onready var modifier_textures = {
 								 DEXTERITY: "res://modifiers/images/dexterity.png",
 								 STRENGTH: "res://modifiers/images/strength.png",
@@ -98,17 +150,6 @@ var max_mana = 9
 var current_max_mana = 3
 
 var deck = []
-
-func init_card(card, id):
-	card.card_id = id
-	card.card_name = cards[id].name
-	card.cost = cards[id].cost
-	card.description = cards[id].description
-	card.type = cards[id].type
-	card.image = cards[id].image
-	card.value = cards[id].value
-	card.effect = cards[id].effect
-	card.modifiers = cards[id].modifiers
 
 func shuffle_list(list):
     var shuffledList = [] 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
-[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://under_large.png" type="Texture" id=3]
-[ext_resource path="res://progress_large.png" type="Texture" id=4]
-[ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://mana.png" type="Texture" id=7]
-[ext_resource path="res://block.png" type="Texture" id=8]
-[ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://under_large.png" type="Texture" id=4]
+[ext_resource path="res://progress_large.png" type="Texture" id=5]
+[ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://mana.png" type="Texture" id=8]
+[ext_resource path="res://block.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 
@@ -67,41 +67,46 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Battle" type="Node2D" index="0" groups=[
+[node name="Battle" type="Node2D" groups=[
 "battle",
 ]]
 
 script = ExtResource( 1 )
 
-[node name="CardsStart" type="Position2D" parent="." index="0"]
+[node name="ModifiersContainer" parent="." index="0" instance=ExtResource( 2 )]
+
+position = Vector2( 291, 262 )
+
+[node name="CardsStart" type="Position2D" parent="." index="1"]
 
 position = Vector2( 275, 384 )
 
-[node name="CardsEnd" type="Position2D" parent="." index="1"]
+[node name="CardsEnd" type="Position2D" parent="." index="2"]
 
 position = Vector2( 699, 381 )
 
-[node name="Play" type="Position2D" parent="." index="2"]
+[node name="Play" type="Position2D" parent="." index="3"]
 
 position = Vector2( 242, 291 )
 
-[node name="Node2D" parent="." index="3" instance=ExtResource( 2 )]
+[node name="Node2D" parent="." index="4" instance=ExtResource( 3 )]
 
 position = Vector2( 428, 118 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="Node2D2" parent="." index="4" instance=ExtResource( 2 )]
+[node name="Node2D2" parent="." index="5" instance=ExtResource( 3 )]
 
 position = Vector2( 616, 119 )
 
-[node name="Node2D3" parent="." index="5" instance=ExtResource( 2 )]
+[node name="Node2D3" parent="." index="6" instance=ExtResource( 3 )]
 
 position = Vector2( 819, 121 )
 
-[node name="Node2D4" parent="." index="6" instance=ExtResource( 2 )]
+[node name="Node2D4" parent="." index="7" instance=ExtResource( 3 )]
 
 position = Vector2( 238, 95 )
 
-[node name="TextureProgress" type="TextureProgress" parent="." index="7"]
+[node name="TextureProgress" type="TextureProgress" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -124,9 +129,9 @@ page = 0.0
 value = 100.0
 exp_edit = false
 rounded = false
-texture_under = ExtResource( 3 )
+texture_under = ExtResource( 4 )
 texture_over = null
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
@@ -147,7 +152,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -158,12 +163,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" parent="." index="8" instance=ExtResource( 6 )]
+[node name="Button" parent="." index="9" instance=ExtResource( 7 )]
 
 position = Vector2( 757, 237 )
 text = "END TURN"
 
-[node name="Warning" type="Label" parent="." index="9"]
+[node name="Warning" type="Label" parent="." index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -180,7 +185,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color = Color( 1, 0, 0, 0 )
 text = "TEST WARNING"
 align = 1
@@ -211,15 +216,15 @@ anims/invisible = SubResource( 2 )
 anims/visible = SubResource( 3 )
 blend_times = [  ]
 
-[node name="mana_sprite" type="Sprite" parent="." index="10"]
+[node name="mana_sprite" type="Sprite" parent="." index="11"]
 
 position = Vector2( 277, 243 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Mana" type="Label" parent="." index="11"]
+[node name="Mana" type="Label" parent="." index="12"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -236,7 +241,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 text = "0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -246,7 +251,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MaxMana" type="Label" parent="." index="12"]
+[node name="MaxMana" type="Label" parent="." index="13"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -263,7 +268,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 text = "0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -273,12 +278,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="block_sprite" type="Sprite" parent="." index="13"]
+[node name="block_sprite" type="Sprite" parent="." index="14"]
 
 position = Vector2( 629, 243 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
-[node name="Block" type="Label" parent="." index="14"]
+[node name="Block" type="Label" parent="." index="15"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -295,17 +300,13 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 6 )
 text = "0"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
-
-[node name="ModifiersContainer" parent="." index="15" instance=ExtResource( 9 )]
-
-position = Vector2( 291, 262 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

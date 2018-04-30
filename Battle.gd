@@ -3,6 +3,8 @@ extends Node2D
 var turn = -1
 var Card = preload("res://Card.tscn")
 
+var initial_cards = []
+
 # holds cards ids
 var draw_pile = []
 # auto managed list of cards on screen
@@ -70,6 +72,9 @@ func set_max_mana(value):
 	$MaxMana.text = str(max_mana)
 
 func _ready():
+	for e in enemies:
+		e.init()
+	initial_cards = global.cards.duplicate()
 	self.max_hp = 70
 	self.hp = 70
 	self.max_mana = global.current_max_mana
@@ -93,6 +98,17 @@ func reshuffle():
 	draw_pile = global.shuffle_list(discard_pile)
 	discard_pile.clear()
 
+func init_card(card, id):
+	card.card_id = id
+	card.card_name = initial_cards[id].name
+	card.cost = initial_cards[id].cost
+	card.description = initial_cards[id].description
+	card.type = initial_cards[id].type
+	card.image = initial_cards[id].image
+	card.value = initial_cards[id].value
+	card.effect = initial_cards[id].effect
+	card.modifiers = initial_cards[id].modifiers
+
 # create a random card from draw pile as a scene object
 # if draw pile is empty move shuffled cards from discard pile to it first
 func draw_card():
@@ -107,7 +123,7 @@ func draw_card():
 	var card = Card.instance()
 	card.position = Vector2(0, 0)
 	var id = draw_pile.pop_back()
-	global.init_card(card, id)
+	init_card(card, id)
 	add_child(card)
 	reposition_cards()
 
@@ -133,9 +149,8 @@ func play_card(card):
 		else:
 			Effects.add_effect(0, selected_enemy.position)
 			selected_enemy.damage(card.value)
-	elif card.type == "skill":
-		if card.effect == "block":
-			self.block += card.value
+	if card.effect == "block":
+		self.block += card.value
 	for i in range(0, card.modifiers.size(), 3):
 		if card.modifiers[i + 1] == "all":
 			for e in enemies:
@@ -177,6 +192,7 @@ func enemy_finished():
 	pass
 
 func end_turn():
+	modifiers.process()
 	# TODO: disable button and cards
 	if enemy_turn:
 		return

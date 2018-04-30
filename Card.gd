@@ -98,9 +98,9 @@ func _input(event):
 				self.position.y = max_y
 			old_position = event.position
 			if parent.is_in_group("battle"):
-				if type == "attack" and parent.selected_enemy != null:
+				if (type == "attack" or (type == "skill" and effect == "target")) and parent.selected_enemy != null:
 					$selection.texture = selection_attack
-				elif type != "attack" and event.position.y < parent.get_node("Play").position.y:
+				elif (type == "skill" and effect != "target") and event.position.y < parent.get_node("Play").position.y:
 					$selection.texture = selection_play
 				else:
 					$selection.texture = selection_

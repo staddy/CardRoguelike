@@ -43,6 +43,8 @@ func set_block(value):
 		$Block.visible = true
 		$Block.text = str(block)
 
+onready var modifiers = get_node("ModifiersContainer")
+
 var mana setget set_mana
 func set_mana(value):
 	if value > 9:
@@ -113,7 +115,10 @@ func play_card(card):
 	if enemy_turn:
 		return
 	if card.type == "attack":
-		if selected_enemy == null:
+		if card.effect != "all" and selected_enemy == null:
+			return
+	elif card.type == "skill":
+		if card.effect == "target" and selected_enemy == null:
 			return
 	if self.mana < card.cost:
 		show_warning("Not enough mana")
@@ -121,13 +126,29 @@ func play_card(card):
 	self.mana = self.mana - card.cost
 	
 	if card.type == "attack":
-		Effects.add_effect(0, selected_enemy.position)
-		selected_enemy.damage(card.value)
+		if card.effect == "all":
+			for e in enemies:
+				Effects.add_effect(0, e)
+				e.damage(card.value)
+		else:
+			Effects.add_effect(0, selected_enemy.position)
+			selected_enemy.damage(card.value)
 	elif card.type == "skill":
 		if card.effect == "block":
 			self.block += card.value
+	for i in range(0, card.modifiers.size(), 3):
+		if card.modifiers[i + 1] == "all":
+			for e in enemies:
+				apply(e, card.modifiers[i], card.modifiers[i + 2])
+		elif card.modifiers[i + 1] == "self":
+			apply(self, card.modifiers[i], card.modifiers[i + 2])
+		elif card.modifiers[i + 1] == "target" and selected_enemy != null:
+			apply(selected_enemy, card.modifiers[i], card.modifiers[i + 2])
 	discard_card(card)
 	pass
+
+func apply(target, modifier, value):
+	target.modifiers.add(modifier, value)
 
 # move cards on screen to proper locations
 func reposition_cards():

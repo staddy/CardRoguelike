@@ -3,6 +3,8 @@ extends Node2D
 var attack_icon = preload("res://attack_icon.png")
 var block_icon = preload("res://block_icon.png")
 
+onready var modifiers = get_node("ModifiersContainer")
+
 var intent = "attack" setget set_intent
 func set_intent(value):
 	intent = value

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://mana.png" type="Texture" id=7]
 [ext_resource path="res://block.png" type="Texture" id=8]
-
+[ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 
@@ -67,7 +67,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Battle" type="Node2D" groups=[
+[node name="Battle" type="Node2D" index="0" groups=[
 "battle",
 ]]
 
@@ -302,6 +302,10 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="ModifiersContainer" parent="." index="15" instance=ExtResource( 9 )]
+
+position = Vector2( 291, 262 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

@@ -26,7 +26,8 @@ var cards = {
 				   "type" : "attack",
 				   "image" : "res://card_placeholder.png",
 				   "value" : 7,
-				   "effect" : ""
+				   "effect" : "",
+				   "modifiers": []
 				  },
 			  1 : {
 				   "name" : "Defence",
@@ -35,7 +36,8 @@ var cards = {
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 7,
-				   "effect" : "block"
+				   "effect" : "block",
+				   "modifiers": []
 				  },
 			  2 : {
 				   "name" : "Burst",
@@ -44,7 +46,48 @@ var cards = {
 				   "type" : "attack",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 25,
-				   "effect" : ""
+				   "effect" : "",
+				   "modifiers": []
+				  },
+			  3 : {
+				   "name" : "Strength",
+				   "cost" : 1,
+				   "description" : "Gain 2 strength",
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 0,
+				   "effect" : "",
+				   "modifiers": [STRENGTH, "self", 2]
+				  },
+			  4 : {
+				   "name" : "Disabling attack",
+				   "cost" : 2,
+				   "description" : "Deals 10 damage and applies 2 weakness",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 10,
+				   "effect" : "",
+				   "modifiers": [WEAKNESS, "target", 2]
+				  },
+			  5 : {
+				   "name" : "Vulnerability",
+				   "cost" : 2,
+				   "description" : "Applies 1 vulnerability to all enemies",
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 0,
+				   "effect" : "",
+				   "modifiers": [VULNERABILITY, "all", 1]
+				  },
+			  6 : {
+				   "name" : "Break",
+				   "cost" : 3,
+				   "description" : "Enemy looses 5 strength",
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 0,
+				   "effect" : "target",
+				   "modifiers": [STRENGTH, "target", -5]
 				  }
 			}
 
@@ -65,6 +108,7 @@ func init_card(card, id):
 	card.image = cards[id].image
 	card.value = cards[id].value
 	card.effect = cards[id].effect
+	card.modifiers = cards[id].modifiers
 
 func shuffle_list(list):
     var shuffledList = [] 
@@ -82,6 +126,10 @@ func init_deck():
 	for i in range(5):
 		deck.append(1)
 	deck.append(2)
+	deck.append(3)
+	deck.append(4)
+	deck.append(5)
+	deck.append(6)
 
 signal unselect_all()
 

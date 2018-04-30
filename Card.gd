@@ -8,6 +8,7 @@ var type = null
 var image = null
 var value = 0
 var effect = ""
+var modifiers = []
 
 var selection_ = preload("res://selection.png")
 var selection_play = preload("res://selection_play.png")

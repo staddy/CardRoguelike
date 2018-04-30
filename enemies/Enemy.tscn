@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://material.tres" type="Material" id=2]
@@ -8,9 +8,7 @@
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=6]
 [ext_resource path="res://block.png" type="Texture" id=7]
 [ext_resource path="res://attack_icon.png" type="Texture" id=8]
-
-
-
+[ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -50,7 +48,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
@@ -228,6 +226,10 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_fonts" ]
+
+[node name="ModifiersContainer" parent="." index="9" instance=ExtResource( 9 )]
+
+position = Vector2( -40, 79 )
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 

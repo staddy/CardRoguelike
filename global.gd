@@ -10,7 +10,16 @@ var locked = false
 var material_ = preload("res://material.tres")
 var outlined_material = preload("res://outlined_material.tres")
 
-var cards = { 0 : {
+enum Modifiers {DEXTERITY, STRENGTH, WEAKNESS, VULNERABILITY}
+onready var modifier_textures = {
+								 DEXTERITY: "res://modifiers/images/dexterity.png",
+								 STRENGTH: "res://modifiers/images/strength.png",
+								 WEAKNESS: "res://modifiers/images/weakness.png",
+								 VULNERABILITY: "res://modifiers/images/vulnerability.png"
+								}
+
+var cards = {
+			  0 : {
 				   "name" : "Attack",
 				   "cost" : 1,
 				   "description" : "Deals 7 damage",

@@ -36,9 +36,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 16.0
+margin_left = 13.0
 margin_top = 14.0
-margin_right = 38.0
+margin_right = 35.0
 margin_bottom = 25.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
@@ -60,8 +60,5 @@ scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
 

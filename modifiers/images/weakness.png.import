@@ -7,10 +7,10 @@ path="res://.import/weakness.png-3a778ef0583cd6fa005bb56f7f88d5b1.stex"
 [deps]
 
 source_file="res://modifiers/images/weakness.png"
-source_md5="d39b89e5fc9a544508c4b565e597837a"
+source_md5="4ce12f5ce414f87bd7fa2796a393f234"
 
 dest_files=[ "res://.import/weakness.png-3a778ef0583cd6fa005bb56f7f88d5b1.stex" ]
-dest_md5="7de123ee50e2a66d1fd2f4d08379cd6a"
+dest_md5="890807a221d2f4d8d2077a81fad1c9f4"
 
 [params]
 

@@ -1,13 +1,14 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://under_large.png" type="Texture" id=3]
 [ext_resource path="res://progress_large.png" type="Texture" id=4]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://mana.png" type="Texture" id=7]
 [ext_resource path="res://block.png" type="Texture" id=8]
+
 
 [sub_resource type="Animation" id=1]
 

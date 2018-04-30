@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dog.png-4e2e68f557c08f4f920813740d4b2838.stex"
+path="res://.import/dexterity.png-d8b357fece35cb9a77f8be2d9009b9dc.stex"
 
 [deps]
 
-source_file="res://dog.png"
-source_md5="bdbf1c4ff3551f42df900ddd18f18c72"
+source_file="res://modifiers/images/dexterity.png"
+source_md5="262f4143f823126e16caa6f420489ccc"
 
-dest_files=[ "res://.import/dog.png-4e2e68f557c08f4f920813740d4b2838.stex" ]
-dest_md5="0603392da5014d0eebf4adfd0c61c2ab"
+dest_files=[ "res://.import/dexterity.png-d8b357fece35cb9a77f8be2d9009b9dc.stex" ]
+dest_md5="39024a1190e45849ae6586017c12fe62"
 
 [params]
 

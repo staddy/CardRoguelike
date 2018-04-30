@@ -48,7 +48,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="Node2D" type="Node2D" index="0" groups=[
+[node name="Node2D" type="Node2D" groups=[
 "enemy",
 ]]
 

@@ -71,6 +71,10 @@ func set_max_mana(value):
 		max_mana = value
 	$MaxMana.text = str(max_mana)
 
+func update_cards():
+	for c in cards:
+		c.update()
+
 func _ready():
 	for e in enemies:
 		e.init()
@@ -102,12 +106,14 @@ func init_card(card, id):
 	card.card_id = id
 	card.card_name = initial_cards[id].name
 	card.cost = initial_cards[id].cost
-	card.description = initial_cards[id].description
 	card.type = initial_cards[id].type
 	card.image = initial_cards[id].image
 	card.value = initial_cards[id].value
+	card.value2 = initial_cards[id].value2
 	card.effect = initial_cards[id].effect
 	card.modifiers = initial_cards[id].modifiers
+	# because description depends on value and value2 (and parent and enemy (not card) modifiers!)
+	card.description = initial_cards[id].description
 
 # create a random card from draw pile as a scene object
 # if draw pile is empty move shuffled cards from discard pile to it first
@@ -123,18 +129,18 @@ func draw_card():
 	var card = Card.instance()
 	card.position = Vector2(0, 0)
 	var id = draw_pile.pop_back()
-	init_card(card, id)
 	add_child(card)
+	init_card(card, id)
 	reposition_cards()
 
-func play_card(card):
+func play_card(card, enemy):
 	if enemy_turn:
 		return
 	if card.type == "attack":
-		if card.effect != "all" and selected_enemy == null:
+		if card.effect != "all" and enemy == null:
 			return
 	elif card.type == "skill":
-		if card.effect == "target" and selected_enemy == null:
+		if card.effect == "target" and enemy == null:
 			return
 	if self.mana < card.cost:
 		show_warning("Not enough mana")
@@ -145,20 +151,20 @@ func play_card(card):
 		if card.effect == "all":
 			for e in enemies:
 				Effects.add_effect(0, e)
-				e.damage(card.value)
+				e.damage(global.get_damage_to_enemy(card.value, modifiers, e.modifiers))
 		else:
-			Effects.add_effect(0, selected_enemy.position)
-			selected_enemy.damage(card.value)
+			Effects.add_effect(0, enemy.position)
+			enemy.damage(global.get_damage_to_enemy(card.value, modifiers, enemy.modifiers))
 	if card.effect == "block":
-		self.block += card.value
+		self.block += global.get_block_player(card.value2, modifiers)
 	for i in range(0, card.modifiers.size(), 3):
 		if card.modifiers[i + 1] == "all":
 			for e in enemies:
 				apply(e, card.modifiers[i], card.modifiers[i + 2])
 		elif card.modifiers[i + 1] == "self":
 			apply(self, card.modifiers[i], card.modifiers[i + 2])
-		elif card.modifiers[i + 1] == "target" and selected_enemy != null:
-			apply(selected_enemy, card.modifiers[i], card.modifiers[i + 2])
+		elif card.modifiers[i + 1] == "target" and enemy != null:
+			apply(enemy, card.modifiers[i], card.modifiers[i + 2])
 	discard_card(card)
 	pass
 

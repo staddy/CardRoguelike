@@ -7,7 +7,8 @@ var modifiers_instances = {}
 func update_parent():
 	if get_parent().is_in_group("enemy"):
 		get_parent().update_intent_value()
-	# TODO: same for player (battle)
+	elif get_parent().is_in_group("battle"):
+		get_parent().update_cards()
 	pass
 
 func add(m, v):

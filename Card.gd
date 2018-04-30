@@ -3,10 +3,11 @@ extends Node2D
 var card_id
 var card_name setget set_card_name
 var cost setget set_cost
-var description setget set_description
+var description = "" setget set_description
 var type = null
-var image = null
+var image = null setget set_image
 var value = 0
+var value2 = 0
 var effect = ""
 var modifiers = []
 
@@ -14,17 +15,33 @@ var selection_ = preload("res://selection.png")
 var selection_play = preload("res://selection_play.png")
 var selection_attack = preload("res://selection_attack.png")
 
-func set_card_name(value):
-	card_name = value
-	$Name.text = value
+var enemy = null
 
-func set_cost(value):
-	cost = value
-	$Cost.text = str(value)
+func update():
+	set_description(description)
 
-func set_description(value):
-	description = value
-	$Description.text = value
+func set_card_name(value_):
+	card_name = value_
+	$Name.text = value_
+
+func set_cost(value_):
+	cost = value_
+	$Cost.text = str(value_)
+
+func set_description(value_):
+	description = value_
+	var parent = get_parent()
+	var d = description
+	if parent.is_in_group("battle"):
+		#d = d.replace("#dmg", "[color=<#FF0000>]" + str(global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers)) + "[/color]")
+		d = d.replace("#dmg", str(global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers)))
+		d = d.replace("#block", str(global.get_block_player(value2, parent.modifiers)))
+	$Description.text = d
+
+func set_image(img):
+	image = img
+	if(image != null):
+		$picture.texture = load(image)
 
 var pressed = false
 var selected = false setget set_selected
@@ -32,9 +49,9 @@ var scale_factor = 1.5
 
 var old_z_index = 0
 
-func set_selected(value):
-	if selected != value:
-		if value:
+func set_selected(value_):
+	if selected != value_:
+		if value_:
 			scale = Vector2(scale_factor, scale_factor)
 			$selection.visible = true
 			selected = true
@@ -84,34 +101,42 @@ func _process(delta):
 		position += (initial_position - position) * speed * delta
 
 func _input(event):
-	if pressed and selected:
+	if selected:
 		var parent = get_parent()
-		if event is InputEventMouseMotion or event is InputEventScreenDrag:
-			self.position += (event.position - old_position)
-			if(self.position.x < width / 2):
-				self.position.x = width / 2
-			elif(self.position.x > max_x):
-				self.position.x = max_x
-			if(self.position.y < height / 2):
-				self.position.y = height / 2
-			elif(self.position.y > max_y):
-				self.position.y = max_y
-			old_position = event.position
-			if parent.is_in_group("battle"):
+		if parent.is_in_group("battle"):
+			if event.get("position") != null:
 				if (type == "attack" or (type == "skill" and effect == "target")) and parent.selected_enemy != null:
+					enemy = parent.selected_enemy
 					$selection.texture = selection_attack
 				elif (type == "skill" and effect != "target") and event.position.y < parent.get_node("Play").position.y:
+					enemy = null
 					$selection.texture = selection_play
 				else:
+					enemy = null
 					$selection.texture = selection_
-		elif (event is InputEventMouseButton or event is InputEventScreenTouch) and not event.is_pressed():
-			self.selected = false
-			pressed = false
-			if parent.is_in_group("battle"):
-				if event.position.y < parent.get_node("Play").position.y:
-					parent.play_card(self)
-				parent.selected_card = null
-			global.unlock()
+				update()
+		if pressed:
+			if event is InputEventMouseMotion or event is InputEventScreenDrag:
+				self.position += (event.position - old_position)
+				if(self.position.x < width / 2):
+					self.position.x = width / 2
+				elif(self.position.x > max_x):
+					self.position.x = max_x
+				if(self.position.y < height / 2):
+					self.position.y = height / 2
+				elif(self.position.y > max_y):
+					self.position.y = max_y
+				old_position = event.position
+	
+			elif (event is InputEventMouseButton or event is InputEventScreenTouch) and not event.is_pressed():
+				self.selected = false
+				pressed = false
+				if parent.is_in_group("battle"):
+					if event.position.y < parent.get_node("Play").position.y:
+						parent.play_card(self, parent.selected_enemy)
+					parent.selected_enemy = null
+					parent.selected_card = null
+				global.unlock()
 
 func remove():
 	var parent = get_parent()
@@ -145,3 +170,5 @@ func _on_Area2D_mouse_entered():
 func _on_Area2D_mouse_exited():
 	if !global.locked:
 		self.selected = false
+		enemy = null
+		update()

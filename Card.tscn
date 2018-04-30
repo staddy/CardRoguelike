@@ -163,12 +163,12 @@ visible_characters = -1
 percent_visible = 1.0
 meta_underlined = true
 tab_size = 4
-text = "Test description, test description"
+text = ""
 scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "Mouse", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "BBCode", "Mouse", "Rect", "custom_colors", "custom_fonts" ]
 __meta__ = {
 "_edit_lock_": true
 }

@@ -37,7 +37,7 @@ func get_damage_to_enemy(base, modifiers, enemy_modifiers):
 		return 0
 	if modifiers.has(WEAKNESS):
 		value *= weakness_damage_to_enemies()
-	if enemy_modifiers.has(VULNERABILITY):
+	if enemy_modifiers != null and enemy_modifiers.has(VULNERABILITY):
 		value *= vulnerability_damage_to_enemies()
 	return int(value)
 
@@ -74,30 +74,33 @@ var cards = {
 			  0 : {
 				   "name" : "Attack",
 				   "cost" : 1,
-				   "description" : "Deals 7 damage",
+				   "description" : "Deals #dmg damage",
 				   "type" : "attack",
 				   "image" : "res://card_placeholder.png",
 				   "value" : 7,
+				   "value2" : 0,
 				   "effect" : "",
 				   "modifiers": []
 				  },
 			  1 : {
 				   "name" : "Defence",
 				   "cost" : 1,
-				   "description" : "Increases block by 7",
+				   "description" : "Increases block by #block",
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
-				   "value" : 7,
+				   "value" : 0,
+				   "value2" : 7,
 				   "effect" : "block",
 				   "modifiers": []
 				  },
 			  2 : {
 				   "name" : "Burst",
 				   "cost" : 3,
-				   "description" : "Deals 25 damage",
+				   "description" : "Deals #dmg damage",
 				   "type" : "attack",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 25,
+				   "value2" : 0,
 				   "effect" : "",
 				   "modifiers": []
 				  },
@@ -108,16 +111,18 @@ var cards = {
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 0,
+				   "value2" : 0,
 				   "effect" : "",
 				   "modifiers": [STRENGTH, "self", 2]
 				  },
 			  4 : {
 				   "name" : "Disabling attack",
 				   "cost" : 2,
-				   "description" : "Deals 10 damage and applies 2 weakness",
+				   "description" : "Deals #dmg damage and applies 2 weakness",
 				   "type" : "attack",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 10,
+				   "value2" : 0,
 				   "effect" : "",
 				   "modifiers": [WEAKNESS, "target", 2]
 				  },
@@ -128,6 +133,7 @@ var cards = {
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 0,
+				   "value2" : 0,
 				   "effect" : "",
 				   "modifiers": [VULNERABILITY, "all", 1]
 				  },
@@ -138,8 +144,20 @@ var cards = {
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 0,
+				   "value2" : 0,
 				   "effect" : "target",
 				   "modifiers": [STRENGTH, "target", -5]
+				  },
+			  7 : {
+				   "name" : "Dexter",
+				   "cost" : 0,
+				   "description" : "Gain 3 dexterity",
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 0,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": [DEXTERITY, "self", 3]
 				  }
 			}
 
@@ -171,6 +189,7 @@ func init_deck():
 	deck.append(4)
 	deck.append(5)
 	deck.append(6)
+	deck.append(7)
 
 signal unselect_all()
 

@@ -33,10 +33,21 @@ func set_description(value_):
 	var parent = get_parent()
 	var d = description
 	if parent.is_in_group("battle"):
-		#d = d.replace("#dmg", "[color=<#FF0000>]" + str(global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers)) + "[/color]")
-		d = d.replace("#dmg", str(global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers)))
-		d = d.replace("#block", str(global.get_block_player(value2, parent.modifiers)))
-	$Description.text = d
+		var dmg = global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers)
+		var block = global.get_block_player(value2, parent.modifiers)
+		var color1 = "#FFFFFF"
+		var color2 = "#FFFFFF"
+		if dmg < value:
+			color1 = "#b00000"
+		elif dmg > value:
+			color1 = "#00b000"
+		d = d.replace("#dmg", "[color=" + color1 + "]" + str(dmg) + "[/color]")
+		if block < value2:
+			color2 = "#b00000"
+		elif block > value2:
+			color2 = "#00b000"
+		d = d.replace("#block", "[color=" + color2 + "]" + str(block) + "[/color]")
+	$Description.bbcode_text = d
 
 func set_image(img):
 	image = img

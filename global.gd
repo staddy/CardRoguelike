@@ -113,7 +113,7 @@ var cards = {
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "",
-				   "modifiers": [STRENGTH, "self", 2]
+				   "modifiers": [STRENGTH, "self", -2]
 				  },
 			  4 : {
 				   "name" : "Disabling attack",

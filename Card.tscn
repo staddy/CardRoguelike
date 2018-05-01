@@ -11,7 +11,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 26, 26 )
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -157,7 +157,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/normal_font = ExtResource( 5 )
-bbcode_enabled = false
+bbcode_enabled = true
 bbcode_text = ""
 visible_characters = -1
 percent_visible = 1.0

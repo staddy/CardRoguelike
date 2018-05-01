@@ -113,7 +113,7 @@ var cards = {
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "",
-				   "modifiers": [STRENGTH, "self", -2]
+				   "modifiers": [STRENGTH, "self", +2]
 				  },
 			  4 : {
 				   "name" : "Disabling attack",
@@ -152,13 +152,90 @@ var cards = {
 				   "name" : "Dexter",
 				   "cost" : 0,
 				   "description" : "Gain 3 dexterity",
-				   "type" : "skill",
+				   "type" : "attack",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "",
 				   "modifiers": [DEXTERITY, "self", 3]
-				  }
+				  },
+			8: {
+				   "name" : "Armor Strike",
+				   "cost" : 1,
+				   "description" : "Deals damage equal to the current armor",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 0,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": []
+				},
+			9: {
+				   "name" : "Punch",
+				   "cost" : 0,
+				   "description" : "Deals #dmg damage",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder.png",
+				   "value" : 4,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": []
+				},
+			10: {
+				   "name" : "Skirmish",
+				   "cost" : 0,
+				   "description" : "Can only be played if every card in your hand is an Attack. Deals #dmg damage",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder.png",
+				   "value" : 14,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": []
+				},
+			11: {
+				   "name" : "Multistrike",
+				   "cost" : 1,
+				   "description" : "Deals #dmg damage to ALL enemies",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder.png",
+				   "value" : 7,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": []
+				},
+			12: {
+				   "name" : "Power Attack",
+				   "cost" : 2,
+				   "description" : "Deals #dmg damage. Strength affects Power Attack 3 times",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder.png",
+				   "value" : 14,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": []
+				},
+			13: {
+				   "name" : "Skilled Warrior",
+				   "cost" : 1,
+				   "description" : "Deals #dmg damage. Gain #block block",
+				   "type" : "attack",
+				   "image" : "res://card_placeholder.png",
+				   "value" : 5,
+				   "value2" : 5,
+				   "effect" : "",
+				   "modifiers": []
+				},
+			14: {
+				   "name" : "Second wind",
+				   "cost" : 1,
+				   "description" : "Gain 2 energy. Exhaust.",
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 0,
+				   "value2" : 0,
+				   "effect" : "",
+				   "modifiers": []
+				}
 			}
 
 var default_draw_size = 5
@@ -190,6 +267,8 @@ func init_deck():
 	deck.append(5)
 	deck.append(6)
 	deck.append(7)
+	deck.append(8)
+	deck.append(9)
 
 signal unselect_all()
 

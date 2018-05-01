@@ -49,7 +49,7 @@ tracks/2/keys = {
 "values": [ true, true, false ]
 }
 
-[node name="Effects" type="Node2D" index="0"]
+[node name="Effects" type="Node2D"]
 
 z_index = 5
 script = ExtResource( 1 )

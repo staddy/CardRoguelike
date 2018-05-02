@@ -247,26 +247,26 @@ var current_max_mana = 3
 var deck = []
 
 func shuffle_list(list):
-    var shuffledList = [] 
-    var indexList = range(list.size())
-    for i in range(list.size()):
-        var x = randi()%indexList.size()
-        shuffledList.append(list[indexList[x]])
-        indexList.remove(x)
-    return shuffledList
+	var shuffledList = [] 
+	var indexList = range(list.size())
+	for i in range(list.size()):
+		var x = randi()%indexList.size()
+		shuffledList.append(list[indexList[x]])
+		indexList.remove(x)
+	return shuffledList
 
 func init_deck():
 	deck.clear()
-	for i in range(5):
-		deck.append(0)
+	#for i in range(5):
+		#deck.append(0)
 	for i in range(5):
 		deck.append(1)
-	deck.append(2)
-	deck.append(3)
-	deck.append(4)
-	deck.append(5)
-	deck.append(6)
-	deck.append(7)
+	#deck.append(2)
+	#deck.append(3)
+	#deck.append(4)
+	#deck.append(5)
+	#deck.append(6)
+	#deck.append(7)
 	deck.append(8)
 	deck.append(9)
 

@@ -75,6 +75,20 @@ func update_cards():
 	for c in cards:
 		c.update()
 
+#my bad modify
+func modify_cards(c, mode):
+	if mode == "play":
+		if c.card_name == "Armor Strike":
+			c.value = self.block
+		elif c.card_name == "Punch":
+			# duplicate effect ## maybe bad code, no thoughts 
+			global.deck.append(c.card_id)
+			#init_card(c, 9)
+			initial_cards = global.cards.duplicate()
+			draw_pile = global.shuffle_list(global.deck)
+	else:
+		pass
+
 func _ready():
 	for e in enemies:
 		e.init()
@@ -131,6 +145,7 @@ func draw_card():
 	var id = draw_pile.pop_back()
 	add_child(card)
 	init_card(card, id)
+	modify_cards(card, "update")
 	reposition_cards()
 
 func play_card(card, enemy):
@@ -153,6 +168,7 @@ func play_card(card, enemy):
 				Effects.add_effect(0, e)
 				e.damage(global.get_damage_to_enemy(card.value, modifiers, e.modifiers))
 		else:
+			modify_cards(card, "play")
 			Effects.add_effect(0, enemy.position)
 			enemy.damage(global.get_damage_to_enemy(card.value, modifiers, enemy.modifiers))
 	if card.effect == "block":

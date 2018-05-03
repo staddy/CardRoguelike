@@ -5,7 +5,8 @@ var value setget set_value
 
 func set_type(type_):
 	if has_node("icon"):
-		$icon.texture = load(global.modifier_textures[type_])
+		if global.modifier_textures[type_] != null:
+			$icon.texture = load(global.modifier_textures[type_])
 	type = type_
 
 func set_value(value_):

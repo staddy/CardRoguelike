@@ -75,20 +75,6 @@ func update_cards():
 	for c in cards:
 		c.update()
 
-#my bad modify
-func modify_cards(c, mode):
-	if mode == "play":
-		if c.card_name == "Armor Strike":
-			c.value = self.block
-		elif c.card_name == "Punch":
-			# duplicate effect ## maybe bad code, no thoughts 
-			global.deck.append(c.card_id)
-			#init_card(c, 9)
-			initial_cards = global.cards.duplicate()
-			draw_pile = global.shuffle_list(global.deck)
-	else:
-		pass
-
 func _ready():
 	for e in enemies:
 		e.init()
@@ -145,7 +131,6 @@ func draw_card():
 	var id = draw_pile.pop_back()
 	add_child(card)
 	init_card(card, id)
-	modify_cards(card, "update")
 	reposition_cards()
 
 func play_card(card, enemy):
@@ -165,14 +150,18 @@ func play_card(card, enemy):
 	if card.type == "attack":
 		if card.effect == "all":
 			for e in enemies:
-				Effects.add_effect(0, e)
+				Effects.add_effect(0, e.position)
 				e.damage(global.get_damage_to_enemy(card.value, modifiers, e.modifiers))
+		elif card.effect == "use_block":
+			enemy.damage(global.get_damage_to_enemy(self.block, modifiers, enemy.modifiers))
 		else:
-			modify_cards(card, "play")
 			Effects.add_effect(0, enemy.position)
 			enemy.damage(global.get_damage_to_enemy(card.value, modifiers, enemy.modifiers))
-	if card.effect == "block":
-		self.block += global.get_block_player(card.value2, modifiers)
+	elif card.type == "skill":
+		if card.effect == "block":
+			self.block += global.get_block_player(card.value2, modifiers)
+		else:
+			pass
 	for i in range(0, card.modifiers.size(), 3):
 		if card.modifiers[i + 1] == "all":
 			for e in enemies:

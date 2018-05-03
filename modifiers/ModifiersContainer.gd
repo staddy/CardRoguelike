@@ -9,6 +9,7 @@ func update_parent():
 		get_parent().update_intent_value()
 	elif get_parent().is_in_group("battle"):
 		get_parent().update_cards()
+		pass
 	pass
 
 func add(m, v):

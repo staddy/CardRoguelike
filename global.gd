@@ -152,7 +152,7 @@ var cards = {
 				   "name" : "Dexter",
 				   "cost" : 0,
 				   "description" : "Gain 3 dexterity",
-				   "type" : "attack",
+				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 0,
 				   "value2" : 0,
@@ -167,7 +167,7 @@ var cards = {
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 0,
 				   "value2" : 0,
-				   "effect" : "",
+				   "effect" : "use_block",
 				   "modifiers": []
 				},
 			9: {
@@ -200,7 +200,7 @@ var cards = {
 				   "image" : "res://card_placeholder.png",
 				   "value" : 7,
 				   "value2" : 0,
-				   "effect" : "",
+				   "effect" : "all",
 				   "modifiers": []
 				},
 			12: {
@@ -231,8 +231,19 @@ var cards = {
 				   "description" : "Gain 2 energy. Exhaust.",
 				   "type" : "skill",
 				   "image" : "res://card_placeholder2.png",
-				   "value" : 0,
+				   "value" : 2,
 				   "value2" : 0,
+				   "effect" : "exhaust",
+				   "modifiers": []
+				},
+			15: {
+				   "name" : "Sacrifice",
+				   "cost" : 0,
+				   "description" : "Gain #dmg energy. Lose #block HP.",
+				   "type" : "skill",
+				   "image" : "res://card_placeholder2.png",
+				   "value" : 1,
+				   "value2" : 3,
 				   "effect" : "",
 				   "modifiers": []
 				}
@@ -262,13 +273,19 @@ func init_deck():
 	for i in range(5):
 		deck.append(1)
 	#deck.append(2)
-	#deck.append(3)
+	deck.append(3)
 	#deck.append(4)
 	#deck.append(5)
 	#deck.append(6)
 	#deck.append(7)
 	deck.append(8)
-	deck.append(9)
+	#deck.append(9)
+	#deck.append(10)
+	#deck.append(11)
+	#deck.append(12)
+	#deck.append(13)
+	#deck.append(14)
+	#deck.append(15)
 
 signal unselect_all()
 

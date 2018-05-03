@@ -4,7 +4,7 @@
 [ext_resource path="res://modifiers/images/dexterity.png" type="Texture" id=2]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=3]
 
-[node name="Modifier" type="Control" index="0"]
+[node name="Modifier" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -19,8 +19,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-type = 0
-value = 1
 
 [node name="icon" type="Sprite" parent="." index="0"]
 

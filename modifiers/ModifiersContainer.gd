@@ -38,6 +38,7 @@ func process():
 
 func get(m):
 	return modifiers_instances[m].value
+	
 
 func _ready():
 	for m in global.Modifiers:

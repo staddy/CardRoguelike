@@ -73,7 +73,7 @@ func set_max_mana(value):
 
 func update_cards():
 	for c in cards:
-		c.update()
+		c.update(c.card_id)
 
 func _ready():
 	for e in enemies:
@@ -151,30 +151,48 @@ func play_card(card, enemy):
 		if card.effect == "all":
 			for e in enemies:
 				Effects.add_effect(0, e.position)
-				e.damage(global.get_damage_to_enemy(card.value, modifiers, e.modifiers))
+				e.damage(global.get_damage_to_enemy(card, card.value, modifiers, e.modifiers))
 		elif card.effect == "use_block":
-			enemy.damage(global.get_damage_to_enemy(self.block, modifiers, enemy.modifiers))
+			enemy.damage(global.get_damage_to_enemy(card, self.block, modifiers, enemy.modifiers))
+		elif card.effect == "only_attack":
+			var k = 0
+			for c in cards:
+				if c.type == "attack":
+					k += 1
+			if cards.size() == k:
+				enemy.damage(global.get_damage_to_enemy(card, card.value, modifiers, enemy.modifiers))
+			else:
+				return
+		#elif card.effect == "strength_scale":
+			#enemy.damage(global.get_damage_to_enemy(card.value, modifiers, enemy.modifiers))
 		else:
 			Effects.add_effect(0, enemy.position)
-			enemy.damage(global.get_damage_to_enemy(card.value, modifiers, enemy.modifiers))
+			enemy.damage(global.get_damage_to_enemy(card, card.value, modifiers, enemy.modifiers))
 	elif card.type == "skill":
 		if card.effect == "block":
-			self.block += global.get_block_player(card.value2, modifiers)
+			self.block += global.get_block_player(card, card.value2, modifiers)
+		elif card.effect == "sacrifice":
+			self.hp -= global.get_damage_to_player(card, card.value2, modifiers, null)
+			self.mana = global.get_energy_to_player(mana, card.value)
+			enemy.damage(global.get_damage_to_enemy(card, card.value, modifiers, enemy.modifiers))
 		else:
 			pass
 	for i in range(0, card.modifiers.size(), 3):
 		if card.modifiers[i + 1] == "all":
 			for e in enemies:
-				apply(e, card.modifiers[i], card.modifiers[i + 2])
+				apply(card, e, card.modifiers[i], card.modifiers[i + 2])
 		elif card.modifiers[i + 1] == "self":
-			apply(self, card.modifiers[i], card.modifiers[i + 2])
+			apply(card, self, card.modifiers[i], card.modifiers[i + 2])
 		elif card.modifiers[i + 1] == "target" and enemy != null:
-			apply(enemy, card.modifiers[i], card.modifiers[i + 2])
+			apply(card, enemy, card.modifiers[i], card.modifiers[i + 2])
 	discard_card(card)
 	pass
 
-func apply(target, modifier, value):
+func apply(card, target, modifier, value):
 	target.modifiers.add(modifier, value)
+	#special scale
+	#if card.card_id == 3:
+		#initial_cards[12].value = global.get_damage_to_enemy(card, initial_cards[12].value, modifiers, null)
 
 # move cards on screen to proper locations
 func reposition_cards():

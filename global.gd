@@ -31,8 +31,17 @@ func weakness_damage_to_enemies():
 func weakness_damage_to_player():
 	return 0.75
 
-func get_damage_to_enemy(base, modifiers, enemy_modifiers):
+func get_energy_to_player(base, multiplier):
+	var value = base + multiplier
+	return int(value)
+
+func get_damage_to_enemy(card, base, modifiers, enemy_modifiers):
 	var value = (base + modifiers.get(STRENGTH))
+	if typeof(card) != TYPE_NIL:
+		if card.card_id == 12:
+			value = (base + modifiers.get(STRENGTH)*3)
+		if card.card_id == 15:
+			value = base
 	if value <= 0:
 		return 0
 	if modifiers.has(WEAKNESS):
@@ -41,18 +50,23 @@ func get_damage_to_enemy(base, modifiers, enemy_modifiers):
 		value *= vulnerability_damage_to_enemies()
 	return int(value)
 
-func get_damage_to_player(base, modifiers, player_modifiers):
+func get_damage_to_player(card, base, modifiers, player_modifiers):
 	var value = (base + modifiers.get(STRENGTH))
+	if typeof(card) != TYPE_NIL and card.card_id == 15:
+		value = base
 	if value <= 0:
 		return 0
 	if modifiers.has(WEAKNESS):
 		value *= weakness_damage_to_player()
-	if player_modifiers.has(VULNERABILITY):
+	if typeof(player_modifiers) != TYPE_NIL and player_modifiers.has(VULNERABILITY):
 		value *= vulnerability_damage_to_player()
 	return int(value)
 
-func get_block_player(base, modifiers):
+func get_block_player(card, base, modifiers):
 	var value = (base + modifiers.get(DEXTERITY))
+	if typeof(card) != TYPE_NIL:
+		if card.card_id == 15:
+			value = base
 	if value <= 0:
 		return 0
 	return value
@@ -178,7 +192,7 @@ var cards = {
 				   "image" : "res://card_placeholder.png",
 				   "value" : 4,
 				   "value2" : 0,
-				   "effect" : "",
+				   "effect" : "duplicate",
 				   "modifiers": []
 				},
 			10: {
@@ -189,7 +203,7 @@ var cards = {
 				   "image" : "res://card_placeholder.png",
 				   "value" : 14,
 				   "value2" : 0,
-				   "effect" : "",
+				   "effect" : "only_attack",
 				   "modifiers": []
 				},
 			11: {
@@ -211,7 +225,7 @@ var cards = {
 				   "image" : "res://card_placeholder.png",
 				   "value" : 14,
 				   "value2" : 0,
-				   "effect" : "",
+				   "effect" : "strength_scale",
 				   "modifiers": []
 				},
 			13: {
@@ -244,7 +258,7 @@ var cards = {
 				   "image" : "res://card_placeholder2.png",
 				   "value" : 1,
 				   "value2" : 3,
-				   "effect" : "",
+				   "effect" : "sacrifice",
 				   "modifiers": []
 				}
 			}
@@ -277,15 +291,15 @@ func init_deck():
 	#deck.append(4)
 	#deck.append(5)
 	#deck.append(6)
-	#deck.append(7)
-	deck.append(8)
+	deck.append(7)
+	#deck.append(8)
 	#deck.append(9)
 	#deck.append(10)
 	#deck.append(11)
-	#deck.append(12)
+	deck.append(12)
 	#deck.append(13)
 	#deck.append(14)
-	#deck.append(15)
+	deck.append(15)
 
 signal unselect_all()
 

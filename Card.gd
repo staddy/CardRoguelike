@@ -17,7 +17,7 @@ var selection_attack = preload("res://selection_attack.png")
 
 var enemy = null
 
-func update():
+func update(id):
 	set_description(description)
 
 func set_card_name(value_):
@@ -33,8 +33,8 @@ func set_description(value_):
 	var parent = get_parent()
 	var d = description
 	if parent.is_in_group("battle"):
-		var dmg = global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers)
-		var block = global.get_block_player(value2, parent.modifiers)
+		var dmg = global.get_damage_to_enemy(self, value, parent.modifiers, null if enemy == null else enemy.modifiers)
+		var block = global.get_block_player(self, value2, parent.modifiers)
 		var color1 = "#FFFFFF"
 		var color2 = "#FFFFFF"
 		if dmg < value:
@@ -125,7 +125,7 @@ func _input(event):
 				else:
 					enemy = null
 					$selection.texture = selection_
-				update()
+				update(null)
 		if pressed:
 			if event is InputEventMouseMotion or event is InputEventScreenDrag:
 				self.position += (event.position - old_position)
@@ -182,4 +182,4 @@ func _on_Area2D_mouse_exited():
 	if !global.locked:
 		self.selected = false
 		enemy = null
-		update()
+		update(null)

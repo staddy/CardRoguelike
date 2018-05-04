@@ -40,6 +40,7 @@ __meta__ = {
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( -40, -60 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

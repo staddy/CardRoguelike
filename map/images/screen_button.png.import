@@ -7,10 +7,7 @@ path="res://.import/screen_button.png-47ddc215d06c7f10b9182671f7d1d07f.stex"
 [deps]
 
 source_file="res://map/images/screen_button.png"
-source_md5="a0af10b821cce95bb2a14f72d15350a8"
-
 dest_files=[ "res://.import/screen_button.png-47ddc215d06c7f10b9182671f7d1d07f.stex" ]
-dest_md5="4bf0635afaf0b172abca7e8bad3de1bb"
 
 [params]
 

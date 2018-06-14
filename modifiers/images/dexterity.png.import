@@ -7,10 +7,7 @@ path="res://.import/dexterity.png-d8b357fece35cb9a77f8be2d9009b9dc.stex"
 [deps]
 
 source_file="res://modifiers/images/dexterity.png"
-source_md5="2739222bb611975be2daf0f4c8651d81"
-
 dest_files=[ "res://.import/dexterity.png-d8b357fece35cb9a77f8be2d9009b9dc.stex" ]
-dest_md5="e577b7e3dbc28d82a114d8799d4cd58e"
 
 [params]
 

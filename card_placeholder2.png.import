@@ -7,10 +7,7 @@ path="res://.import/card_placeholder2.png-37eb930b129d21eafa6a0b4688835d35.stex"
 [deps]
 
 source_file="res://card_placeholder2.png"
-source_md5="d8a48cc7350f4d55d2e6a1f9fa75c160"
-
 dest_files=[ "res://.import/card_placeholder2.png-37eb930b129d21eafa6a0b4688835d35.stex" ]
-dest_md5="3d6957d9972098d6205902ef99c95db3"
 
 [params]
 

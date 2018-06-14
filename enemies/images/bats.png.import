@@ -7,10 +7,7 @@ path="res://.import/bats.png-34272c2287f1ca791442d8953a1310d3.stex"
 [deps]
 
 source_file="res://enemies/images/bats.png"
-source_md5="ac214615c683bf77bd359bb263e00e09"
-
 dest_files=[ "res://.import/bats.png-34272c2287f1ca791442d8953a1310d3.stex" ]
-dest_md5="939b1056f6d48e0ea4b990a5b5d58929"
 
 [params]
 

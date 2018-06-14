@@ -7,10 +7,7 @@ path="res://.import/slice.png-5e4316e0c573b4a3abb08c1f5ebf55ee.stex"
 [deps]
 
 source_file="res://effects/slice.png"
-source_md5="d398abd1b3eb808544ee3476bb76b565"
-
 dest_files=[ "res://.import/slice.png-5e4316e0c573b4a3abb08c1f5ebf55ee.stex" ]
-dest_md5="ea43bb47d8d800d9418eb5744cbe175a"
 
 [params]
 

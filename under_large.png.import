@@ -7,10 +7,7 @@ path="res://.import/under_large.png-901c3e2e9251219d11b8a79f11a59ad7.stex"
 [deps]
 
 source_file="res://under_large.png"
-source_md5="c9ebface1c96b8ff7e1c0bfd1f8e4287"
-
 dest_files=[ "res://.import/under_large.png-901c3e2e9251219d11b8a79f11a59ad7.stex" ]
-dest_md5="4e26c0fcc989ceeeb80bdf7eca0acddc"
 
 [params]
 

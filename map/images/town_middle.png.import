@@ -7,10 +7,7 @@ path="res://.import/town_middle.png-981883bbc4d7f8f80c4d0a4ad843b22d.stex"
 [deps]
 
 source_file="res://map/images/town_middle.png"
-source_md5="49d1d17174e6b863c54f62e477c07a9a"
-
 dest_files=[ "res://.import/town_middle.png-981883bbc4d7f8f80c4d0a4ad843b22d.stex" ]
-dest_md5="0b4544a333b74134c0ac714313a9356d"
 
 [params]
 

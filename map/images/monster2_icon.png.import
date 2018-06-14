@@ -7,10 +7,7 @@ path="res://.import/monster2_icon.png-115ed3e39004ade9d0dc2f87074a4520.stex"
 [deps]
 
 source_file="res://map/images/monster2_icon.png"
-source_md5="ad2a82f1702c0d7656968726b7f01b39"
-
 dest_files=[ "res://.import/monster2_icon.png-115ed3e39004ade9d0dc2f87074a4520.stex" ]
-dest_md5="635cce680165c9ae33f5a3d011a62b7e"
 
 [params]
 

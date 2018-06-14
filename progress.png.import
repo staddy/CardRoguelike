@@ -7,10 +7,7 @@ path="res://.import/progress.png-23bc1c796ce6a9ffba24ef7cee6b1071.stex"
 [deps]
 
 source_file="res://progress.png"
-source_md5="277bc0103ff5970ce892ec6341155a81"
-
 dest_files=[ "res://.import/progress.png-23bc1c796ce6a9ffba24ef7cee6b1071.stex" ]
-dest_md5="9c88753d4c394a0caf641729639cbf90"
 
 [params]
 

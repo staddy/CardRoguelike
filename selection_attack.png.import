@@ -7,10 +7,7 @@ path="res://.import/selection_attack.png-42a885d44ab64d9f3becbd07e0fd3be8.stex"
 [deps]
 
 source_file="res://selection_attack.png"
-source_md5="5e8915a09d170be2a43196e86f0238a8"
-
 dest_files=[ "res://.import/selection_attack.png-42a885d44ab64d9f3becbd07e0fd3be8.stex" ]
-dest_md5="39a1c5586e2d067b0763c19811cff93b"
 
 [params]
 

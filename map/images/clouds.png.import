@@ -7,10 +7,7 @@ path="res://.import/clouds.png-f7564ce1646e686ea298ed6938e30647.stex"
 [deps]
 
 source_file="res://map/images/clouds.png"
-source_md5="42791af96bdd9028dbbdcf0a5b221584"
-
 dest_files=[ "res://.import/clouds.png-f7564ce1646e686ea298ed6938e30647.stex" ]
-dest_md5="b2c0c44ff4e93aa69db7cd0702b9ae05"
 
 [params]
 

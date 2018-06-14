@@ -7,10 +7,7 @@ path="res://.import/attack_icon.png-32fb6589fd16eaa948b7bb11ccd39c00.stex"
 [deps]
 
 source_file="res://attack_icon.png"
-source_md5="9c570ee9fb08c6488e58f08e8d95cada"
-
 dest_files=[ "res://.import/attack_icon.png-32fb6589fd16eaa948b7bb11ccd39c00.stex" ]
-dest_md5="12add13a58bf0aea785a6f86cd31701e"
 
 [params]
 

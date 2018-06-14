@@ -7,10 +7,7 @@ path="res://.import/skull.png-cf249689766e1dff19e268afa5f14778.stex"
 [deps]
 
 source_file="res://skull.png"
-source_md5="4c31a6b69cf1ac5599d4b6ce2eaa7a78"
-
 dest_files=[ "res://.import/skull.png-cf249689766e1dff19e268afa5f14778.stex" ]
-dest_md5="cca5604ef34c0b35f2c8898f6ddd04a2"
 
 [params]
 

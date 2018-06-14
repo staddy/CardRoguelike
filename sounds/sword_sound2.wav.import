@@ -7,10 +7,7 @@ path="res://.import/sword_sound2.wav-82199a125c5286fb06c37f094c5c2b4f.sample"
 [deps]
 
 source_file="res://sounds/sword_sound2.wav"
-source_md5="604a45b4c585b37863d4baa170aa51b5"
-
 dest_files=[ "res://.import/sword_sound2.wav-82199a125c5286fb06c37f094c5c2b4f.sample" ]
-dest_md5="1258885f3088b108bbf796f35be762cb"
 
 [params]
 

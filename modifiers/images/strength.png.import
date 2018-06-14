@@ -7,10 +7,7 @@ path="res://.import/strength.png-f228854361f4d201fbe8f0d655588d4a.stex"
 [deps]
 
 source_file="res://modifiers/images/strength.png"
-source_md5="143242ba1d0d3f387fdc92b40905ca13"
-
 dest_files=[ "res://.import/strength.png-f228854361f4d201fbe8f0d655588d4a.stex" ]
-dest_md5="c13361231b5b87c0e76126e8c8439df5"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/background_old.png-7d001b483bf16cba2225b537fcb28f7d.stex"
 [deps]
 
 source_file="res://background_old.png"
-source_md5="9f413971ad3c9849b5d23df62076f4d4"
-
 dest_files=[ "res://.import/background_old.png-7d001b483bf16cba2225b537fcb28f7d.stex" ]
-dest_md5="dbfb344667d484e9c791bd0a295ef8e2"
 
 [params]
 

@@ -7,10 +7,7 @@ path="res://.import/chest_icon.png-6065b9e989bdd5725fb1a0f4ef90a615.stex"
 [deps]
 
 source_file="res://map/images/chest_icon.png"
-source_md5="326acc5b5a0252c596559361d5bb1312"
-
 dest_files=[ "res://.import/chest_icon.png-6065b9e989bdd5725fb1a0f4ef90a615.stex" ]
-dest_md5="e3f3b06af9fb79b373aa31cbf759cf07"
 
 [params]
 

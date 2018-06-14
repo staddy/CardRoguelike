@@ -7,10 +7,7 @@ path="res://.import/random_icon.png-94cfbe7a7bae46d42c61fafe6f846169.stex"
 [deps]
 
 source_file="res://map/images/random_icon.png"
-source_md5="76514aa0443ead5de061c2f481ed9692"
-
 dest_files=[ "res://.import/random_icon.png-94cfbe7a7bae46d42c61fafe6f846169.stex" ]
-dest_md5="bbd165205c878312e92575adb64c1795"
 
 [params]
 

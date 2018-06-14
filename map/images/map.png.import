@@ -7,10 +7,7 @@ path="res://.import/map.png-223af95a48a9118cc82c58e09bc20012.stex"
 [deps]
 
 source_file="res://map/images/map.png"
-source_md5="09d25e7dd85051349e321fe1a6e67478"
-
 dest_files=[ "res://.import/map.png-223af95a48a9118cc82c58e09bc20012.stex" ]
-dest_md5="cc5f7f148e23c33079e90f6ffa149411"
 
 [params]
 

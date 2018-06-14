@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/attack_icon.png-32fb6589fd16eaa948b7bb11ccd39c00.stex"
+path="res://.import/selection.png-67d413828990405266e21172e0d73f86.stex"
 
 [deps]
 
-source_file="res://attack_icon.png"
-dest_files=[ "res://.import/attack_icon.png-32fb6589fd16eaa948b7bb11ccd39c00.stex" ]
+source_file="res://cards/selection.png"
+dest_files=[ "res://.import/selection.png-67d413828990405266e21172e0d73f86.stex" ]
 
 [params]
 

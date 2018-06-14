@@ -3,12 +3,13 @@
 [ext_resource path="res://enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://material.tres" type="Material" id=2]
 [ext_resource path="res://enemies/images/dog.png" type="Texture" id=3]
-[ext_resource path="res://under.png" type="Texture" id=4]
-[ext_resource path="res://progress.png" type="Texture" id=5]
+[ext_resource path="res://battle/under.png" type="Texture" id=4]
+[ext_resource path="res://battle/progress.png" type="Texture" id=5]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=6]
-[ext_resource path="res://block.png" type="Texture" id=7]
-[ext_resource path="res://attack_icon.png" type="Texture" id=8]
+[ext_resource path="res://battle/block.png" type="Texture" id=7]
+[ext_resource path="res://battle/attack_icon.png" type="Texture" id=8]
 [ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

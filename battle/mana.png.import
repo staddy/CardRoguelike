@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/block.png-b7fed0a755ada244f74f9622a987e81f.stex"
+path="res://.import/mana.png-c7515316977af7471a31ad52f1aa8292.stex"
 
 [deps]
 
-source_file="res://block.png"
-dest_files=[ "res://.import/block.png-b7fed0a755ada244f74f9622a987e81f.stex" ]
+source_file="res://battle/mana.png"
+dest_files=[ "res://.import/mana.png-c7515316977af7471a31ad52f1aa8292.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/progress_large.png-ecc345e732fd5ab9291225d08ac0ef18.stex"
+path="res://.import/selection_play.png-ee550ee247c1a70c75a6646edaeb1573.stex"
 
 [deps]
 
-source_file="res://progress_large.png"
-dest_files=[ "res://.import/progress_large.png-ecc345e732fd5ab9291225d08ac0ef18.stex" ]
+source_file="res://cards/selection_play.png"
+dest_files=[ "res://.import/selection_play.png-ee550ee247c1a70c75a6646edaeb1573.stex" ]
 
 [params]
 

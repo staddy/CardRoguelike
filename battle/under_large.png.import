@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/selection.png-9afcbfee80b52259f363fc780247c9b5.stex"
+path="res://.import/under_large.png-8dd097557453c5c8897fcaf0f1823bbf.stex"
 
 [deps]
 
-source_file="res://selection.png"
-dest_files=[ "res://.import/selection.png-9afcbfee80b52259f363fc780247c9b5.stex" ]
+source_file="res://battle/under_large.png"
+dest_files=[ "res://.import/under_large.png-8dd097557453c5c8897fcaf0f1823bbf.stex" ]
 
 [params]
 

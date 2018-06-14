@@ -1,7 +1,7 @@
 extends Node2D
 
 var turn = -1
-var Card = preload("res://Card.tscn")
+var Card = preload("res://cards/Card.tscn")
 
 var initial_cards = []
 

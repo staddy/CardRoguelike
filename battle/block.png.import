@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/card_placeholder2.png-37eb930b129d21eafa6a0b4688835d35.stex"
+path="res://.import/block.png-9f1fa30e2ac164a8dfed429e9dc3ba92.stex"
 
 [deps]
 
-source_file="res://card_placeholder2.png"
-dest_files=[ "res://.import/card_placeholder2.png-37eb930b129d21eafa6a0b4688835d35.stex" ]
+source_file="res://battle/block.png"
+dest_files=[ "res://.import/block.png-9f1fa30e2ac164a8dfed429e9dc3ba92.stex" ]
 
 [params]
 

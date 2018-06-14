@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/progress.png-23bc1c796ce6a9ffba24ef7cee6b1071.stex"
+path="res://.import/card_placeholder2.png-24bc0aa76f76e89d6292b4b6f9c221d7.stex"
 
 [deps]
 
-source_file="res://progress.png"
-dest_files=[ "res://.import/progress.png-23bc1c796ce6a9ffba24ef7cee6b1071.stex" ]
+source_file="res://cards/card_placeholder2.png"
+dest_files=[ "res://.import/card_placeholder2.png-24bc0aa76f76e89d6292b4b6f9c221d7.stex" ]
 
 [params]
 

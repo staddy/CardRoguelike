@@ -1,7 +1,7 @@
 extends Node2D
 
-var attack_icon = preload("res://attack_icon.png")
-var block_icon = preload("res://block_icon.png")
+var attack_icon = preload("res://battle/attack_icon.png")
+var block_icon = preload("res://battle/block_icon.png")
 
 onready var modifiers = get_node("ModifiersContainer")
 

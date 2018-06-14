@@ -1,10 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Card.gd" type="Script" id=1]
-[ext_resource path="res://card_placeholder.png" type="Texture" id=2]
-[ext_resource path="res://card.png" type="Texture" id=3]
-[ext_resource path="res://selection.png" type="Texture" id=4]
+[ext_resource path="res://cards/Card.gd" type="Script" id=1]
+[ext_resource path="res://cards/card_placeholder.png" type="Texture" id=2]
+[ext_resource path="res://cards/card.png" type="Texture" id=3]
+[ext_resource path="res://cards/selection.png" type="Texture" id=4]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=5]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

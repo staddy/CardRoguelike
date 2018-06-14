@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/block_icon.png-1af415394317eeea87a5cf1cfd1051ff.stex"
+path="res://.import/progress_large.png-4629a1e1dad629224296a0bf86f3c9ee.stex"
 
 [deps]
 
-source_file="res://block_icon.png"
-dest_files=[ "res://.import/block_icon.png-1af415394317eeea87a5cf1cfd1051ff.stex" ]
+source_file="res://battle/progress_large.png"
+dest_files=[ "res://.import/progress_large.png-4629a1e1dad629224296a0bf86f3c9ee.stex" ]
 
 [params]
 

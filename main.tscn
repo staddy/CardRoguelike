@@ -5,7 +5,7 @@
 [ext_resource path="res://background.png" type="Texture" id=3]
 [ext_resource path="res://background2.png" type="Texture" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://Card.tscn" type="PackedScene" id=6]
+[ext_resource path="res://cards/Card.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Button.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Gradient" id=1]
@@ -128,7 +128,7 @@ flatness = 0.0
 gravity = Vector3( 0, 20, 0 )
 initial_velocity = 40.0
 initial_velocity_random = 0.1
-angular_velocity = 7.49695e-43
+angular_velocity = 7.49695e-043
 angular_velocity_random = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
@@ -208,7 +208,7 @@ tracks/3/keys = {
 "values": [ 0.00444444, 0.0, 2.4, 0.0, 0.0, 3.0, 1.0, 3.0, 0.0, 0.0, 2.0, 0.0, 0.0, 3.0, 0.0, 0.0, 2.0, 0.0 ]
 }
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

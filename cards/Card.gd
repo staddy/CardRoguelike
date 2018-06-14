@@ -11,9 +11,9 @@ var value2 = 0
 var effect = ""
 var modifiers = []
 
-var selection_ = preload("res://selection.png")
-var selection_play = preload("res://selection_play.png")
-var selection_attack = preload("res://selection_attack.png")
+var selection_ = preload("res://cards/selection.png")
+var selection_play = preload("res://cards/selection_play.png")
+var selection_attack = preload("res://cards/selection_attack.png")
 
 var enemy = null
 

@@ -7,6 +7,7 @@ var cast_icon = preload("res://enemies/images/cast_icon.png")
 onready var modifiers = get_node("ModifiersContainer")
 
 var dead = false
+var current_turn = 0
 
 var intent = "attack" setget set_intent
 func set_intent(value):
@@ -128,6 +129,7 @@ func process_action():
 		attack(self.intent_value)
 	elif self.intent == "cast":
 		cast(self.intent_value)
+	current_turn += 1
 
 func action():
 	self.block = 0

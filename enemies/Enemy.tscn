@@ -10,14 +10,14 @@
 [ext_resource path="res://enemies/images/attack_icon.png" type="Texture" id=8]
 [ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=9]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 
 resource_local_to_scene = true
 custom_solver_bias = 0.0
-extents = Vector2( 87, 64 )
+extents = Vector2( 87, 58 )
 _sections_unfolded = [ "Resource" ]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=6]
 
 resource_name = "attack"
 length = 0.2
@@ -50,7 +50,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=7]
 
 resource_name = "death"
 length = 1.0
@@ -70,20 +70,8 @@ tracks/0/keys = {
 "method": "queue_free"
 } ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 4, 5, 6, 7, 8, 9, 10, 11 ]
-}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=8]
 
 resource_name = "idle"
 length = 1.0
@@ -102,7 +90,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -5 ), Vector2( 0, 0 ) ]
 }
 
-[node name="Node2D" type="Node2D" index="0" groups=[
+[node name="Node2D" type="Node2D" groups=[
 "enemy",
 ]]
 
@@ -115,7 +103,7 @@ __meta__ = {
 [node name="sprite" type="Sprite" parent="." index="0"]
 
 material = ExtResource( 2 )
-position = Vector2( -3.8147e-006, 0 )
+position = Vector2( -3.8147e-06, 0 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Transform", "Z Index" ]
@@ -136,10 +124,8 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 0, -6 )
+shape = SubResource( 5 )
 
 [node name="TextureProgress" type="TextureProgress" parent="." index="2"]
 
@@ -209,9 +195,9 @@ autoplay = "idle"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/attack = SubResource( 2 )
-anims/death = SubResource( 4 )
-anims/idle = SubResource( 3 )
+anims/attack = SubResource( 6 )
+anims/death = SubResource( 7 )
+anims/idle = SubResource( 8 )
 blend_times = [  ]
 
 [node name="block_sprite" type="Sprite" parent="." index="5"]

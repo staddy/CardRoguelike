@@ -12,8 +12,10 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
+resource_local_to_scene = true
 custom_solver_bias = 0.0
 extents = Vector2( 87, 64 )
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="Animation" id=2]
 
@@ -87,7 +89,6 @@ _sections_unfolded = [ "Material", "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
 
-editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

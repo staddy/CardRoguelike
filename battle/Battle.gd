@@ -238,19 +238,18 @@ func new_turn():
 	self.mana = self.max_mana
 	draw_cards()
 
-#func _process(delta):
-#	pass
-
 func show_warning(message):
 	$Warning.text = message
 	$Warning.get_node("AnimationPlayer").play("visible")
 	$Warning.get_node("Timer").start()
 
+func enemy_dead():
+	if enemies.size() == 0:
+		show_warning("Victory!")
+
 func _on_Button_pressed():
 	end_turn()
-	pass # replace with function body
 
 
 func _on_Timer_timeout():
 	$Warning.get_node("AnimationPlayer").play("fade_out")
-	pass # replace with function body

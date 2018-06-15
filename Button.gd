@@ -4,7 +4,8 @@ extends Node2D
 export var text = "" setget set_text
 func set_text(value):
 	text = value
-	$Label.text = value
+	if has_node("Label"):
+		$Label.text = value
 
 signal pressed()
 

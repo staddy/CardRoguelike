@@ -6,6 +6,8 @@ var cast_icon = preload("res://enemies/images/cast_icon.png")
 
 onready var modifiers = get_node("ModifiersContainer")
 
+var dead = false
+
 var intent = "attack" setget set_intent
 func set_intent(value):
 	intent = value
@@ -76,9 +78,10 @@ func _ready():
 		get_parent().enemies.append(self)
 
 func _on_Area2D_mouse_entered():
-	$sprite.material = global.outlined_material
-	if get_parent().is_in_group("battle"):
-		get_parent().selected_enemy = self
+	if not dead:
+		$sprite.material = global.outlined_material
+		if get_parent().is_in_group("battle"):
+			get_parent().selected_enemy = self
 
 func _on_Area2D_mouse_exited():
 	$sprite.material = global.material_
@@ -88,11 +91,16 @@ func _on_Area2D_mouse_exited():
 
 func remove():
 	var parent = get_parent()
+	dead = true
+	$Area2D.monitoring = false
+	$Area2D.monitorable = false
 	if parent.is_in_group("battle"):
 		parent.enemies.remove(parent.enemies.find(self))
 		if parent.selected_enemy == self:
 			parent.selected_enemy = null
-	queue_free()
+		parent.enemy_dead()
+	if $AnimationPlayer.has_animation("death"):
+		$AnimationPlayer.play("death")
 
 func turn():
 	if self.intent == "block" and $AnimationPlayer.has_animation("block"):
@@ -137,7 +145,7 @@ func damage(value):
 		remove()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name != "idle":
+	if not dead and anim_name != "idle":
 		if get_parent().is_in_group("battle"):
 			get_parent().enemy_finished()
 		if $AnimationPlayer.has_animation("idle"):

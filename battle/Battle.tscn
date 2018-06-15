@@ -69,7 +69,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Battle" type="Node2D" groups=[
+[node name="Battle" type="Node2D" index="0" groups=[
 "battle",
 ]]
 
@@ -81,11 +81,11 @@ position = Vector2( 291, 262 )
 
 [node name="CardsStart" type="Position2D" parent="." index="1"]
 
-position = Vector2( 275, 384 )
+position = Vector2( 100, 417 )
 
 [node name="CardsEnd" type="Position2D" parent="." index="2"]
 
-position = Vector2( 699, 381 )
+position = Vector2( 857, 434 )
 
 [node name="Play" type="Position2D" parent="." index="3"]
 

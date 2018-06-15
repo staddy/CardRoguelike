@@ -56,7 +56,7 @@ func set_image(img):
 
 var pressed = false
 var selected = false setget set_selected
-var scale_factor = 1.5
+var scale_factor = 2
 
 var old_z_index = 0
 
@@ -70,7 +70,7 @@ func set_selected(value_):
 			z_index = 1
 			#get_parent().move_child(self, get_parent().get_child_count() - 1)
 		else:
-			scale = Vector2(1, 1)
+			scale = Vector2(1.5, 1.5)
 			$selection.visible = false
 			selected = false
 			z_index = old_z_index

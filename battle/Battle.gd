@@ -174,7 +174,6 @@ func play_card(card, enemy):
 		elif card.effect == "sacrifice":
 			self.hp -= global.get_damage_to_player(card, card.value2, modifiers, null)
 			self.mana = global.get_energy_to_player(mana, card.value)
-			enemy.damage(global.get_damage_to_enemy(card, card.value, modifiers, enemy.modifiers))
 		else:
 			pass
 	for i in range(0, card.modifiers.size(), 3):

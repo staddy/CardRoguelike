@@ -1,7 +1,8 @@
 extends Node2D
 
-var attack_icon = preload("res://battle/attack_icon.png")
-var block_icon = preload("res://battle/block_icon.png")
+var attack_icon = preload("res://enemies/images/attack_icon.png")
+var block_icon = preload("res://enemies/images/block_icon.png")
+var cast_icon = preload("res://enemies/images/cast_icon.png")
 
 onready var modifiers = get_node("ModifiersContainer")
 
@@ -12,6 +13,8 @@ func set_intent(value):
 		$intent_icon.texture = block_icon
 	elif value == "attack":
 		$intent_icon.texture = attack_icon
+	elif value == "cast":
+		$intent_icon.texture = cast_icon
 	else:
 		$intent_icon.texture = null
 
@@ -51,16 +54,19 @@ func set_block(value):
 		$Block.visible = true
 		$Block.text = str(block)
 
-func set_basic_intents():
+func set_intents():
 	if randi()%3 == 0:
 		self.intent = "block"
 		self.intent_value = 7 + randi()%4
-	else:
+	elif randi()%2 == 0:
 		self.intent = "attack"
 		self.intent_value = 4 + randi()%2
+	else:
+		self.intent = "cast"
+		self.intent_value = 0
 
 func init():
-	set_basic_intents()
+	set_intents()
 	self.block = 0
 	self.max_hp = 30 + randi()%3
 	self.hp = self.max_hp
@@ -69,23 +75,16 @@ func _ready():
 	if get_parent().is_in_group("battle"):
 		get_parent().enemies.append(self)
 
-#func _process(delta):
-#	pass
-
-
 func _on_Area2D_mouse_entered():
 	$sprite.material = global.outlined_material
 	if get_parent().is_in_group("battle"):
 		get_parent().selected_enemy = self
-	pass # replace with function body
-
 
 func _on_Area2D_mouse_exited():
 	$sprite.material = global.material_
 	if get_parent().is_in_group("battle"):
 		if get_parent().selected_enemy == self:
 			get_parent().selected_enemy = null
-	pass # replace with function body
 
 func remove():
 	var parent = get_parent()
@@ -96,19 +95,37 @@ func remove():
 	queue_free()
 
 func turn():
-	$AnimationPlayer.play("attack")
+	if self.intent == "block" and $AnimationPlayer.has_animation("block"):
+		$AnimationPlayer.play("block")
+	if self.intent == "cast" and $AnimationPlayer.has_animation("cast"):
+		$AnimationPlayer.play("cast")
+	else:
+		$AnimationPlayer.play("attack")
 
-# TODO: it's kind of "turn", should be renamed (structure changed)
-func attack():
-	self.block = 0
+func block(value):
+	self.block = global.get_block_enemy(value, modifiers)
+
+func attack(value):
+	var parent = get_parent()
+	if parent.is_in_group("battle"):
+		parent.damage_player(global.get_damage_to_player(null, value, modifiers, get_parent().modifiers))
+
+func cast(value):
+	pass
+
+func process_action():
 	if self.intent == "block":
-		self.block = global.get_block_enemy(self.intent_value, modifiers)
+		block(self.intent_value)
 	elif self.intent == "attack":
-		var parent = get_parent()
-		if parent.is_in_group("battle"):
-			parent.damage_player(global.get_damage_to_player(null, self.intent_value, modifiers, get_parent().modifiers))
+		attack(self.intent_value)
+	elif self.intent == "cast":
+		cast(self.intent_value)
+
+func action():
+	self.block = 0
+	process_action()
 	modifiers.process()
-	set_basic_intents()
+	set_intents()
 
 func damage(value):
 	if value <= block:
@@ -119,9 +136,9 @@ func damage(value):
 	if self.hp <= 0:
 		remove()
 
-
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if get_parent().is_in_group("battle"):
-		if anim_name == "attack":
+	if anim_name != "idle":
+		if get_parent().is_in_group("battle"):
 			get_parent().enemy_finished()
-	pass # replace with function body
+		if $AnimationPlayer.has_animation("idle"):
+			$AnimationPlayer.play("idle")

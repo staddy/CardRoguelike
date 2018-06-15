@@ -103,6 +103,7 @@ func create_icon(i, j, active):
 	icn.set_scale(Vector2(0.8, 0.8))
 	icn.position = active.position + data.step
 	add_child(icn)
+	create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 	return icn
 
 func gen_type(active):
@@ -153,15 +154,22 @@ func gen_turn(oldTurn):
 			return data
 
 func _gen_turn(data):
+	# Make icon oriented to top
 	# Tratata generate turn
 	var turn = selective_rand(-1, 1)
 	var step = Vector2(0, 0)
 	if turn == -1:
 		data.turn = -2
 		step = Vector2(int_rand(-96, -48), int_rand(-96, -64))
+		if not check_area(data.active, step):
+			data.turn = 2
+			step = Vector2(int_rand(48, 96), int_rand(-96, -64))
 	else:
 		data.turn = 2
 		step = Vector2(int_rand(48, 96), int_rand(-96, -64))
+		if not check_area(data.active, step):
+			data.turn = -2
+			step = Vector2(int_rand(-96, -48), int_rand(-96, -64))
 	data.step = step
 	if not check_area(data.active, step):
 		return null
@@ -199,6 +207,7 @@ func create_branch(i, j, h, active): # For branches
 			icn.position = active.position + data.step
 			icn.get_node("Sprite").modulate.r8 = 55
 			add_child(icn)
+			create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 			active = icn
 			data.active = active
 			map[j].append(active)
@@ -220,6 +229,7 @@ func create_map():
 			map.append([active])
 			trees[i].append(active)
 			j += 1
+		create_line(active.position.x, active.position.y, trees[i][0].position.x, trees[i][0].position.y)
 	# Create branches
 	for i in trees.size():
 		var mark = false

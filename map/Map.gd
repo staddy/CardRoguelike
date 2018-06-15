@@ -1,117 +1,252 @@
 extends Node2D
 
-var map_icons = preload("res://map/objects/map_icons.tscn")
-var parts_town = preload("res://map/objects/town.tscn")
+# 
 
 var width = 960
 var height = 540
 
-var iconsMas = []
-var townMas = []
-var MAP = []
-var spawn = 0
-var sequence = { value1 = 0, value2 = 0, value3 = 0 }
+var map = []
 
-var town = { h = 0 }
 var trees = [[],[],[]]
+var branch = []
 
-var player = { townLvl = -1 }
+### icons type
+### fight - 0, random - 1, elite - 2, chest - 3,
+### camp - 4, marker - 5, boss - 6
+var icons = [
+	preload("res://map/objects/fight.tscn").instance(),
+	preload("res://map/objects/random.tscn").instance(),
+	preload("res://map/objects/elite.tscn").instance(),
+	preload("res://map/objects/chest.tscn").instance(),
+	preload("res://map/objects/camp.tscn").instance(),
+	preload("res://map/objects/market.tscn").instance(),
+	preload("res://map/objects/boss1.tscn").instance(),
+	]
+
+var zone = preload("res://map/objects/zone.tscn")
+var line = preload("res://map/objects/line.tscn")
+
+### Description ###
+# 3 core trees
+# Distance between icons from 96 to 128px
+# 1-4 branches on tree long 1-5
+# No branches on branches
+# 1-3 connections between trees
+# Min, max size trees ???
+# Build trees #
+# Create Boss icon
+# Create core icons to boss and add in map massive
+# Zero element of map - end icon, element number 1 - start 
+# Map array look - [[obj1.1], [obj2.1, obj.2.2]]
+# Create array "m" containing clean tree for build branches
+# Create branches
+# Create connections
 
 func _ready():
 	initing()
 
 func initing():
 	randomize(true)
-	add_classes()
-	town_create()
+	create_map()
 
-func camera_settings():
-	$Camera2D.set_limit(1,  -(town.h*townMas[1].get_node("Sprite").get_texture().get_size().y))
+func round_rand(a, b):
+	return round(rand_range(a, b))
 
-func add_classes():
-	var m = map_icons.instance()
-	for c in m.get_children():
-		if c.is_in_group("icon"):
-			iconsMas.append(c)
-	var t = parts_town.instance()
-	for c in t.get_children():
-		if c.is_in_group("town"):
-			townMas.append(c)
+func int_rand(a, b):
+	return int(round(rand_range(a, b)))
 
-func icon_gen(line, h):
-	#проверка на повторение
-	spawn = round(rand_range(1, 10))
-	if spawn < 6:
+func bool_rand():
+	var r = round(rand_range(0, 1))
+	if r == 0:
+		return false
+	else:
+		return true
+
+func selective_rand(a, b):
+	var r = bool_rand()
+	if r:
+		return a
+	else:
+		return b
+
+func create_line(x1, y1, x2, y2):
+	var l = line.instance()
+	l.set_point_position(0, Vector2(x1, y1))
+	l.set_point_position(1, Vector2(x2, y2))
+	add_child(l)
+
+func create_icon(i, j, active):
+	if j == 0:
+		# End icon
+		var icn2 = icons[4].duplicate()
+		icn2.set_scale(Vector2(0.8, 0.8))
+		icn2.position = Vector2(active.position.x+10, -960+160)
+		icn2.tree = i
+		add_child(icn2)
+		map.append([icn2])
+		trees[i].append(icn2)
+		# Start icon
+		var icn = icons[0].duplicate()
+		icn.set_scale(Vector2(0.8, 0.8))
+		icn.position = Vector2(active.position.x, active.position.y)
+		icn.tree = i
+		add_child(icn)
+		return icn
+	# Generate type
+	var spawn = gen_type(active)
+	# Gen turn and step
+	var data = gen_turn(active.turn)
+	# Gen icon
+	var icn = icons[spawn].duplicate()
+	icn.tree = i
+	icn.turn = data.turn
+	icn.set_scale(Vector2(0.8, 0.8))
+	icn.position = active.position + data.step
+	add_child(icn)
+	return icn
+
+func gen_type(active):
+	var spawn = 0
+	var dice = round_rand(1, 100)
+	if dice <= 50:
 		spawn = 0
-	elif spawn == 6:
+	elif dice > 50 and dice <= 60:
 		spawn = 1
-	elif spawn == 7:
+	elif dice > 60 and dice <= 70:
 		spawn = 2
-	elif spawn == 8:
+	elif dice > 70 and dice <= 80:
 		spawn = 3
-	elif spawn == 9:
+	elif dice > 80 and dice < 90:
 		spawn = 4
-	elif spawn == 10:
+	elif dice > 90 and dice < 100:
 		spawn = 5
-	if h > 0 and h < town.h-1:
-		if spawn != 0 and trees[line][h-1] == spawn:
-			while spawn == trees[line][h-1]:
-				spawn = round(rand_range(0, 5))
+	return spawn
+
+func gen_turn(oldTurn):
+	var data = { turn = 0, step = Vector2(0, 0)}
+	data.turn = int_rand(-1, 1)
+	if oldTurn == 0:
+		if data.turn == 0:
+			data.step = Vector2(int_rand(-4, 4), int_rand(-128, -96))
+		elif data.turn == 1:
+			data.step = Vector2(int_rand(48, 96), int_rand(-128, -96))
 		else:
-			if trees[line][h-1] == trees[line][h-2]:
-				spawn = round(rand_range(1, 5))
-			else:
-				spawn == 0
-	elif h+1 == town.h:
-		spawn = 2
+			data.step = Vector2(int_rand(-96, -48), int_rand(-128, -96))
+		return data
+	elif oldTurn == 1:
+		if data.turn == 1 or data.turn == 0:
+			data.turn = 1
+			data.step = Vector2(int_rand(-4, 4), int_rand(-128, -96))
+			return data
+		else:
+			data.turn = 0
+			data.step = Vector2(int_rand(-96, -48), int_rand(-128, -96))
+			return data
+	else:
+		if data.turn == -1 or data.turn == 0:
+			data.turn = -1
+			data.step = Vector2(int_rand(-4, 4), int_rand(-128, -96))
+			return data
+		else:
+			data.turn = 0
+			data.step = Vector2(int_rand(48, 96), int_rand(-128, -96))
+			return data
 
-func town_create():
-	town.h = round(rand_range(3, 10))
-	var offset = Vector2(0, 32)
-	var this = { x = width/2, y = height, size = null, lvl = 1 }
-	var step = Vector2(this.x, this.y)
-	var k = 0
-	#create entrance
-	var e = townMas[3].duplicate()
-	offset.x = 10
-	e.position = Vector2(this.x-offset.x, this.y-offset.y)
-	add_child(e)
-	offset.y += 64
-	#create bottom part
-	var b = townMas[0].duplicate()  # ↓↓↓ incorrect offset 
-	b.position = Vector2(this.x, this.y-offset.y)
+func _gen_turn(data):
+	# Tratata generate turn
+	var turn = selective_rand(-1, 1)
+	var step = Vector2(0, 0)
+	if turn == -1:
+		data.turn = -2
+		step = Vector2(int_rand(-96, -48), int_rand(-96, -64))
+	else:
+		data.turn = 2
+		step = Vector2(int_rand(48, 96), int_rand(-96, -64))
+	data.step = step
+	if not check_area(data.active, step):
+		return null
+	return data
+
+func check_area(active, step):
+	var z = zone.instance()
+	z.position = active.position + step
+	add_child(z)
+	for i in map.size():
+		for c in map[i]:
+			var dist = z.position.distance_to(c.position)
+			if dist < 48:
+				z.queue_free()
+				return false
+	z.queue_free()
+	return true
+
+func create_branch(i, j, h, active): # For branches
+	var k = h
+	var data = { active = active, turn = 0, step = Vector2(0, 0) }
+	data = _gen_turn(data)
+	while k > 0:
+		var spawn = gen_type(active)
+		if data == null:
+			# End build code
+			break
+		if k != h:
+			data.step = Vector2(int_rand(-4, 4), int_rand(-96, -64))
+		if check_area(data.active, data.step):
+			var icn = icons[spawn].duplicate()
+			icn.tree = i
+			icn.turn = data.turn
+			icn.set_scale(Vector2(0.8, 0.8))
+			icn.position = active.position + data.step
+			icn.get_node("Sprite").modulate.r8 = 55
+			add_child(icn)
+			active = icn
+			data.active = active
+			map[j].append(active)
+			branch.append(active)
+		k -= 1
+
+func create_map():
+	var dice = 0
+	# Create boss
+	var b = icons[6].duplicate()
+	b.position = Vector2(480, -960)
 	add_child(b)
-	this.size = b.get_node("Sprite").get_texture().get_size()
-	offset = Vector2(2, -28)
-	step -= Vector2(offset.x, (this.size.y - offset.y))
-	#create middle part
-	for i in range(town.h):
-		var m = townMas[1].duplicate()
-		m.position = Vector2(step.x, step.y)
-		add_child(m)
-		this.size = m.get_node("Sprite").get_texture().get_size()
-		step.y -= this.size.y
-		#create icons for windows
-		for j in range(3):
-			icon_gen(j, i)
-			var n = iconsMas[spawn].duplicate()
-			n.position = m.position - this.size/2 + Vector2(160+(j*50), 70)#+50
-			add_child(n)
-			trees[j].append(spawn)
-			MAP.append(n)
-			n.type = spawn
-			n.level = this.lvl
-			n.tree = j
-			k += 1
-		this.lvl += 1
-	#create top part
-	var t = townMas[2].duplicate()
-	this.size = t.get_node("Sprite").get_texture().get_size()
-	t.position = Vector2(step.x, step.y - this.size.y/4)
-	add_child(t)
-	#set camera limit
-	camera_settings()
+	# Create core trees
+	for i in trees.size():
+		var j = 0
+		var active = { position = {x = -64 + (i+1)*275, y = 400} }
+		while active.position.y >= b.position.y + 360:
+			active = create_icon(i, j, active)
+			map.append([active])
+			trees[i].append(active)
+			j += 1
+	# Create branches
+	for i in trees.size():
+		var mark = false
+		var completed = false
+		var h = int_rand(2, 4)
+		var s = int_rand(2, 4)
+		var j = 1
+		branch = []
+		var active = trees[i][j]
+		while not completed:
+			active = trees[i][j]
+			#turn -2, 2
+			dice = bool_rand()
+			if dice or mark:
+				create_branch(i, j, h, active)
+				j += h
+				s -= 1
+			j += 1
+			if s == 0:
+				completed = true
+				continue
+			if j >= trees[i].size()-1 and not completed:
+				j = 1
+		#print(branch)
 
-func _on_Timer_timeout():
-	global.init_deck()
-	global.goto_scene(global.Battle)
+
+
+
+
+

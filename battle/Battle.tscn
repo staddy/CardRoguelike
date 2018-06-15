@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://battle/mana.png" type="Texture" id=8]
 [ext_resource path="res://battle/block.png" type="Texture" id=9]
-
+[ext_resource path="res://enemies/Slime.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
 
@@ -68,7 +68,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Battle" type="Node2D" groups=[
+[node name="Battle" type="Node2D" index="0" groups=[
 "battle",
 ]]
 
@@ -103,11 +103,7 @@ position = Vector2( 616, 119 )
 
 position = Vector2( 819, 121 )
 
-[node name="Node2D4" parent="." index="7" instance=ExtResource( 3 )]
-
-position = Vector2( 238, 95 )
-
-[node name="TextureProgress" type="TextureProgress" parent="." index="8"]
+[node name="TextureProgress" type="TextureProgress" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -164,12 +160,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" parent="." index="9" instance=ExtResource( 7 )]
+[node name="Button" parent="." index="8" instance=ExtResource( 7 )]
 
 position = Vector2( 757, 237 )
 text = "END TURN"
 
-[node name="Warning" type="Label" parent="." index="10"]
+[node name="Warning" type="Label" parent="." index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -217,7 +213,7 @@ anims/invisible = SubResource( 2 )
 anims/visible = SubResource( 3 )
 blend_times = [  ]
 
-[node name="mana_sprite" type="Sprite" parent="." index="11"]
+[node name="mana_sprite" type="Sprite" parent="." index="10"]
 
 position = Vector2( 277, 243 )
 texture = ExtResource( 8 )
@@ -225,7 +221,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Mana" type="Label" parent="." index="12"]
+[node name="Mana" type="Label" parent="." index="11"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -252,7 +248,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MaxMana" type="Label" parent="." index="13"]
+[node name="MaxMana" type="Label" parent="." index="12"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -279,12 +275,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="block_sprite" type="Sprite" parent="." index="14"]
+[node name="block_sprite" type="Sprite" parent="." index="13"]
 
 position = Vector2( 629, 243 )
 texture = ExtResource( 9 )
 
-[node name="Block" type="Label" parent="." index="15"]
+[node name="Block" type="Label" parent="." index="14"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -308,6 +304,10 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="Node2D4" parent="." index="15" instance=ExtResource( 10 )]
+
+position = Vector2( 227, 107 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

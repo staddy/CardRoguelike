@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/button_selection.png-db48417f17d7a7ae565454c41a8ca854.stex"
+path="res://.import/scenery_1.png-0412136160e21a2ae4b1d9652038f386.stex"
 
 [deps]
 
-source_file="res://button_selection.png"
-dest_files=[ "res://.import/button_selection.png-db48417f17d7a7ae565454c41a8ca854.stex" ]
+source_file="res://battle/scenery_1.png"
+dest_files=[ "res://.import/scenery_1.png-0412136160e21a2ae4b1d9652038f386.stex" ]
 
 [params]
 

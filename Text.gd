@@ -18,7 +18,7 @@ func _draw():
 	for i in range(SCREEN_WIDTH / 22 + 1):
 		for j in range(SCREEN_HEIGHT / 22 + 1):
 			if randf() > 0:#.999:
-				draw_string(font, Vector2(i * 22, 22 + j * 22), letters[randi() % letters.size()], Color("0900FFFF"))
+				draw_string(font, Vector2(i * 22, 22 + j * 22), letters[randi() % letters.size()], Color("FFFFFFFF"))
 
 func _process(delta):
 	time += delta

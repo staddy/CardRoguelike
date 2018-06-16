@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://light.png" type="Texture" id=2]
@@ -207,6 +207,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.00444444, 0.0, 2.4, 0.0, 0.0, 3.0, 1.0, 3.0, 0.0, 0.0, 2.0, 0.0, 0.0, 3.0, 0.0, 0.0, 2.0, 0.0 ]
 }
+
+[sub_resource type="Shader" id=9]
+
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+void fragment()
+{
+	vec4 scol = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	vec4 col = textureLod(TEXTURE, UV, 0.0);
+    if ((scol.r  != 0.0) || (scol.g  != 0.0) || (scol.b  != 0.0))
+        col.a = 0.0;
+	else
+		col.a /= 16.0;
+	col.r = 0.0;
+	col.g = 1.0;
+	col.b = 1.0;
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+
+render_priority = 0
+shader = SubResource( 9 )
 
 [node name="main" type="Node2D" index="0"]
 
@@ -481,8 +505,9 @@ blend_times = [  ]
 
 [node name="Text" type="Node2D" parent="." index="12"]
 
+material = SubResource( 10 )
 script = ExtResource( 6 )
-_sections_unfolded = [ "Z Index" ]
+_sections_unfolded = [ "Material", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }

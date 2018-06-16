@@ -5,8 +5,8 @@
 [ext_resource path="res://background.png" type="Texture" id=3]
 [ext_resource path="res://background2.png" type="Texture" id=4]
 [ext_resource path="res://skull.png" type="Texture" id=5]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Text.gd" type="Script" id=7]
+[ext_resource path="res://Text.gd" type="Script" id=6]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Gradient" id=1]
 
@@ -208,7 +208,7 @@ tracks/3/keys = {
 "values": [ 0.00444444, 0.0, 2.4, 0.0, 0.0, 3.0, 1.0, 3.0, 0.0, 0.0, 2.0, 0.0, 0.0, 3.0, 0.0, 0.0, 2.0, 0.0 ]
 }
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -479,31 +479,30 @@ playback_speed = 1.0
 anims/wind = SubResource( 8 )
 blend_times = [  ]
 
-[node name="Elevate" parent="." index="12" instance=ExtResource( 6 )]
+[node name="Text" type="Node2D" parent="." index="12"]
+
+script = ExtResource( 6 )
+_sections_unfolded = [ "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Elevate" parent="." index="13" instance=ExtResource( 7 )]
 
 position = Vector2( 390, 170 )
 text = "ELEVATE"
 
-[node name="Start" parent="." index="13" instance=ExtResource( 6 )]
+[node name="Start" parent="." index="14" instance=ExtResource( 7 )]
 
 position = Vector2( 390, 230 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 text = "START"
 
-[node name="Exit" parent="." index="14" instance=ExtResource( 6 )]
+[node name="Exit" parent="." index="15" instance=ExtResource( 7 )]
 
 position = Vector2( 390, 290 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 text = "EXIT"
-
-[node name="Text" type="Node2D" parent="." index="15"]
-
-visible = false
-script = ExtResource( 7 )
-_sections_unfolded = [ "Z Index" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [connection signal="pressed" from="Elevate" to="." method="_on_Elevate_pressed"]
 

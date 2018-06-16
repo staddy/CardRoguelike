@@ -7,17 +7,18 @@
 [node name="Map" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-position = Vector2( 552, -308 )
-scale = Vector2( 1.38005, 1 )
+position = Vector2( 567, -308 )
+scale = Vector2( 1.43468, 1 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Camera2D" type="Camera2D" parent="." index="1"]
 
-position = Vector2( 511, 374 )
+position = Vector2( 483, 266 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -27,8 +28,8 @@ limit_top = -1152
 limit_right = 960
 limit_bottom = 540
 limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
 smoothing_enabled = false
 smoothing_speed = 5.0
 offset_v = 0.0

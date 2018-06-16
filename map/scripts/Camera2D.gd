@@ -10,13 +10,13 @@ var pressed
 func _ready():
 	pass
 
-func _physics_process(delta):
-	if Input.is_action_pressed("ui_w"):
-		if position.y > -960:
-			position.y -= 5
-	if Input.is_action_pressed("ui_s"):
-		if position.y < 340:
-			position.y += 5
+#func _physics_process(delta):
+	#if Input.is_action_pressed("ui_w"):
+		#if position.y > -960:
+			#position.y -= 5
+	#if Input.is_action_pressed("ui_s"):
+		#if position.y < 340:
+			#position.y += 5
 
 func _input(event):
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
@@ -30,6 +30,10 @@ func _input(event):
 				self.position.y = height / 2
 			elif(self.position.y > max_y):
 				self.position.y = max_y"""
+			if self.position.y > 540/2:
+				self.position.y = 540/2
+			elif self.position.y < -1852/2:
+				self.position.y = -1852/2
 			old_position = event.position
 	elif event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.is_pressed():

@@ -7,8 +7,11 @@ var height = 540
 
 var map = []
 
+var playerH = -1
+
 var trees = [[],[],[]]
 var branch = []
+var apexes = []
 
 ### icons type
 ### fight - 0, random - 1, elite - 2, chest - 3,
@@ -93,7 +96,7 @@ func create_icon(i, j, active):
 		add_child(icn)
 		return icn
 	# Generate type
-	var spawn = gen_type(active)
+	var spawn = gen_type(active, j)
 	# Gen turn and step
 	var data = gen_turn(active.turn)
 	# Gen icon
@@ -106,7 +109,7 @@ func create_icon(i, j, active):
 	create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 	return icn
 
-func gen_type(active):
+func gen_type(active, j):
 	var spawn = 0
 	var dice = round_rand(1, 100)
 	if dice <= 50:
@@ -153,7 +156,7 @@ func gen_turn(oldTurn):
 			data.step = Vector2(int_rand(48, 96), int_rand(-128, -96))
 			return data
 
-func _gen_turn(data):
+func _gen_turn(data, core):
 	# Make icon oriented to top
 	# Tratata generate turn
 	var turn = selective_rand(-1, 1)
@@ -161,13 +164,13 @@ func _gen_turn(data):
 	if turn == -1:
 		data.turn = -2
 		step = Vector2(int_rand(-96, -48), int_rand(-96, -64))
-		if not check_area(data.active, step):
+		if not check_area(data.active, step) or core.use.l:
 			data.turn = 2
 			step = Vector2(int_rand(48, 96), int_rand(-96, -64))
 	else:
 		data.turn = 2
 		step = Vector2(int_rand(48, 96), int_rand(-96, -64))
-		if not check_area(data.active, step):
+		if not check_area(data.active, step) or core.use.r:
 			data.turn = -2
 			step = Vector2(int_rand(-96, -48), int_rand(-96, -64))
 	data.step = step
@@ -182,21 +185,47 @@ func check_area(active, step):
 	for i in map.size():
 		for c in map[i]:
 			var dist = z.position.distance_to(c.position)
-			if dist < 48:
+			if dist < 64:
 				z.queue_free()
 				return false
 	z.queue_free()
 	return true
 
+func check_line(active, target, i, j):
+	var distY = 0
+	if active.position.y >= 0:
+		distY = active.position.y - target.position.y
+	else:
+		distY = abs(target.position.y - active.position.y) 
+	if distY > 142:
+		var t = trees[i][j-1]
+		return check_line(active, t, i, j-1)
+	return j
+
 func create_branch(i, j, h, active): # For branches
 	var k = h
+	if j >= trees[i].size()-2 and k > 3:
+		h = 3
+		k = 3
 	var data = { active = active, turn = 0, step = Vector2(0, 0) }
-	data = _gen_turn(data)
+	data = _gen_turn(data, trees[i][j])
+	if data == null:
+		return
+	if active.position.x + data.step.x > 900 or active.position.x + data.step.x < 60 :
+		return
 	while k > 0:
-		var spawn = gen_type(active)
+		var spawn = gen_type(active, j)
 		if data == null:
-			# End build code
+			j = check_line(active, trees[i][j], i, j)
+			create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 			break
+		if j <= trees[i].size()-1:
+			if data.turn == 2 and trees[i][j].use.r:
+				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
+				break
+			elif data.turn == -2 and trees[i][j].use.l:
+				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
+				break
 		if k != h:
 			data.step = Vector2(int_rand(-4, 4), int_rand(-96, -64))
 		if check_area(data.active, data.step):
@@ -207,11 +236,43 @@ func create_branch(i, j, h, active): # For branches
 			icn.position = active.position + data.step
 			icn.get_node("Sprite").modulate.r8 = 55
 			add_child(icn)
+			if j <= trees[i].size()-1:
+				if icn.position.x < trees[i][j].position.x and trees[i][j].turn == 1 and icn.turn == 2:
+					icn.position.x += 48
+				elif icn.position.x > trees[i][j].position.x and trees[i][j].turn == -1 and icn.turn == -2:
+					icn.position.x -= 48
 			create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 			active = icn
 			data.active = active
 			map[j].append(active)
 			branch.append(active)
+			if j <= trees[i].size()-1:
+				if data.turn == 2:
+					trees[i][j].use.r = true
+				else:
+					trees[i][j].use.l = true
+		j += 1
+		if k == 1:
+			if j <= trees[i].size()-1:
+				j = check_line(active, trees[i][j], i, j)
+				if active.turn == 2:
+					trees[i][j].use.r = true
+				else:
+					trees[i][j].use.l = true
+				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
+			else:
+				var e = null
+				for c in trees[i]:
+					var dist = active.position.distance_to(c.position)
+					if dist < 200 and c.position.y < active.position.y:
+						e = c
+					if e != null:
+						continue
+				if e != null:
+					create_line(active.position.x, active.position.y, e.position.x, e.position.y)
+				else:
+					apexes.append(active)
+				break
 		k -= 1
 
 func create_map():
@@ -230,6 +291,7 @@ func create_map():
 			trees[i].append(active)
 			j += 1
 		create_line(active.position.x, active.position.y, trees[i][0].position.x, trees[i][0].position.y)
+		create_line(trees[i][0].position.x, trees[i][0].position.y, b.position.x, b.position.y)
 	# Create branches
 	for i in trees.size():
 		var mark = false
@@ -251,10 +313,10 @@ func create_map():
 			if s == 0:
 				completed = true
 				continue
-			if j >= trees[i].size()-1 and not completed:
+			if j >= trees[i].size()-2 and not completed:
 				j = 1
-		#print(branch)
-
+	for c in apexes:
+		create_line(c.position.x, c.position.y, b.position.x, b.position.y)
 
 
 

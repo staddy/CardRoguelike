@@ -112,9 +112,6 @@ func create_icon(i, j, active):
 func gen_type(active, j):
 	return 0
   # very bad code /^\
-### icons type
-### fight - 0, random - 1, elite - 2, chest - 3,
-### camp - 4, marker - 5, boss - 6
 func change_type(zone):
 	var dice
 	var spawn
@@ -150,6 +147,8 @@ func change_type(zone):
 	return spawn
 
 func apply_change_icn(icn, type):
+	if icn.type == 4:
+		return icn
 	var n = icons[type].duplicate()
 	n.set_scale(Vector2(0.8, 0.8))
 	n.position = Vector2(icn.position.x, icn.position.y)
@@ -162,6 +161,7 @@ func apply_change_icn(icn, type):
 	n.connect = icn.connect
 	add_child(n)
 	icn.queue_free()
+	return n
 
 func gen_turn(oldTurn):
 	var data = { turn = 0, step = Vector2(0, 0)}
@@ -288,8 +288,12 @@ func create_branch(i, j, h, active): # For branches
 			var p = 0
 			for _i in i:
 				p += trees[i].size()
-			map[p+j][0].get_node("Sprite").modulate.g8 = 55
-			map[p+j].append(active)
+			if p+j+1 < map.size():
+				map[p+j+1].append(active)
+				map[p+j+1][0].get_node("Sprite").modulate.g8 = 55
+			else:
+				map[map.size()-1].append(active)
+				map[map.size()-1][0].get_node("Sprite").modulate.g8 = 55
 			branch.append(active)
 			if j <= trees[i].size()-1:
 				if data.turn == 2:
@@ -370,25 +374,51 @@ func create_map():
 	var k = 0
 	var spawn = 0
 	for i in map.size():
+		var j = 0
 		for c in map[i]:
 			if c.start:
 				k = 0
 			if k <= 3:
 				spawn = change_type(0)
 				spawned[0].append(spawn)
-				apply_change_icn(c, spawn)
+				var icn = apply_change_icn(c, spawn)
+				map[i].remove(j)
+				map[i].insert(j, icn)
 			if k > 3 and k <= 7:
 				spawn = change_type(1)
 				spawned[1].append(spawn)
-				apply_change_icn(c, spawn)
+				var icn = apply_change_icn(c, spawn)
+				if k == 7:
+					if not spawned[1].has(1):
+						icn = apply_change_icn(c, 1)
+				map[i].remove(j)
+				map[i].insert(j, icn)
 			if k > 7 and k <= 12:
 				spawn = change_type(2)
 				spawned[2].append(spawn)
-				apply_change_icn(c, spawn)
+				var icn = apply_change_icn(c, spawn)
+				icn.queue_free()
+				if k == 9:
+					if not spawned[1].has(4):
+						icn = apply_change_icn(c, 4)
+				if k == 10:
+					if not spawned[1].has(5):
+						icn = apply_change_icn(c, 5)
+				if k == 11:
+					if not spawned[1].has(3):
+						icn = apply_change_icn(c, 3)
+				if k == 12:
+					if not spawned[1].has(2):
+						icn = apply_change_icn(c, 2)
+				map[i].remove(j)
+				map[i].insert(j, icn)
 			if k > 12:
 				spawn = change_type(3)
 				spawned[3].append(spawn)
-				apply_change_icn(c, spawn)
-			k+=1
+				var icn = apply_change_icn(c, spawn)
+				map[i].remove(j)
+				map[i].insert(j, icn)
+			k += 1
+			j += 1
 
 

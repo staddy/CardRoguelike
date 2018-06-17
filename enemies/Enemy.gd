@@ -25,7 +25,7 @@ var intent_value = 7 setget set_intent_value
 func set_intent_value(value):
 	intent_value = value
 	if intent == "attack":
-		$Intent.text = str(global.get_damage_to_player(null, intent_value, modifiers, get_parent().modifiers))
+		$Intent.text = str(global.get_damage_to_player(intent_value, modifiers, get_parent().modifiers))
 	elif intent == "block":
 		$Intent.text = str(global.get_block_enemy(intent_value, modifiers))
 	else:
@@ -117,7 +117,7 @@ func block(value):
 func attack(value):
 	var parent = get_parent()
 	if parent.is_in_group("battle"):
-		parent.damage_player(global.get_damage_to_player(null, value, modifiers, get_parent().modifiers))
+		parent.damage_player(global.get_damage_to_player(value, modifiers, get_parent().modifiers))
 
 func cast(value):
 	pass

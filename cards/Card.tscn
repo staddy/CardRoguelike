@@ -11,7 +11,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 26, 26 )
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Node2D" index="0"]
 
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )

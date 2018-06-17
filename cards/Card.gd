@@ -1,6 +1,7 @@
 extends Node2D
 
 var card_id
+var initial
 var card_name setget set_card_name
 var cost setget set_cost
 var description = "" setget set_description
@@ -17,7 +18,24 @@ var selection_attack = preload("res://cards/selection_attack.png")
 
 var enemy = null
 
-func update(id):
+func init(id, i):
+	self.card_id = id
+	self.initial = i
+	self.card_name = i.name
+	self.cost = i.cost
+	self.type = i.type
+	self.image = i.image
+	self.value = i.value
+	self.value2 = i.value2
+	self.effect = i.effect
+	self.modifiers = i.modifiers
+	# because description depends on value and value2 (and parent and enemy (not card) modifiers!)
+	self.description = i.description
+
+func get(key):
+	return null if not self.initial.has(key) else self.initial[key]
+
+func update():
 	set_description(description)
 
 func set_card_name(value_):
@@ -33,8 +51,8 @@ func set_description(value_):
 	var parent = get_parent()
 	var d = description
 	if parent.is_in_group("battle"):
-		var dmg = global.get_damage_to_enemy(self, value, parent.modifiers, null if enemy == null else enemy.modifiers)
-		var block = global.get_block_player(self, value2, parent.modifiers)
+		var dmg = global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers, self.get("strength_multiplier"))
+		var block = global.get_block_player(value2, parent.modifiers)
 		var color1 = "#FFFFFF"
 		var color2 = "#FFFFFF"
 		if dmg < value:
@@ -125,7 +143,7 @@ func _input(event):
 				else:
 					enemy = null
 					$selection.texture = selection_
-				update(null)
+				update()
 		if pressed:
 			if event is InputEventMouseMotion or event is InputEventScreenDrag:
 				self.position += (event.position - old_position)
@@ -182,4 +200,4 @@ func _on_Area2D_mouse_exited():
 	if !global.locked:
 		self.selected = false
 		enemy = null
-		update(null)
+		update()

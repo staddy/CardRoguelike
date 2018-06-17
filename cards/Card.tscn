@@ -6,7 +6,6 @@
 [ext_resource path="res://cards/selection.png" type="Texture" id=4]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=5]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -14,6 +13,7 @@ extents = Vector2( 26, 26 )
 
 [node name="Card" type="Node2D" index="0"]
 
+scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {

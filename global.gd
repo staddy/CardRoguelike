@@ -31,17 +31,11 @@ func weakness_damage_to_enemies():
 func weakness_damage_to_player():
 	return 0.75
 
-func get_energy_to_player(base, multiplier):
-	var value = base + multiplier
-	return int(value)
-
-func get_damage_to_enemy(card, base, modifiers, enemy_modifiers):
-	var value = (base + modifiers.get(STRENGTH))
-	if typeof(card) != TYPE_NIL:
-		if card.card_id == 12:
-			value = (base + modifiers.get(STRENGTH)*3)
-		if card.card_id == 15:
-			value = base
+func get_damage_to_enemy(base, modifiers, enemy_modifiers, strength_multiplier = null):
+	var strength = modifiers.get(STRENGTH)
+	if strength_multiplier != null:
+		strength *= strength_multiplier
+	var value = (base + strength)
 	if value <= 0:
 		return 0
 	if modifiers.has(WEAKNESS):
@@ -50,23 +44,18 @@ func get_damage_to_enemy(card, base, modifiers, enemy_modifiers):
 		value *= vulnerability_damage_to_enemies()
 	return int(value)
 
-func get_damage_to_player(card, base, modifiers, player_modifiers):
+func get_damage_to_player(base, modifiers, player_modifiers):
 	var value = (base + modifiers.get(STRENGTH))
-	if typeof(card) != TYPE_NIL and card.card_id == 15:
-		value = base
 	if value <= 0:
 		return 0
 	if modifiers.has(WEAKNESS):
 		value *= weakness_damage_to_player()
-	if typeof(player_modifiers) != TYPE_NIL and player_modifiers.has(VULNERABILITY):
+	if player_modifiers.has(VULNERABILITY):
 		value *= vulnerability_damage_to_player()
 	return int(value)
 
-func get_block_player(card, base, modifiers):
+func get_block_player(base, modifiers):
 	var value = (base + modifiers.get(DEXTERITY))
-	if typeof(card) != TYPE_NIL:
-		if card.card_id == 15:
-			value = base
 	if value <= 0:
 		return 0
 	return value
@@ -225,8 +214,9 @@ var cards = {
 				   "image" : "res://cards/card_placeholder.png",
 				   "value" : 14,
 				   "value2" : 0,
-				   "effect" : "strength_scale",
-				   "modifiers": []
+				   "effect" : "",
+				   "modifiers": [],
+				   "strength_multiplier": 3
 				},
 			13: {
 				   "name" : "Skilled Warrior",
@@ -253,7 +243,7 @@ var cards = {
 			15: {
 				   "name" : "Sacrifice",
 				   "cost" : 0,
-				   "description" : "Gain #dmg energy. Lose #block HP.",
+				   "description" : "Gain 1 energy. Lose 3 HP.",
 				   "type" : "skill",
 				   "image" : "res://cards/card_placeholder2.png",
 				   "value" : 1,

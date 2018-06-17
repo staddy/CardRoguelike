@@ -1,12 +1,12 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://light.png" type="Texture" id=2]
 [ext_resource path="res://background.png" type="Texture" id=3]
 [ext_resource path="res://background2.png" type="Texture" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://cards/Card.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://skull.png" type="Texture" id=5]
+[ext_resource path="res://Text.gd" type="Script" id=6]
+[ext_resource path="res://ui/Button.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Gradient" id=1]
 
@@ -208,7 +208,31 @@ tracks/3/keys = {
 "values": [ 0.00444444, 0.0, 2.4, 0.0, 0.0, 3.0, 1.0, 3.0, 0.0, 0.0, 2.0, 0.0, 0.0, 3.0, 0.0, 0.0, 2.0, 0.0 ]
 }
 
-[node name="main" type="Node2D"]
+[sub_resource type="Shader" id=9]
+
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+void fragment()
+{
+	vec4 scol = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	vec4 col = textureLod(TEXTURE, UV, 0.0);
+    if ((scol.r  != 0.0) || (scol.g  != 0.0) || (scol.b  != 0.0))
+        col.a = 0.0;
+	else
+		col.a /= 8.0;
+	col.r = 0.0;
+	col.g = 1.0;
+	col.b = 1.0;
+	COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+
+render_priority = 0
+shader = SubResource( 9 )
+
+[node name="main" type="Node2D" index="0"]
 
 editor/display_folded = true
 script = ExtResource( 1 )
@@ -228,7 +252,7 @@ energy = 0.00378378
 mode = 0
 range_height = 0.0
 range_z_min = -1024
-range_z_max = 1024
+range_z_max = -1
 range_layer_min = 0
 range_layer_max = 0
 range_item_cull_mask = 1
@@ -244,7 +268,37 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light2D2" type="Light2D" parent="." index="1"]
+[node name="Light2D3" type="Light2D" parent="." index="1"]
+
+position = Vector2( 353, 241 )
+scale = Vector2( 1.425, 1.425 )
+enabled = true
+editor_only = false
+texture = ExtResource( 2 )
+offset = Vector2( 0, 0 )
+texture_scale = 1.0
+color = Color( 0, 1, 0.438902, 1 )
+energy = 0.76923
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = -1
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
+_sections_unfolded = [ "Range", "Shadow" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Light2D2" type="Light2D" parent="." index="2"]
 
 position = Vector2( 535, 271 )
 scale = Vector2( 1.425, 1.425 )
@@ -258,7 +312,7 @@ energy = 0.0
 mode = 0
 range_height = 0.0
 range_z_min = -1024
-range_z_max = 1024
+range_z_max = -1
 range_layer_min = 0
 range_layer_max = 0
 range_item_cull_mask = 1
@@ -274,37 +328,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light2D3" type="Light2D" parent="." index="2"]
-
-position = Vector2( 353, 241 )
-scale = Vector2( 1.425, 1.425 )
-enabled = true
-editor_only = false
-texture = ExtResource( 2 )
-offset = Vector2( 0, 0 )
-texture_scale = 1.0
-color = Color( 0, 1, 0.438902, 1 )
-energy = 0.76923
-mode = 0
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
-shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
-_sections_unfolded = [ "Range", "Shadow" ]
-
 [node name="background" type="Sprite" parent="." index="3"]
 
 position = Vector2( 480, 270 )
+z_index = -1
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -313,11 +342,20 @@ __meta__ = {
 
 position = Vector2( 480, 270 )
 texture = ExtResource( 4 )
+_sections_unfolded = [ "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Fire" type="Particles2D" parent="." index="5"]
+[node name="skull" type="Sprite" parent="." index="5"]
+
+position = Vector2( 453, 468 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fire" type="Particles2D" parent="." index="6"]
 
 position = Vector2( 481.075, 432.754 )
 rotation = 0.215195
@@ -345,7 +383,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Fire2" type="Particles2D" parent="." index="6"]
+[node name="Fire2" type="Particles2D" parent="." index="7"]
 
 position = Vector2( 476.383, 429.085 )
 rotation = 0.215195
@@ -373,7 +411,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Fire4" type="Particles2D" parent="." index="7"]
+[node name="Fire4" type="Particles2D" parent="." index="8"]
 
 position = Vector2( 483.975, 431.129 )
 rotation = 0.215195
@@ -401,7 +439,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Fire3" type="Particles2D" parent="." index="8"]
+[node name="Fire3" type="Particles2D" parent="." index="9"]
 
 position = Vector2( 485.714, 451.865 )
 rotation = 0.215195
@@ -429,7 +467,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Particles2D2" type="Particles2D" parent="." index="9"]
+[node name="Particles2D2" type="Particles2D" parent="." index="10"]
 
 position = Vector2( 95, 109 )
 rotation = -1.5708
@@ -456,7 +494,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="11"]
 
 root_node = NodePath("..")
 autoplay = "wind"
@@ -466,40 +504,36 @@ playback_speed = 1.0
 anims/wind = SubResource( 8 )
 blend_times = [  ]
 
-[node name="icon" type="Sprite" parent="." index="11"]
+[node name="Text" type="Node2D" parent="." index="12"]
 
-position = Vector2( 420, 71 )
-texture = ExtResource( 5 )
+material = SubResource( 10 )
+script = ExtResource( 6 )
+_sections_unfolded = [ "Material", "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Card" parent="." index="12" instance=ExtResource( 6 )]
+[node name="Elevate" parent="." index="13" instance=ExtResource( 7 )]
 
-position = Vector2( 878, 429 )
-_sections_unfolded = [ "Transform", "Visibility" ]
-
-[node name="Button" parent="." index="13" instance=ExtResource( 7 )]
-
-position = Vector2( 284.802, 211.651 )
-_sections_unfolded = [ "Transform", "Visibility" ]
-text = "EXIT"
-
-[node name="Button2" parent="." index="14" instance=ExtResource( 7 )]
-
-position = Vector2( 210.703, 106.046 )
-_sections_unfolded = [ "Transform", "Visibility" ]
-text = "START"
-
-[node name="Button3" parent="." index="15" instance=ExtResource( 7 )]
-
-position = Vector2( 284.478, 71.4986 )
+position = Vector2( 390, 170 )
 text = "ELEVATE"
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="Start" parent="." index="14" instance=ExtResource( 7 )]
 
-[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
+position = Vector2( 390, 230 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+text = "START"
 
-[connection signal="pressed" from="Button3" to="." method="_on_Button3_pressed"]
+[node name="Exit" parent="." index="15" instance=ExtResource( 7 )]
+
+position = Vector2( 390, 290 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+text = "EXIT"
+
+[connection signal="pressed" from="Elevate" to="." method="_on_Elevate_pressed"]
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+
+[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
 
 

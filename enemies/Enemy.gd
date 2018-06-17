@@ -6,6 +6,9 @@ var cast_icon = preload("res://enemies/images/cast_icon.png")
 
 onready var modifiers = get_node("ModifiersContainer")
 
+var dead = false
+var current_turn = 0
+
 var intent = "attack" setget set_intent
 func set_intent(value):
 	intent = value
@@ -22,7 +25,7 @@ var intent_value = 7 setget set_intent_value
 func set_intent_value(value):
 	intent_value = value
 	if intent == "attack":
-		$Intent.text = str(global.get_damage_to_player(null, intent_value, modifiers, get_parent().modifiers))
+		$Intent.text = str(global.get_damage_to_player(intent_value, modifiers, get_parent().modifiers))
 	elif intent == "block":
 		$Intent.text = str(global.get_block_enemy(intent_value, modifiers))
 	else:
@@ -76,9 +79,10 @@ func _ready():
 		get_parent().enemies.append(self)
 
 func _on_Area2D_mouse_entered():
-	$sprite.material = global.outlined_material
-	if get_parent().is_in_group("battle"):
-		get_parent().selected_enemy = self
+	if not dead:
+		$sprite.material = global.outlined_material
+		if get_parent().is_in_group("battle"):
+			get_parent().selected_enemy = self
 
 func _on_Area2D_mouse_exited():
 	$sprite.material = global.material_
@@ -88,11 +92,16 @@ func _on_Area2D_mouse_exited():
 
 func remove():
 	var parent = get_parent()
+	dead = true
+	$Area2D.monitoring = false
+	$Area2D.monitorable = false
 	if parent.is_in_group("battle"):
 		parent.enemies.remove(parent.enemies.find(self))
 		if parent.selected_enemy == self:
 			parent.selected_enemy = null
-	queue_free()
+		parent.enemy_dead()
+	if $AnimationPlayer.has_animation("death"):
+		$AnimationPlayer.play("death")
 
 func turn():
 	if self.intent == "block" and $AnimationPlayer.has_animation("block"):
@@ -108,7 +117,7 @@ func block(value):
 func attack(value):
 	var parent = get_parent()
 	if parent.is_in_group("battle"):
-		parent.damage_player(global.get_damage_to_player(null, value, modifiers, get_parent().modifiers))
+		parent.damage_player(global.get_damage_to_player(value, modifiers, get_parent().modifiers))
 
 func cast(value):
 	pass
@@ -120,6 +129,7 @@ func process_action():
 		attack(self.intent_value)
 	elif self.intent == "cast":
 		cast(self.intent_value)
+	current_turn += 1
 
 func action():
 	self.block = 0
@@ -137,7 +147,7 @@ func damage(value):
 		remove()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name != "idle":
+	if not dead and anim_name != "idle":
 		if get_parent().is_in_group("battle"):
 			get_parent().enemy_finished()
 		if $AnimationPlayer.has_animation("idle"):

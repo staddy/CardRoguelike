@@ -5,9 +5,6 @@
 [node name="ModifiersContainer" type="Node2D"]
 
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
 

@@ -5,18 +5,12 @@ func _ready():
 	#OS.set_window_fullscreen(true)
 	pass
 
+func _on_Elevate_pressed():
+	global.goto_scene(global.Map)
 
-#func _process(delta):
-#	pass
-
-
-
-func _on_Button_pressed():
-	get_tree().quit()
-
-func _on_Button2_pressed():
+func _on_Start_pressed():
 	global.init_deck()
 	global.goto_scene(global.Battle)
 
-func _on_Button3_pressed():
-	global.goto_scene(global.Map)
+func _on_Exit_pressed():
+	get_tree().quit()

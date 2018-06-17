@@ -7,11 +7,13 @@ var height = 540
 
 var map = []
 
-var playerH = -1
+var player_place = null
 
 var trees = [[],[],[]]
 var branch = []
 var apexes = []
+
+var spawned = [[],[],[],[]]
 
 ### icons type
 ### fight - 0, random - 1, elite - 2, chest - 3,
@@ -66,11 +68,7 @@ func bool_rand():
 		return true
 
 func selective_rand(a, b):
-	var r = bool_rand()
-	if r:
-		return a
-	else:
-		return b
+	return a if bool_rand() else b
 
 func create_line(x1, y1, x2, y2):
 	var l = line.instance()
@@ -93,6 +91,7 @@ func create_icon(i, j, active):
 		icn.set_scale(Vector2(0.8, 0.8))
 		icn.position = Vector2(active.position.x, active.position.y)
 		icn.tree = i
+		icn.start = true
 		add_child(icn)
 		return icn
 	# Generate type
@@ -106,25 +105,63 @@ func create_icon(i, j, active):
 	icn.set_scale(Vector2(0.8, 0.8))
 	icn.position = active.position + data.step
 	add_child(icn)
+	icn.connect = active
 	create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 	return icn
 
 func gen_type(active, j):
-	var spawn = 0
-	var dice = round_rand(1, 100)
-	if dice <= 50:
+	return 0
+  # very bad code /^\
+### icons type
+### fight - 0, random - 1, elite - 2, chest - 3,
+### camp - 4, marker - 5, boss - 6
+func change_type(zone):
+	var dice
+	var spawn
+	if zone == 0:
 		spawn = 0
-	elif dice > 50 and dice <= 60:
-		spawn = 1
-	elif dice > 60 and dice <= 70:
-		spawn = 2
-	elif dice > 70 and dice <= 80:
-		spawn = 3
-	elif dice > 80 and dice < 90:
-		spawn = 4
-	elif dice > 90 and dice < 100:
-		spawn = 5
+	elif zone == 1:
+		if bool_rand():
+			spawn = 0
+		else:
+			spawn = 1
+	elif zone == 2:
+		dice = int_rand(1, 10)
+		if dice == 1:
+			spawn = 4
+		elif dice > 1 and dice <= 5:
+			spawn = 0
+		elif dice > 5 and dice <= 7:
+			spawn = 1
+		elif dice > 7 and dice <= 9:
+			spawn = 2
+		elif dice == 10:
+			spawn = 3
+	elif zone == 3:
+		dice = int_rand(1, 10)
+		if dice == 1:
+			spawn = 4
+		elif dice > 1 and dice <= 5:
+			spawn = 0
+		elif dice > 5 and dice <= 7:
+			spawn = 1
+		elif dice > 7:
+			spawn = 2
 	return spawn
+
+func apply_change_icn(icn, type):
+	var n = icons[type].duplicate()
+	n.set_scale(Vector2(0.8, 0.8))
+	n.position = Vector2(icn.position.x, icn.position.y)
+	n.tree = icn.tree
+	n.other = icn.other 
+	n.type = type
+	n.turn = icn.turn
+	n.use = icn.use
+	n.start = icn.start
+	n.connect = icn.connect
+	add_child(n)
+	icn.queue_free()
 
 func gen_turn(oldTurn):
 	var data = { turn = 0, step = Vector2(0, 0)}
@@ -217,13 +254,16 @@ func create_branch(i, j, h, active): # For branches
 		var spawn = gen_type(active, j)
 		if data == null:
 			j = check_line(active, trees[i][j], i, j)
+			active.connect = trees[i][j]
 			create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 			break
 		if j <= trees[i].size()-1:
 			if data.turn == 2 and trees[i][j].use.r:
+				active.connect = trees[i][j]
 				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 				break
 			elif data.turn == -2 and trees[i][j].use.l:
+				active.connect = trees[i][j]
 				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 				break
 		if k != h:
@@ -241,10 +281,15 @@ func create_branch(i, j, h, active): # For branches
 					icn.position.x += 48
 				elif icn.position.x > trees[i][j].position.x and trees[i][j].turn == -1 and icn.turn == -2:
 					icn.position.x -= 48
+			active.connect = icn
 			create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 			active = icn
 			data.active = active
-			map[j].append(active)
+			var p = 0
+			for _i in i:
+				p += trees[i].size()
+			map[p+j][0].get_node("Sprite").modulate.g8 = 55
+			map[p+j].append(active)
 			branch.append(active)
 			if j <= trees[i].size()-1:
 				if data.turn == 2:
@@ -259,6 +304,7 @@ func create_branch(i, j, h, active): # For branches
 					trees[i][j].use.r = true
 				else:
 					trees[i][j].use.l = true
+				active.connect = trees[i][j]
 				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 			else:
 				var e = null
@@ -269,6 +315,7 @@ func create_branch(i, j, h, active): # For branches
 					if e != null:
 						continue
 				if e != null:
+					active.connect = e
 					create_line(active.position.x, active.position.y, e.position.x, e.position.y)
 				else:
 					apexes.append(active)
@@ -290,6 +337,8 @@ func create_map():
 			map.append([active])
 			trees[i].append(active)
 			j += 1
+		active.connect = trees[i][0]
+		trees[i][0].connect = b
 		create_line(active.position.x, active.position.y, trees[i][0].position.x, trees[i][0].position.y)
 		create_line(trees[i][0].position.x, trees[i][0].position.y, b.position.x, b.position.y)
 	# Create branches
@@ -316,9 +365,30 @@ func create_map():
 			if j >= trees[i].size()-2 and not completed:
 				j = 1
 	for c in apexes:
+		c.connect = b
 		create_line(c.position.x, c.position.y, b.position.x, b.position.y)
-
-
-
+	var k = 0
+	var spawn = 0
+	for i in map.size():
+		for c in map[i]:
+			if c.start:
+				k = 0
+			if k <= 3:
+				spawn = change_type(0)
+				spawned[0].append(spawn)
+				apply_change_icn(c, spawn)
+			if k > 3 and k <= 7:
+				spawn = change_type(1)
+				spawned[1].append(spawn)
+				apply_change_icn(c, spawn)
+			if k > 7 and k <= 12:
+				spawn = change_type(2)
+				spawned[2].append(spawn)
+				apply_change_icn(c, spawn)
+			if k > 12:
+				spawn = change_type(3)
+				spawned[3].append(spawn)
+				apply_change_icn(c, spawn)
+			k+=1
 
 

@@ -7,6 +7,8 @@ var other = 0
 var type = 0
 var turn = 0
 var use = { r = false, l = false }
+var start = false
+var connect = null
 var access = 0 # 0 - core tree, 1 - branch, 2 - bridge
 
 func _ready():

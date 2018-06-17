@@ -7,7 +7,10 @@ path="res://.import/button_selection.png-db48417f17d7a7ae565454c41a8ca854.stex"
 [deps]
 
 source_file="res://button_selection.png"
+source_md5="ca722e0de3c7ef86379106db8bac22eb"
+
 dest_files=[ "res://.import/button_selection.png-db48417f17d7a7ae565454c41a8ca854.stex" ]
+dest_md5="838173564ea012aa483fc5286fe13a34"
 
 [params]
 

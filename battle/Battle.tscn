@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://battle/scenery_1.png" type="Texture" id=2]
@@ -10,8 +10,6 @@
 [ext_resource path="res://battle/progress_large.png" type="Texture" id=8]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=9]
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=10]
-[ext_resource path="res://battle/mana.png" type="Texture" id=11]
-[ext_resource path="res://battle/block.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
 
@@ -113,7 +111,7 @@ position = Vector2( 227, 107 )
 
 [node name="Node2D" parent="." index="8" instance=ExtResource( 6 )]
 
-position = Vector2( 405, 122 )
+position = Vector2( 404, 107 )
 
 [node name="TextureProgress" type="TextureProgress" parent="." index="9"]
 
@@ -229,26 +227,16 @@ anims/invisible = SubResource( 2 )
 anims/visible = SubResource( 3 )
 blend_times = [  ]
 
-[node name="mana_sprite" type="Sprite" parent="." index="12"]
-
-position = Vector2( 194, 242 )
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 11 )
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Mana" type="Label" parent="." index="13"]
+[node name="Mana" type="Label" parent="." index="12"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 178.0
-margin_top = 227.0
-margin_right = 185.0
-margin_bottom = 238.0
+margin_left = 177.0
+margin_top = 223.0
+margin_right = 184.0
+margin_bottom = 234.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -266,16 +254,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MaxMana" type="Label" parent="." index="14"]
+[node name="MaxMana" type="Label" parent="." index="13"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 198.0
-margin_top = 237.0
-margin_right = 205.0
-margin_bottom = 248.0
+margin_left = 194.0
+margin_top = 242.0
+margin_right = 201.0
+margin_bottom = 253.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -293,17 +281,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="block_sprite" type="Sprite" parent="." index="15"]
-
-position = Vector2( 722, 242 )
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 12 )
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Block" type="Label" parent="." index="16"]
+[node name="Block" type="Label" parent="." index="14"]
 
 anchor_left = 0.0
 anchor_top = 0.0

@@ -38,10 +38,12 @@ var block = 0 setget set_block
 func set_block(value):
 	block = value
 	if block == 0:
-		$block_sprite.visible = false
+		# TODO: add back block_sprite
+		#$block_sprite.visible = false
 		$Block.visible = false
 	else:
-		$block_sprite.visible = true
+		# TODO: add back block_sprite
+		#$block_sprite.visible = true
 		$Block.visible = true
 		$Block.text = str(block)
 

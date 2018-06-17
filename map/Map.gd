@@ -274,7 +274,6 @@ func create_branch(i, j, h, active): # For branches
 			icn.turn = data.turn
 			icn.set_scale(Vector2(0.8, 0.8))
 			icn.position = active.position + data.step
-			icn.get_node("Sprite").modulate.r8 = 55
 			add_child(icn)
 			if j <= trees[i].size()-1:
 				if icn.position.x < trees[i][j].position.x and trees[i][j].turn == 1 and icn.turn == 2:
@@ -290,10 +289,8 @@ func create_branch(i, j, h, active): # For branches
 				p += trees[i].size()
 			if p+j+1 < map.size():
 				map[p+j+1].append(active)
-				map[p+j+1][0].get_node("Sprite").modulate.g8 = 55
 			else:
 				map[map.size()-1].append(active)
-				map[map.size()-1][0].get_node("Sprite").modulate.g8 = 55
 			branch.append(active)
 			if j <= trees[i].size()-1:
 				if data.turn == 2:

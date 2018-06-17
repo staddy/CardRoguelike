@@ -387,25 +387,28 @@ func create_map():
 				var icn = apply_change_icn(c, spawn)
 				if k == 7:
 					if not spawned[1].has(1):
-						icn = apply_change_icn(c, 1)
+						icn = apply_change_icn(icn, 1)
 				map[i].remove(j)
 				map[i].insert(j, icn)
 			if k > 7 and k <= 12:
 				spawn = change_type(2)
 				spawned[2].append(spawn)
 				var icn = apply_change_icn(c, spawn)
-				icn.queue_free()
 				if k == 9:
 					if not spawned[1].has(4):
+						icn.queue_free()
 						icn = apply_change_icn(c, 4)
 				if k == 10:
 					if not spawned[1].has(5):
+						icn.queue_free()
 						icn = apply_change_icn(c, 5)
 				if k == 11:
 					if not spawned[1].has(3):
+						icn.queue_free()
 						icn = apply_change_icn(c, 3)
 				if k == 12:
 					if not spawned[1].has(2):
+						icn.queue_free()
 						icn = apply_change_icn(c, 2)
 				map[i].remove(j)
 				map[i].insert(j, icn)

@@ -232,7 +232,7 @@ void fragment()
 render_priority = 0
 shader = SubResource( 9 )
 
-[node name="main" type="Node2D" index="0"]
+[node name="main" type="Node2D"]
 
 editor/display_folded = true
 script = ExtResource( 1 )

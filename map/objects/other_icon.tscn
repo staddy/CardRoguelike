@@ -7,7 +7,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="other_icon" type="Area2D" index="0" groups=[
+[node name="other_icon" type="Area2D" groups=[
 "icon",
 ]]
 

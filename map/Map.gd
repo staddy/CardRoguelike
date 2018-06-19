@@ -15,17 +15,19 @@ var apexes = []
 
 var spawned = [[],[],[],[]]
 
+var lines = []
+
 ### icons type
 ### fight - 0, random - 1, elite - 2, chest - 3,
 ### camp - 4, marker - 5, boss - 6
 var icons = [
-	preload("res://map/objects/fight.tscn").instance(),
-	preload("res://map/objects/random.tscn").instance(),
-	preload("res://map/objects/elite.tscn").instance(),
-	preload("res://map/objects/chest.tscn").instance(),
-	preload("res://map/objects/camp.tscn").instance(),
-	preload("res://map/objects/market.tscn").instance(),
-	preload("res://map/objects/boss1.tscn").instance(),
+	preload("res://map/objects/fight.tscn"),
+	preload("res://map/objects/random.tscn"),
+	preload("res://map/objects/elite.tscn"),
+	preload("res://map/objects/chest.tscn"),
+	preload("res://map/objects/camp.tscn"),
+	preload("res://map/objects/market.tscn"),
+	preload("res://map/objects/boss1.tscn"),
 	]
 
 var zone = preload("res://map/objects/zone.tscn")
@@ -52,7 +54,6 @@ func _ready():
 
 func initing():
 	randomize(true)
-	create_map()
 
 func round_rand(a, b):
 	return round(rand_range(a, b))
@@ -75,11 +76,12 @@ func create_line(x1, y1, x2, y2):
 	l.set_point_position(0, Vector2(x1, y1))
 	l.set_point_position(1, Vector2(x2, y2))
 	add_child(l)
+	lines.append(l)
 
 func create_icon(i, j, active):
 	if j == 0:
 		# End icon
-		var icn2 = icons[4].duplicate()
+		var icn2 = icons[4].instance()
 		icn2.set_scale(Vector2(0.8, 0.8))
 		icn2.position = Vector2(active.position.x+10, -960+160)
 		icn2.tree = i
@@ -87,7 +89,7 @@ func create_icon(i, j, active):
 		map.append([icn2])
 		trees[i].append(icn2)
 		# Start icon
-		var icn = icons[0].duplicate()
+		var icn = icons[0].instance()
 		icn.set_scale(Vector2(0.8, 0.8))
 		icn.position = Vector2(active.position.x, active.position.y)
 		icn.tree = i
@@ -99,7 +101,7 @@ func create_icon(i, j, active):
 	# Gen turn and step
 	var data = gen_turn(active.turn)
 	# Gen icon
-	var icn = icons[spawn].duplicate()
+	var icn = icons[spawn].instance()
 	icn.tree = i
 	icn.turn = data.turn
 	icn.set_scale(Vector2(0.8, 0.8))
@@ -149,7 +151,7 @@ func change_type(zone):
 func apply_change_icn(icn, type):
 	if icn.type == 4:
 		return icn
-	var n = icons[type].duplicate()
+	var n = icons[type].instance()
 	n.set_scale(Vector2(0.8, 0.8))
 	n.position = Vector2(icn.position.x, icn.position.y)
 	n.tree = icn.tree
@@ -269,7 +271,7 @@ func create_branch(i, j, h, active): # For branches
 		if k != h:
 			data.step = Vector2(int_rand(-4, 4), int_rand(-96, -64))
 		if check_area(data.active, data.step):
-			var icn = icons[spawn].duplicate()
+			var icn = icons[spawn].instance()
 			icn.tree = i
 			icn.turn = data.turn
 			icn.set_scale(Vector2(0.8, 0.8))
@@ -326,7 +328,7 @@ func create_branch(i, j, h, active): # For branches
 func create_map():
 	var dice = 0
 	# Create boss
-	var b = icons[6].duplicate()
+	var b = icons[6].instance()
 	b.position = Vector2(480, -960)
 	add_child(b)
 	# Create core trees
@@ -420,5 +422,56 @@ func create_map():
 				map[i].insert(j, icn)
 			k += 1
 			j += 1
+	save_map()
+
+func save_map():
+	var save_dict = {}
+	
+	save_dict["save"] = "true"
+	
+	save_dict["data"] = {
+		"place": player_place
+	}
+
+	save_dict["camera"] = {
+		"position": $Camera2D.position
+	}
+	
+	for i in map.size():
+		for c in map[i]:
+			if c.is_in_group("icon"):
+				save_dict[c] = {
+					"position": {
+						"x": c.global_position.x,
+						"y": c.global_position.y
+					},
+					"scale": c.get_scale(),
+					"group": c.get_groups(),
+					"tree": c.tree,
+					"other": c.other,
+					"type": c.type,
+					"turn": c.turn,
+					"use": c.use,
+					"start": c.start,
+					"connect": c.connect,
+					"access": c.access
+				}
+				
+	for c in lines:
+		save_dict[c] = {
+			"transform": c.get_transform()
+		}
+	save_dict = str(save_dict)
+	return save_dict
+
+func load_map(map_string):
+	if map_string.find("save:true") != -1:
+		# load map
+		pass
+	else:
+		create_map()
+
+
+
 
 

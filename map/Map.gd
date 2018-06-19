@@ -422,7 +422,6 @@ func create_map():
 				map[i].insert(j, icn)
 			k += 1
 			j += 1
-	save_map()
 
 func save_map():
 	var save_dict = {}
@@ -461,6 +460,7 @@ func save_map():
 		save_dict[c] = {
 			"transform": c.get_transform()
 		}
+	
 	save_dict = str(save_dict)
 	return save_dict
 

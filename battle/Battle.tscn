@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://battle/scenery_1.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://battle/progress_large.png" type="Texture" id=8]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=9]
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://enemies/Insect.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 
@@ -97,23 +98,19 @@ position = Vector2( 857, 434 )
 
 position = Vector2( 242, 291 )
 
-[node name="Node2D2" parent="." index="5" instance=ExtResource( 4 )]
-
-position = Vector2( 616, 119 )
-
-[node name="Node2D3" parent="." index="6" instance=ExtResource( 4 )]
+[node name="Node2D3" parent="." index="5" instance=ExtResource( 4 )]
 
 position = Vector2( 819, 112 )
 
-[node name="Node2D4" parent="." index="7" instance=ExtResource( 5 )]
+[node name="Node2D4" parent="." index="6" instance=ExtResource( 5 )]
 
 position = Vector2( 227, 107 )
 
-[node name="Node2D" parent="." index="8" instance=ExtResource( 6 )]
+[node name="Node2D" parent="." index="7" instance=ExtResource( 6 )]
 
 position = Vector2( 404, 107 )
 
-[node name="TextureProgress" type="TextureProgress" parent="." index="9"]
+[node name="TextureProgress" type="TextureProgress" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -174,12 +171,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Button" parent="." index="10" instance=ExtResource( 10 )]
+[node name="Button" parent="." index="9" instance=ExtResource( 10 )]
 
 position = Vector2( 765, 222 )
 text = "END TURN"
 
-[node name="Warning" type="Label" parent="." index="11"]
+[node name="Warning" type="Label" parent="." index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -227,7 +224,7 @@ anims/invisible = SubResource( 2 )
 anims/visible = SubResource( 3 )
 blend_times = [  ]
 
-[node name="Mana" type="Label" parent="." index="12"]
+[node name="Mana" type="Label" parent="." index="11"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -254,7 +251,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MaxMana" type="Label" parent="." index="13"]
+[node name="MaxMana" type="Label" parent="." index="12"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -281,7 +278,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Block" type="Label" parent="." index="14"]
+[node name="Block" type="Label" parent="." index="13"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -308,6 +305,10 @@ _sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Insect" parent="." index="14" instance=ExtResource( 11 )]
+
+position = Vector2( 596, 130 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

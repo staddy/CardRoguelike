@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="Console.gd" type="Script" id=1]
-[ext_resource path="../assets/fonts/RobotoMono/RobotoMono-BoldItalic.ttf" type="DynamicFontData" id=2]
-[ext_resource path="../assets/fonts/RobotoMono/RobotoMono-Italic.ttf" type="DynamicFontData" id=3]
-[ext_resource path="../assets/fonts/RobotoMono/RobotoMono-Bold.ttf" type="DynamicFontData" id=4]
-[ext_resource path="../assets/fonts/RobotoMono/RobotoMono-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://thirdparty/godot-console/src/Console.gd" type="Script" id=1]
+[ext_resource path="res://thirdparty/godot-console/assets/fonts/RobotoMono/RobotoMono-BoldItalic.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://thirdparty/godot-console/assets/fonts/RobotoMono/RobotoMono-Italic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://thirdparty/godot-console/assets/fonts/RobotoMono/RobotoMono-Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://thirdparty/godot-console/assets/fonts/RobotoMono/RobotoMono-Regular.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="Animation" id=1]
 
@@ -69,6 +69,7 @@ size = 16
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 3 )
+_sections_unfolded = [ "Settings" ]
 
 [sub_resource type="DynamicFont" id=6]
 
@@ -76,6 +77,7 @@ size = 16
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 4 )
+_sections_unfolded = [ "Settings" ]
 
 [sub_resource type="DynamicFont" id=7]
 
@@ -83,6 +85,7 @@ size = 16
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 5 )
+_sections_unfolded = [ "Settings" ]
 
 [sub_resource type="StyleBoxFlat" id=8]
 
@@ -142,6 +145,7 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -165,6 +169,7 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -177,8 +182,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1024.0
-margin_bottom = 265.0
+margin_right = 960.0
+margin_bottom = 234.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 focus_neighbour_left = NodePath("../LineEdit")
@@ -217,10 +222,11 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 269.0
-margin_right = 1024.0
-margin_bottom = 300.0
+margin_top = 238.0
+margin_right = 960.0
+margin_bottom = 270.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")

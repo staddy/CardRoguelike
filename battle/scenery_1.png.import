@@ -7,10 +7,7 @@ path="res://.import/scenery_1.png-0412136160e21a2ae4b1d9652038f386.stex"
 [deps]
 
 source_file="res://battle/scenery_1.png"
-source_md5="0ea75aac2c8323aae010e9b0261aa74d"
-
 dest_files=[ "res://.import/scenery_1.png-0412136160e21a2ae4b1d9652038f386.stex" ]
-dest_md5="c3ba1cf5fba93dd51e3a8a5af6d6d7c7"
 
 [params]
 

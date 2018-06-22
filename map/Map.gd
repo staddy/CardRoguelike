@@ -54,6 +54,7 @@ func _ready():
 
 func initing():
 	randomize(true)
+	load_map("0")
 
 func round_rand(a, b):
 	return round(rand_range(a, b))
@@ -196,8 +197,6 @@ func gen_turn(oldTurn):
 			return data
 
 func _gen_turn(data, core):
-	# Make icon oriented to top
-	# Tratata generate turn
 	var turn = selective_rand(-1, 1)
 	var step = Vector2(0, 0)
 	if turn == -1:
@@ -325,6 +324,24 @@ func create_branch(i, j, h, active): # For branches
 				break
 		k -= 1
 
+func create_bridge(i, uses):
+	var completed = false
+	var dice
+	var skip = { flag = false, h = 0}
+	var k = 0
+	if i == 0:
+		for j in uses[i][i].size():
+			if skip.flag:
+				if skip.h == 0:
+					skip.flag = false
+				else:
+					skip.h -= 1
+					continue
+			if uses[i][i][j] != trees[i][1] and !skip.flag:
+				#connect
+				skip.flag = true
+				skip.h = 1
+
 func create_map():
 	var dice = 0
 	# Create boss
@@ -370,7 +387,7 @@ func create_map():
 	for c in apexes:
 		c.connect = b
 		create_line(c.position.x, c.position.y, b.position.x, b.position.y)
-	var k = 0
+	var k = 1
 	var spawn = 0
 	for i in map.size():
 		var j = 0
@@ -422,6 +439,24 @@ func create_map():
 				map[i].insert(j, icn)
 			k += 1
 			j += 1
+	k = 0
+	trees = [[],[],[]]
+	var uses = [[[],[]],[[],[],[]],[[],[]]]
+	for i in map.size():
+		for j in map[i].size():
+			trees[map[i][j].tree].append(map[i][j])
+	for i in trees.size():
+		for j in range(1, trees[i].size()):
+			if i == 0:
+				if !trees[i][j].use.r and trees[i][j].turn != -2:
+					uses[i][i].append(trees[i][j])
+				if j <= trees[i+1].size()-1 and !trees[i+1][j].use.l and trees[i+1][j].turn != 2:
+					uses[i][i+1].append(trees[i+1][j])
+	for i in trees.size():
+		create_bridge(i, uses)
+
+
+
 
 func save_map():
 	var save_dict = {}
@@ -438,23 +473,22 @@ func save_map():
 	
 	for i in map.size():
 		for c in map[i]:
-			if c.is_in_group("icon"):
-				save_dict[c] = {
-					"position": {
-						"x": c.global_position.x,
-						"y": c.global_position.y
-					},
-					"scale": c.get_scale(),
-					"group": c.get_groups(),
-					"tree": c.tree,
-					"other": c.other,
-					"type": c.type,
-					"turn": c.turn,
-					"use": c.use,
-					"start": c.start,
-					"connect": c.connect,
-					"access": c.access
-				}
+			save_dict[c] = {
+				"position": {
+					"x": c.global_position.x,
+					"y": c.global_position.y
+				},
+				"scale": c.get_scale(),
+				"group": c.get_groups(),
+				"tree": c.tree,
+				"other": c.other,
+				"type": c.type,
+				"turn": c.turn,
+				"use": c.use,
+				"start": c.start,
+				"connect": c.connect,
+				"access": c.access
+			}
 				
 	for c in lines:
 		save_dict[c] = {

@@ -326,19 +326,25 @@ func create_branch(i, j, h, active): # For branches
 
 func create_bridge(i, uses):
 	var completed = false
+	var done = false
 	var dice
 	var skip = { flag = false, h = 0}
 	var k = 0
 	if i == 0:
 		for j in uses[i][i].size():
+			done = false
 			if skip.flag:
 				if skip.h == 0:
 					skip.flag = false
 				else:
 					skip.h -= 1
 					continue
-			if uses[i][i][j] != trees[i][1] and !skip.flag:
-				#connect
+			if (uses[i][i][j] != trees[i][1] and !skip.flag):
+				for c in uses[i][i+1]:
+					var dist = uses[i][i][j].position.distance_to(c.position)
+					if !done and dist < 400 and c.position.y < uses[i][i][j].position.y:
+						create_line(uses[i][i][j].position.x, uses[i][i][j].position.y, c.position.x, c.position.y)
+						done = true
 				skip.flag = true
 				skip.h = 1
 
@@ -454,8 +460,6 @@ func create_map():
 					uses[i][i+1].append(trees[i+1][j])
 	for i in trees.size():
 		create_bridge(i, uses)
-
-
 
 
 func save_map():

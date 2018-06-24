@@ -10,7 +10,7 @@ var type = 0
 var turn = 0
 var use = { r = false, l = false }
 var start = false
-var connect = null
+var connect = []
 var access = 0 # 0 - core tree, 1 - branch, 2 - bridge
 
 func _ready():
@@ -22,7 +22,7 @@ func action():
 		map.player_place = self
 		global.init_deck()
 		global.goto_scene(global.Battle)
-	elif self.connect == map.player_place:
+	elif self.connect.has(map.player_place):
 		map.player_place = self
 		global.init_deck()
 		global.goto_scene(global.Battle)

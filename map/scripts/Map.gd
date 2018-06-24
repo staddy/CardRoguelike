@@ -108,7 +108,7 @@ func create_icon(i, j, active):
 	icn.set_scale(Vector2(0.8, 0.8))
 	icn.position = active.position + data.step
 	add_child(icn)
-	icn.connect = active
+	icn.connect.append(active)
 	create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 	return icn
 
@@ -255,16 +255,16 @@ func create_branch(i, j, h, active): # For branches
 		var spawn = gen_type(active, j)
 		if data == null:
 			j = check_line(active, trees[i][j], i, j)
-			active.connect = trees[i][j]
+			active.connect.append(trees[i][j])
 			create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 			break
 		if j <= trees[i].size()-1:
 			if data.turn == 2 and trees[i][j].use.r:
-				active.connect = trees[i][j]
+				active.connect.append(trees[i][j])
 				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 				break
 			elif data.turn == -2 and trees[i][j].use.l:
-				active.connect = trees[i][j]
+				active.connect.append(trees[i][j])
 				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 				break
 		if k != h:
@@ -281,7 +281,7 @@ func create_branch(i, j, h, active): # For branches
 					icn.position.x += 48
 				elif icn.position.x > trees[i][j].position.x and trees[i][j].turn == -1 and icn.turn == -2:
 					icn.position.x -= 48
-			active.connect = icn
+			active.connect.append(icn)
 			create_line(active.position.x, active.position.y, icn.position.x, icn.position.y)
 			active = icn
 			data.active = active
@@ -306,7 +306,7 @@ func create_branch(i, j, h, active): # For branches
 					trees[i][j].use.r = true
 				else:
 					trees[i][j].use.l = true
-				active.connect = trees[i][j]
+				active.connect.append(trees[i][j])
 				create_line(active.position.x, active.position.y, trees[i][j].position.x, trees[i][j].position.y)
 			else:
 				var e = null
@@ -317,36 +317,76 @@ func create_branch(i, j, h, active): # For branches
 					if e != null:
 						continue
 				if e != null:
-					active.connect = e
+					active.connect.append(e)
 					create_line(active.position.x, active.position.y, e.position.x, e.position.y)
 				else:
 					apexes.append(active)
 				break
 		k -= 1
 
+func create_bridge_icn(a, c, d):
+	var step
+	if a.position.x > c.position.x:
+		step = Vector2(-(a.position.x-c.position.x)/2, -(a.position.y-c.position.y)/2)
+	else:
+		step = Vector2((c.position.x-a.position.x)/2, -(a.position.y-c.position.y)/2)
+	if d > 200:
+		var n = icons[gen_type(a, 0)].instance()
+		n.position = a.position + step
+		n.set_scale(Vector2(0.8, 0.8))
+		n.connect.append(a)
+		c.connect.append(n)
+		add_child(n)
+		create_line(a.position.x, a.position.y, n.position.x, n.position.y)
+		create_line(n.position.x, n.position.y, c.position.x, c.position.y)
+	else:
+		create_line(a.position.x, a.position.y, c.position.x, c.position.y)
+
 func create_bridge(i, uses):
 	var completed = false
 	var done = false
 	var dice
 	var skip = { flag = false, h = 0}
-	var k = 0
-	if i == 0:
-		for j in uses[i][i].size():
-			done = false
-			if skip.flag:
-				if skip.h == 0:
-					skip.flag = false
-				else:
-					skip.h -= 1
-					continue
-			if (uses[i][i][j] != trees[i][1] and !skip.flag):
-				for c in uses[i][i+1]:
-					var dist = uses[i][i][j].position.distance_to(c.position)
-					if !done and dist < 400 and c.position.y < uses[i][i][j].position.y:
-						create_line(uses[i][i][j].position.x, uses[i][i][j].position.y, c.position.x, c.position.y)
+	for j in uses[i][0].size():
+		done = false
+		if skip.flag:
+			if skip.h == 0:
+				skip.flag = false
+			else:
+				skip.h -= 1
+				continue
+		if (uses[i][0][j] != trees[i][1] and !skip.flag):
+			if i == 0:
+				for c in uses[i][1]:
+					var dist = uses[i][0][j].position.distance_to(c.position)
+					if !done and dist < 400 and c.position.y < uses[i][0][j].position.y:
+						uses[i][0][j].use.r = true
+						create_bridge_icn(uses[i][0][j], c, dist)
 						done = true
 				skip.flag = true
 				skip.h = 1
+		if i == 1:
+			for k in uses[i][1].size():
+				var c = uses[i][1][k]
+				var dist = uses[i][0][j].position.distance_to(c.position)
+				if k > 0 and uses[i][1][k-1].use.r or uses[i][0][j-1].use.l:
+					continue
+				if !done and dist < 400 and c.position.y < uses[i][0][j].position.y:
+					uses[i][0][j].use.l = true
+					create_bridge_icn(uses[i][0][j], c, dist)
+					done = true
+			skip.flag = true
+			skip.h = 1
+		if i == 2:
+			for c in uses[i][1]:
+				var dist = uses[i][0][j].position.distance_to(c.position)
+				if !done and dist < 400 and c.position.y < uses[i][0][j].position.y:
+					uses[i][0][j].use.l = true
+					create_bridge_icn(uses[i][0][j], c, dist)
+					done = true
+			skip.flag = true
+			skip.h = 1
+
 
 func create_map():
 	var dice = 0
@@ -363,8 +403,8 @@ func create_map():
 			map.append([active])
 			trees[i].append(active)
 			j += 1
-		active.connect = trees[i][0]
-		trees[i][0].connect = b
+		active.connect.append(trees[i][0])
+		trees[i][0].connect.append(b)
 		create_line(active.position.x, active.position.y, trees[i][0].position.x, trees[i][0].position.y)
 		create_line(trees[i][0].position.x, trees[i][0].position.y, b.position.x, b.position.y)
 	# Create branches
@@ -391,7 +431,7 @@ func create_map():
 			if j >= trees[i].size()-2 and not completed:
 				j = 1
 	for c in apexes:
-		c.connect = b
+		c.connect.append(b)
 		create_line(c.position.x, c.position.y, b.position.x, b.position.y)
 	var k = 1
 	var spawn = 0
@@ -447,7 +487,7 @@ func create_map():
 			j += 1
 	k = 0
 	trees = [[],[],[]]
-	var uses = [[[],[]],[[],[],[]],[[],[]]]
+	var uses = [[[],[]],[[],[],[],[]],[[],[]]]
 	for i in map.size():
 		for j in map[i].size():
 			trees[map[i][j].tree].append(map[i][j])
@@ -455,9 +495,23 @@ func create_map():
 		for j in range(1, trees[i].size()):
 			if i == 0:
 				if !trees[i][j].use.r and trees[i][j].turn != -2:
-					uses[i][i].append(trees[i][j])
+					uses[i][0].append(trees[i][j])
 				if j <= trees[i+1].size()-1 and !trees[i+1][j].use.l and trees[i+1][j].turn != 2:
-					uses[i][i+1].append(trees[i+1][j])
+					uses[i][1].append(trees[i+1][j])
+			if i == 1:
+				if !trees[i][j].use.l and trees[i][j].turn != 2:
+					uses[i][0].append(trees[i][j])
+				if j <= trees[i-1].size()-1 and !trees[i-1][j].use.r and trees[i-1][j].turn != -2:
+					uses[i][1].append(trees[i-1][j])
+				if !trees[i][j].use.r and trees[i][j].turn != -2:
+					uses[i][2].append(trees[i][j])
+				if j <= trees[i+1].size()-1 and !trees[i+1][j].use.l and trees[i+1][j].turn != 2:
+					uses[i][3].append(trees[i+1][j])
+			if i == 2:
+				if !trees[i][j].use.l and trees[i][j].turn != 2:
+					uses[i][0].append(trees[i][j])
+				if j <= trees[i-1].size()-1 and !trees[i-1][j].use.r and trees[i-1][j].turn != -2:
+					uses[i][1].append(trees[i-1][j])
 	for i in trees.size():
 		create_bridge(i, uses)
 

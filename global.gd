@@ -1,6 +1,7 @@
 extends Node
 
 var current_scene = null
+var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
 var mutex = Mutex.new()
@@ -253,7 +254,7 @@ var cards = {
 				}
 			}
 
-var default_draw_size = 5
+var default_draw_size = 10
 var max_hand_size = 10
 var max_mana = 9
 

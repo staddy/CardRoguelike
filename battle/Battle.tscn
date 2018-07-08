@@ -114,6 +114,9 @@ __meta__ = {
 
 z_index = -1024
 _sections_unfolded = [ "Z Index" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureProgress" type="TextureProgress" parent="HP" index="0"]
 
@@ -189,7 +192,9 @@ __meta__ = {
 
 [node name="ModifiersContainer" parent="." index="4" instance=ExtResource( 8 )]
 
-position = Vector2( 216, 267 )
+position = Vector2( 349, 298 )
+z_index = -1024
+_sections_unfolded = [ "Z Index" ]
 
 [node name="CardsStart" type="Position2D" parent="." index="5"]
 
@@ -244,10 +249,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 300.0
-margin_top = 217.0
-margin_right = 460.0
-margin_bottom = 231.0
+margin_right = 480.0
+margin_bottom = 14.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -263,9 +266,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Timer" type="Timer" parent="Warning" index="0"]
 

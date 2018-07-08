@@ -115,7 +115,7 @@ func draw_card():
 	if draw_pile.size() == 0:
 		reshuffle()
 	if draw_pile.size() == 0:
-		show_warning("No cards to draw")
+		show_warning("No more cards to draw")
 		return
 	var card = Card.instance()
 	card.position = Vector2(0, 0)

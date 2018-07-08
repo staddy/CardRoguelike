@@ -4,7 +4,7 @@
 [ext_resource path="res://modifiers/images/dexterity.png" type="Texture" id=2]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=3]
 
-[node name="Modifier" type="Control"]
+[node name="Modifier" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -36,10 +36,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 13.0
-margin_top = 14.0
-margin_right = 35.0
-margin_bottom = 25.0
+margin_left = 10.0
+margin_top = 12.0
+margin_right = 32.0
+margin_bottom = 23.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
@@ -47,18 +47,18 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/normal_font = ExtResource( 3 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/default_color = Color( 0.639216, 0.835294, 0.466667, 1 )
 bbcode_enabled = false
 bbcode_text = ""
 visible_characters = -1
 percent_visible = 1.0
 meta_underlined = true
 tab_size = 4
-text = "1"
+text = "99"
 scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "Rect", "custom_colors", "custom_fonts", "custom_styles" ]
 
 

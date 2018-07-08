@@ -1,0 +1,167 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://battle/Energy.gd" type="Script" id=1]
+[ext_resource path="res://battle/images/energy_slots.png" type="Texture" id=2]
+[ext_resource path="res://battle/images/energy_empty.png" type="Texture" id=3]
+[ext_resource path="res://battle/images/energy_full.png" type="Texture" id=4]
+
+[node name="Energy" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="energy_slots" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty1" type="Sprite" parent="energy_slots" index="0"]
+
+position = Vector2( -52, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty2" type="Sprite" parent="energy_slots" index="1"]
+
+position = Vector2( -39, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty3" type="Sprite" parent="energy_slots" index="2"]
+
+position = Vector2( -26, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty4" type="Sprite" parent="energy_slots" index="3"]
+
+position = Vector2( -13, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty5" type="Sprite" parent="energy_slots" index="4"]
+
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty6" type="Sprite" parent="energy_slots" index="5"]
+
+position = Vector2( 13, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty7" type="Sprite" parent="energy_slots" index="6"]
+
+position = Vector2( 26, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty8" type="Sprite" parent="energy_slots" index="7"]
+
+position = Vector2( 39, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="empty9" type="Sprite" parent="energy_slots" index="8"]
+
+position = Vector2( 52, 0 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full1" type="Sprite" parent="energy_slots" index="9"]
+
+position = Vector2( -52, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full2" type="Sprite" parent="energy_slots" index="10"]
+
+position = Vector2( -39, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full3" type="Sprite" parent="energy_slots" index="11"]
+
+position = Vector2( -26, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full4" type="Sprite" parent="energy_slots" index="12"]
+
+position = Vector2( -13, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full5" type="Sprite" parent="energy_slots" index="13"]
+
+position = Vector2( 0, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full6" type="Sprite" parent="energy_slots" index="14"]
+
+position = Vector2( 13, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full7" type="Sprite" parent="energy_slots" index="15"]
+
+position = Vector2( 26, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full8" type="Sprite" parent="energy_slots" index="16"]
+
+position = Vector2( 39, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="full9" type="Sprite" parent="energy_slots" index="17"]
+
+position = Vector2( 52, -2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+

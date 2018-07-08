@@ -25,14 +25,14 @@ var current_enemy = 0
 var hp = 10 setget set_hp
 func set_hp(value):
 	hp = value
-	$TextureProgress.value = value
-	$TextureProgress.get_node("Label").text = str(hp) + " of " + str(max_hp)
+	$HP/TextureProgress.value = value
+	$HP/Label.text = str(hp) + "  " + str(max_hp)
 
 var max_hp = 10 setget set_max_hp
 func set_max_hp(value):
 	max_hp = value
-	$TextureProgress.max_value = value
-	$TextureProgress.get_node("Label").text = str(hp) + " of " + str(max_hp)
+	$HP/TextureProgress.max_value = value
+	$HP/Label.text = str(hp) + "  " + str(max_hp)
 
 var block = 0 setget set_block
 func set_block(value):
@@ -56,13 +56,14 @@ func set_mana(value):
 		mana = 9
 	else:
 		mana = value
+	$Energy.value = mana
 	$Mana.text = str(mana)
 	if mana == 0:
 		$Mana.set("custom_colors/font_color", Color(0.4, 0.4, 0.4))
 		$MaxMana.set("custom_colors/font_color", Color(0.4, 0.4, 0.4))
 	else:
-		$Mana.set("custom_colors/font_color", Color(1, 1, 1))
-		$MaxMana.set("custom_colors/font_color", Color(1, 1, 1))
+		$Mana.set("custom_colors/font_color", Color("#a3d577"))
+		$MaxMana.set("custom_colors/font_color", Color("#a3d577"))
 
 var max_mana setget set_max_mana
 func set_max_mana(value):
@@ -71,6 +72,7 @@ func set_max_mana(value):
 		max_mana = 9
 	else:
 		max_mana = value
+	$Energy.max_value = max_mana
 	$MaxMana.text = str(max_mana)
 
 func update_cards():
@@ -231,9 +233,8 @@ func enemy_dead():
 	if enemies.size() == 0:
 		show_warning("Victory!")
 
-func _on_Button_pressed():
-	end_turn()
-
-
 func _on_Timer_timeout():
 	$Warning.get_node("AnimationPlayer").play("fade_out")
+
+func _on_EndTurnButton_pressed():
+	end_turn()

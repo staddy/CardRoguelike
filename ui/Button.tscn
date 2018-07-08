@@ -5,13 +5,14 @@
 [ext_resource path="res://ui/button_selection.png" type="Texture" id=3]
 [ext_resource path="res://dynamic_font.tres" type="DynamicFont" id=4]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
+resource_local_to_scene = true
 custom_solver_bias = 0.0
 extents = Vector2( 13, 13 )
+_sections_unfolded = [ "Resource" ]
 
-[node name="Button" type="Node2D"]
+[node name="Button" type="Node2D" index="0"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
@@ -80,12 +81,9 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
-position = Vector2( 30, 7.5 )
+position = Vector2( 30, 6.5 )
 scale = Vector2( 2.30769, 0.576923 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 

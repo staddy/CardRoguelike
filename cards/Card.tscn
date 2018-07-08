@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 26, 26 )
+extents = Vector2( 26, 23.1111 )
 
 [node name="Card" type="Node2D" index="0"]
 
@@ -32,7 +32,7 @@ __meta__ = {
 
 [node name="card" type="Sprite" parent="." index="1"]
 
-scale = Vector2( 0.666667, 0.666667 )
+scale = Vector2( 1.33333, 1.33333 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
@@ -41,7 +41,6 @@ __meta__ = {
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( -40, -60 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -81,10 +80,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -32.0
-margin_top = -55.0
-margin_right = -22.0
-margin_bottom = -44.0
+margin_left = -34.0
+margin_top = -50.0
+margin_right = -24.0
+margin_bottom = -39.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
@@ -114,10 +113,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -17.0
-margin_top = -54.0
-margin_right = 33.0
-margin_bottom = -38.0
+margin_left = -25.0
+margin_top = -50.0
+margin_right = 39.0
+margin_bottom = -34.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
@@ -137,9 +136,6 @@ scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
 _sections_unfolded = [ "Mouse", "Rect", "custom_colors", "custom_fonts" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Description" type="RichTextLabel" parent="." index="6"]
 

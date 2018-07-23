@@ -1,47 +1,31 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://map/scripts/Map.gd" type="Script" id=1]
-[ext_resource path="res://map/sprites/map.png" type="Texture" id=2]
-[ext_resource path="res://map/scripts/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://map/Map.gd" type="Script" id=1]
+[ext_resource path="res://map/objs/background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://map/objs/Place.tscn" type="PackedScene" id=3]
 
 [node name="Map" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="background" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 567, -308 )
-scale = Vector2( 1.43468, 1 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+[node name="City1" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
+position = Vector2( 301, 198 )
+content = "city_1"
+access = "0"
 
-position = Vector2( 483, 266 )
-anchor_mode = 1
-rotating = false
-current = true
-zoom = Vector2( 1, 1 )
-limit_left = 0
-limit_top = -1152
-limit_right = 960
-limit_bottom = 540
-limit_smoothed = false
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-script = ExtResource( 3 )
-_sections_unfolded = [ "Limit", "Transform" ]
+[node name="City2" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 713, 198 )
+content = "city_2"
+access = "1"
+
+[node name="City3" parent="." index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 481, 420 )
+content = "city_3"
+access = "2"
 
 

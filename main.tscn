@@ -234,7 +234,6 @@ shader = SubResource( 9 )
 
 [node name="main" type="Node2D" index="0"]
 
-editor/display_folded = true
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
@@ -516,7 +515,7 @@ __meta__ = {
 [node name="Elevate" parent="." index="13" instance=ExtResource( 7 )]
 
 position = Vector2( 390, 170 )
-text = "ELEVATE"
+text = "MAP"
 
 [node name="Start" parent="." index="14" instance=ExtResource( 7 )]
 

@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 global="*res://global.gd"
 Console="*res://thirdparty/godot-console/src/Console.tscn"
 Effects="*res://effects/Effects.gd"
+player_list="*res://map/scripts/player_list.gd"
 
 [display]
 

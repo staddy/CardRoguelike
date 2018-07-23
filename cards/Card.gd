@@ -12,11 +12,15 @@ var value2 = 0
 var effect = ""
 var modifiers = []
 
+var play_mode = true
+
 var selection_ = preload("res://cards/selection.png")
 var selection_play = preload("res://cards/selection_play.png")
 var selection_attack = preload("res://cards/selection_attack.png")
 
 var enemy = null
+
+signal clicked()
 
 func init(id, i):
 	self.card_id = id
@@ -178,13 +182,16 @@ func remove():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
-		if global.lock():
-			old_position = event.position
-			global.emit_signal("unselect_all")
-			self.selected = true
-			pressed = true
-			if get_parent().is_in_group("battle"):
-				get_parent().selected_card = self
+		if not play_mode:
+			emit_signal("clicked")
+		else:
+			if global.lock():
+				old_position = event.position
+				global.emit_signal("unselect_all")
+				self.selected = true
+				pressed = true
+				if get_parent().is_in_group("battle"):
+					get_parent().selected_card = self
 			
 
 

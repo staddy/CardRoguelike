@@ -232,6 +232,7 @@ func show_warning(message):
 func enemy_dead():
 	if enemies.size() == 0:
 		show_warning("Victory!")
+		global.return_to_previous()
 
 func _on_Timer_timeout():
 	$Warning.get_node("AnimationPlayer").play("fade_out")

@@ -71,7 +71,7 @@ func set_intents():
 func init():
 	set_intents()
 	self.block = 0
-	self.max_hp = 30 + randi()%3
+	self.max_hp = 5 + randi()%3
 	self.hp = self.max_hp
 
 func _ready():

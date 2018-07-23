@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/map.png-223af95a48a9118cc82c58e09bc20012.stex"
+path="res://.import/city_icon_selected.png-f38617c02db14ac5e97fff85546773c9.stex"
 
 [deps]
 
-source_file="res://map/images/map.png"
-dest_files=[ "res://.import/map.png-223af95a48a9118cc82c58e09bc20012.stex" ]
+source_file="res://map/images/city_icon_selected.png"
+dest_files=[ "res://.import/city_icon_selected.png-f38617c02db14ac5e97fff85546773c9.stex" ]
 
 [params]
 
@@ -16,7 +16,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

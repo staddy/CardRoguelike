@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/trail3.png-56ecdbc9ca57e2098b6c0c6569a50ba4.stex"
+path="res://.import/city_icon.png-232412ec34a851621f01ab16525d8751.stex"
 
 [deps]
 
-source_file="res://map/sprites/trail3.png"
-dest_files=[ "res://.import/trail3.png-56ecdbc9ca57e2098b6c0c6569a50ba4.stex" ]
+source_file="res://map/images/city_icon.png"
+dest_files=[ "res://.import/city_icon.png-232412ec34a851621f01ab16525d8751.stex" ]
 
 [params]
 

@@ -1,6 +1,7 @@
 extends Node
 
 var current_scene = null
+var previous_scene = null
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
@@ -276,7 +277,7 @@ func init_deck():
 	#for i in range(5):
 		#deck.append(0)
 	for i in range(5):
-		deck.append(1)
+		deck.append(0)
 	#deck.append(2)
 	deck.append(3)
 	#deck.append(4)
@@ -302,6 +303,29 @@ func _ready():
 func goto_scene(scene):
     call_deferred("_deferred_goto_scene", scene)
 
+func goto_subscene(scene):
+	previous_scene = current_scene
+	current_scene.visible = false
+	
+	# Instance the new scene
+	current_scene = scene.instance()
+	
+	# Add it to the active scene, as child of root
+	get_tree().get_root().add_child(current_scene)
+	
+	# optional, to make it compatible with the SceneTree.change_scene() API
+	get_tree().set_current_scene(current_scene)
+
+func return_to_previous():
+	call_deferred("_deferred_return_to_previous")
+
+func _deferred_return_to_previous():
+	if previous_scene != null:
+		current_scene.free()
+		current_scene = previous_scene
+		current_scene.visible = true
+		get_tree().set_current_scene(current_scene)
+	
 
 func _deferred_goto_scene(scene):
     # Immediately free the current scene,

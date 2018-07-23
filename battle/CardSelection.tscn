@@ -2,8 +2,24 @@
 
 [ext_resource path="res://battle/CardSelection.gd" type="Script" id=1]
 
-[node name="CardSelection" type="Node2D" index="0"]
+[node name="CardSelection" type="Node2D" groups=[
+"card_container",
+]]
 
 script = ExtResource( 1 )
+
+[node name="CardsStart" type="Position2D" parent="." index="0"]
+
+position = Vector2( 227, 204 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CardsEnd" type="Position2D" parent="." index="1"]
+
+position = Vector2( 703, 214 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 

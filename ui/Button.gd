@@ -30,12 +30,14 @@ func _ready():
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
+	print("_on_Area2D_input_event")
 	if get_node("/root/global").lock():
 		if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
 			emit_signal("pressed")
 		get_node("/root/global").unlock()
 
 func _on_Area2D_mouse_entered():
+	print("MOUSE_ENTERED")
 	if !get_node("/root/global").locked:
 		get_node("/root/global").emit_signal("unselect_all")
 		self.selected = true

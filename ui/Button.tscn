@@ -12,14 +12,11 @@ custom_solver_bias = 0.0
 extents = Vector2( 13, 13 )
 _sections_unfolded = [ "Resource" ]
 
-[node name="Button" type="Node2D" index="0"]
+[node name="Button" type="Node2D"]
 
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Material", "Transform", "Z Index" ]
-__meta__ = {
-"_edit_lock_": true
-}
+_sections_unfolded = [ "Material", "Pause", "Transform", "Z Index" ]
 text = ""
 
 [node name="button" type="Sprite" parent="." index="0"]
@@ -59,7 +56,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 4 )
-text = "EXIT"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -75,6 +71,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Pause" ]
 __meta__ = {
 "_edit_lock_": true
 }

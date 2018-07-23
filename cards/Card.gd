@@ -20,9 +20,9 @@ var selection_attack = preload("res://cards/selection_attack.png")
 
 var enemy = null
 
-signal clicked()
+signal clicked(id)
 
-func init(id, i):
+func init(id, i = global.cards[id]):
 	self.card_id = id
 	self.initial = i
 	self.card_name = i.name
@@ -123,7 +123,7 @@ func _ready():
 	max_y = get_viewport().get_visible_rect().size.y - height / 2
 	if(initial_position == null):
 		initial_position = position
-	if get_parent().is_in_group("battle"):
+	if get_parent().is_in_group("card_container"):
 		get_parent().cards.append(self)
 
 #func _process(delta):
@@ -173,8 +173,9 @@ func _input(event):
 
 func remove():
 	var parent = get_parent()
-	if parent.is_in_group("battle"):
+	if parent.is_in_group("card_container"):
 		parent.cards.erase(self)
+	if parent.is_in_group("battle"):
 		if parent.selected_card == self:
 			parent.selected_card = null
 	queue_free()
@@ -183,7 +184,7 @@ func remove():
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
 		if not play_mode:
-			emit_signal("clicked")
+			emit_signal("clicked", card_id)
 		else:
 			if global.lock():
 				old_position = event.position

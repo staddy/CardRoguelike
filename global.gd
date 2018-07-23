@@ -5,6 +5,7 @@ var previous_scene = null
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
+var CardSelection = preload("res://battle/CardSelection.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false

@@ -232,10 +232,18 @@ func show_warning(message):
 func enemy_dead():
 	if enemies.size() == 0:
 		show_warning("Victory!")
-		global.return_to_previous()
+		global.goto_scene(global.CardSelection)
+		#global.return_to_previous()
 
 func _on_Timer_timeout():
 	$Warning.get_node("AnimationPlayer").play("fade_out")
 
 func _on_EndTurnButton_pressed():
 	end_turn()
+
+
+func _on_PauseButton_pressed():
+	print("PAUSE")
+	global.unlock()
+	$PauseMenu.visible = true
+	get_tree().paused = true

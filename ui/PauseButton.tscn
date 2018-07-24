@@ -1,26 +1,63 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/gear.png" type="Texture" id=2]
+[ext_resource path="res://ui/gear_pressed.png" type="Texture" id=3]
+[ext_resource path="res://ui/gear_hover.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
 
-resource_local_to_scene = true
-custom_solver_bias = 0.0
-extents = Vector2( 18.6334, 75.1111 )
-_sections_unfolded = [ "Resource" ]
+script/source = "tool
+extends TextureButton
 
-[node name="Button" instance=ExtResource( 1 )]
+export var text = \"\" setget set_text
+func set_text(value):
+	text = value
+	if has_node(\"Label\"):
+		$Label.text = value
 
-[node name="button" parent="." index="0"]
+var selected = false setget set_selected
+func set_selected(value):
+	if value:
+		#$button_selection.visible = true
+		selected = true
+		#z_index = 1
+		#get_parent().move_child(self, get_parent().get_child_count() - 1)
+	else:
+		#$button_selection.visible = false
+		selected = false
+		#z_index = 0
 
-position = Vector2( 42.6667, 42.6667 )
-scale = Vector2( 0.0519167, 0.0519167 )
-texture = ExtResource( 2 )
+func unselect():
+	self.selected = false
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
+func _ready():
+	if(!Engine.editor_hint):
+		get_node(\"/root/global\").connect(\"unselect_all\", self, \"unselect\")
 
-position = Vector2( 43, 42.3333 )
-shape = SubResource( 1 )
+func _on_Button_mouse_entered():
+	if !get_node(\"/root/global\").locked:
+		get_node(\"/root/global\").emit_signal(\"unselect_all\")
+		self.selected = true
+
+
+func _on_Button_mouse_exited():
+	if !get_node(\"/root/global\").locked:
+		self.selected = false
+
+
+func _on_Button_gui_input(event):
+	if get_node(\"/root/global\").lock():
+		if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
+			emit_signal(\"pressed\")
+		get_node(\"/root/global\").unlock()
+"
+
+[node name="PauseButton" index="0" instance=ExtResource( 1 )]
+
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+script = SubResource( 1 )
 
 

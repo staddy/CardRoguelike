@@ -523,26 +523,22 @@ __meta__ = {
 
 [node name="Elevate" parent="." index="13" instance=ExtResource( 7 )]
 
-position = Vector2( 390, 170 )
+margin_left = 390.0
+margin_top = 170.0
+margin_right = 450.0
+margin_bottom = 185.0
 text = "ELEVATE"
 
 [node name="Start" parent="." index="14" instance=ExtResource( 7 )]
 
-position = Vector2( 390, 230 )
-_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+margin_left = 390.0
+margin_top = 230.0
+margin_right = 450.0
+margin_bottom = 245.0
 text = "START"
-
-[node name="Exit" parent="." index="15" instance=ExtResource( 7 )]
-
-visible = false
-position = Vector2( 390, 290 )
-_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
-text = "EXIT"
 
 [connection signal="pressed" from="Elevate" to="." method="_on_Elevate_pressed"]
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
-
-[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
 
 

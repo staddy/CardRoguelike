@@ -1,78 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/button.png" type="Texture" id=3]
-[ext_resource path="res://ui/button_selection.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-
-resource_local_to_scene = true
-custom_solver_bias = 0.0
-extents = Vector2( 17.9111, 13 )
-_sections_unfolded = [ "Resource" ]
-
-[node name="PauseMenu" type="Node2D" index="0"]
+[node name="PauseMenu" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
-[node name="Button" parent="." index="0" instance=ExtResource( 2 )]
+[node name="ResumeButton" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 51, 45 )
-text = "TO MAIN MENU"
+text = "RESUME"
 
-[node name="button" parent="Button" index="0"]
+[node name="ExitButton" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 41, 7 )
-scale = Vector2( 1.36667, 1 )
+editor/display_folded = true
+margin_top = 50.0
+margin_bottom = 65.0
+text = "EXIT"
 
-[node name="button_selection" parent="Button" index="1"]
+[connection signal="pressed" from="ResumeButton" to="." method="_on_ResumeButton_pressed"]
 
-visible = true
-position = Vector2( 41, 7 )
-scale = Vector2( 1.36667, 1 )
-
-[node name="Label" parent="Button" index="2"]
-
-text = "TO MAIN MENU"
-
-[node name="Area2D" parent="Button" index="3"]
-
-position = Vector2( 10.6667, 1.90735e-006 )
-
-[node name="CollisionShape2D" parent="Button/Area2D" index="0"]
-
-shape = SubResource( 1 )
-
-[node name="TextureButton" type="TextureButton" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 148.0
-margin_top = 102.0
-margin_right = 208.0
-margin_bottom = 142.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
-_sections_unfolded = [ "Pause", "Textures" ]
-
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-
-[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
 
 
-[editable path="Button"]

@@ -243,7 +243,7 @@ func _on_EndTurnButton_pressed():
 
 
 func _on_PauseButton_pressed():
-	print("PAUSE")
+	$PauseButton.selected = false
 	global.unlock()
 	$PauseMenu.visible = true
 	get_tree().paused = true

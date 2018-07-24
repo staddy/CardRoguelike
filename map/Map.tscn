@@ -1,19 +1,61 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://map/Map.gd" type="Script" id=1]
 [ext_resource path="res://map/images/global.png" type="Texture" id=2]
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://map/images/city_icon.png" type="Texture" id=4]
 [ext_resource path="res://map/images/city_icon_selected.png" type="Texture" id=5]
+[ext_resource path="res://map/images/city_icon_hover.png" type="Texture" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
 
-resource_local_to_scene = true
-custom_solver_bias = 0.0
-extents = Vector2( 20.8, 76.5556 )
-_sections_unfolded = [ "Resource" ]
+script/source = "tool
+extends TextureButton
 
-[node name="Map" type="Node2D"]
+export var text = \"\" setget set_text
+func set_text(value):
+	text = value
+	if has_node(\"Label\"):
+		$Label.text = value
+
+var selected = false setget set_selected
+func set_selected(value):
+	if value:
+		#$button_selection.visible = true
+		selected = true
+		#z_index = 1
+		#get_parent().move_child(self, get_parent().get_child_count() - 1)
+	else:
+		#$button_selection.visible = false
+		selected = false
+		#z_index = 0
+
+func unselect():
+	self.selected = false
+
+func _ready():
+	if(!Engine.editor_hint):
+		get_node(\"/root/global\").connect(\"unselect_all\", self, \"unselect\")
+
+func _on_Button_mouse_entered():
+	if !get_node(\"/root/global\").locked:
+		get_node(\"/root/global\").emit_signal(\"unselect_all\")
+		self.selected = true
+
+
+func _on_Button_mouse_exited():
+	if !get_node(\"/root/global\").locked:
+		self.selected = false
+
+
+func _on_Button_gui_input(event):
+	if get_node(\"/root/global\").lock():
+		if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
+			emit_signal(\"pressed\")
+		get_node(\"/root/global\").unlock()
+"
+
+[node name="Map" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -27,23 +69,14 @@ __meta__ = {
 
 [node name="Button" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 124, 311 )
-
-[node name="button" parent="Button" index="0"]
-
-texture = ExtResource( 4 )
-
-[node name="button_selection" parent="Button" index="1"]
-
-texture = ExtResource( 5 )
-
-[node name="Label" parent="Button" index="2"]
-
-text = ""
-
-[node name="CollisionShape2D" parent="Button/Area2D" index="0"]
-
-shape = SubResource( 1 )
+margin_left = 43.0
+margin_top = 194.0
+margin_right = 143.0
+margin_bottom = 294.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
+script = SubResource( 1 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 

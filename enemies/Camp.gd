@@ -9,4 +9,3 @@ func _on_Camp_input_event(viewport, event, shape_idx):
 		global.unlock()
 		global.goto_scene(global.Battle)
 		print("Rest")
-

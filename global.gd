@@ -369,15 +369,22 @@ func set_location(loc):
 
 func generate_enemys():
 	var enemys_positions = [current_scene.point1, current_scene.point2, current_scene.point3, current_scene.point4]
+	if current_loc == null:
+		var e = enemy.instance()
+		e.position = enemys_positions[0].position
+		current_scene.add_child(e)
+		current_scene.enemies.append(e)
+		step += 1
+		return
 	if step == current_loc.size/2:
 		var c = chest.instance()
 		c.position = enemys_positions[0].position
 		current_scene.add_child(c)
 	elif step >= 0 and step < current_loc.size-1: 
-		var enemy = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
-		enemy.position = enemys_positions[0].position
-		current_scene.add_child(enemy)
-		current_scene.enemies.append(enemy)
+		var e = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
+		e.position = enemys_positions[0].position
+		current_scene.add_child(e)
+		current_scene.enemies.append(e)
 	elif step == current_loc.size-1:
 		print(1)
 		var c = camp.instance()

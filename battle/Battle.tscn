@@ -119,8 +119,8 @@ tracks/0/keys = {
 }
 
 [node name="Battle" type="Node2D" index="0" groups=[
-"battle",
 "card_container",
+"battle",
 ]]
 
 script = ExtResource( 1 )

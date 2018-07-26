@@ -261,7 +261,7 @@ var default_draw_size = 10
 var max_hand_size = 10
 var max_mana = 9
 
-var current_reward = [ {}, {}, {} ]
+var current_reward = [ {"type" : "money", "ammount" : 10}, {"type" : "card"}, {"type" : "card"} ]
 var current_card_item = null
 var current_cards_to_pick = [ 0, 1, 2 ]
 

@@ -10,13 +10,14 @@ func _ready():
 		$Sprite.texture = load("res://battle/items/card.png")
 	elif type == "money":
 		$Sprite.texture = load("res://battle/items/coin.png")
+		$Label.text = str(ammount)
 
 func _on_ItemButton_pressed():
 	if type == "card":
 		global.current_card_item = self
 		global.goto_subscene(global.CardSelection)
 	elif type == "money":
-		# TODO: global.money += ammount
+		global.money += ammount
 		remove()
 
 func remove():

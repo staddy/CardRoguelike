@@ -272,6 +272,7 @@ var current_hp setget set_current_hp
 var max_energy setget set_max_energy
 var strength setget set_strength
 var dexterity setget set_dexterity
+var money setget set_money
 
 signal max_hp_changed()
 func set_max_hp(value):
@@ -298,6 +299,11 @@ func set_dexterity(value):
 	dexterity = value
 	emit_signal("dexterity_changed")
 
+signal money_changed()
+func set_money(value):
+	money = value
+	emit_signal("money_changed")
+
 func shuffle_list(list):
 	var shuffledList = [] 
 	var indexList = range(list.size())
@@ -313,27 +319,28 @@ func init_player():
 	self.max_energy = 5
 	self.strength = 1
 	self.dexterity = 1
+	self.money = 0
 
 func init_deck():
 	deck.clear()
 	#for i in range(5):
 		#deck.append(0)
-	for i in range(5):
+	for i in range(4):
 		deck.append(0)
 	#deck.append(2)
-	deck.append(3)
+	#deck.append(3)
 	#deck.append(4)
 	#deck.append(5)
 	#deck.append(6)
-	deck.append(7)
+	#deck.append(7)
 	#deck.append(8)
 	#deck.append(9)
 	#deck.append(10)
 	#deck.append(11)
-	deck.append(12)
+	#deck.append(12)
 	#deck.append(13)
 	#deck.append(14)
-	deck.append(15)
+	#deck.append(15)
 
 signal unselect_all()
 

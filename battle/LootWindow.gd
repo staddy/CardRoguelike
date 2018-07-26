@@ -16,3 +16,7 @@ func check_loot():
 
 func finish():
 	global.return_to_previous()
+
+
+func _on_Continue_pressed():
+	finish()

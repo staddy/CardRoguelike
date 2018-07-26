@@ -22,6 +22,7 @@ func draw_card(id):
 	reposition_cards()
 
 func card_selected(id):
+	global.deck.append(id)
 	global.return_to_previous()
 	if global.current_card_item != null:
 		global.current_card_item.remove()

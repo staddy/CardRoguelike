@@ -1,0 +1,1065 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://cards/Card.tscn" type="PackedScene" id=1]
+
+[node name="CardsViewer" type="Node2D" index="0"]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 960.0
+margin_bottom = 540.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+scroll_horizontal_enabled = true
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
+scroll_deadzone = 0
+_sections_unfolded = [ "Scroll" ]
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 934.0
+margin_bottom = 1214.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 7
+
+[node name="Control" type="Control" parent="ScrollContainer/GridContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 130.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control2" type="Control" parent="ScrollContainer/GridContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_right = 264.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control2" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control3" type="Control" parent="ScrollContainer/GridContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_right = 398.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control3" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control4" type="Control" parent="ScrollContainer/GridContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_right = 532.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control4" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control5" type="Control" parent="ScrollContainer/GridContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_right = 666.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control5" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control6" type="Control" parent="ScrollContainer/GridContainer" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_right = 800.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control6" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control7" type="Control" parent="ScrollContainer/GridContainer" index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 804.0
+margin_right = 934.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control7" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control8" type="Control" parent="ScrollContainer/GridContainer" index="7"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 174.0
+margin_right = 130.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control8" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control9" type="Control" parent="ScrollContainer/GridContainer" index="8"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_top = 174.0
+margin_right = 264.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control9" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control10" type="Control" parent="ScrollContainer/GridContainer" index="9"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_top = 174.0
+margin_right = 398.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control10" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control11" type="Control" parent="ScrollContainer/GridContainer" index="10"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_top = 174.0
+margin_right = 532.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control11" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control12" type="Control" parent="ScrollContainer/GridContainer" index="11"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_top = 174.0
+margin_right = 666.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control12" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control13" type="Control" parent="ScrollContainer/GridContainer" index="12"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_top = 174.0
+margin_right = 800.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control13" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control14" type="Control" parent="ScrollContainer/GridContainer" index="13"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 804.0
+margin_top = 174.0
+margin_right = 934.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control14" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control15" type="Control" parent="ScrollContainer/GridContainer" index="14"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 348.0
+margin_right = 130.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control15" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control16" type="Control" parent="ScrollContainer/GridContainer" index="15"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_top = 348.0
+margin_right = 264.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control16" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control17" type="Control" parent="ScrollContainer/GridContainer" index="16"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_top = 348.0
+margin_right = 398.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control17" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control18" type="Control" parent="ScrollContainer/GridContainer" index="17"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_top = 348.0
+margin_right = 532.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control18" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control19" type="Control" parent="ScrollContainer/GridContainer" index="18"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_top = 348.0
+margin_right = 666.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control19" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control20" type="Control" parent="ScrollContainer/GridContainer" index="19"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_top = 348.0
+margin_right = 800.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control20" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control21" type="Control" parent="ScrollContainer/GridContainer" index="20"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 804.0
+margin_top = 348.0
+margin_right = 934.0
+margin_bottom = 518.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control21" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control22" type="Control" parent="ScrollContainer/GridContainer" index="21"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 522.0
+margin_right = 130.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control22" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control23" type="Control" parent="ScrollContainer/GridContainer" index="22"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_top = 522.0
+margin_right = 264.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control23" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control24" type="Control" parent="ScrollContainer/GridContainer" index="23"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_top = 522.0
+margin_right = 398.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control24" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control25" type="Control" parent="ScrollContainer/GridContainer" index="24"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_top = 522.0
+margin_right = 532.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control25" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control26" type="Control" parent="ScrollContainer/GridContainer" index="25"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_top = 522.0
+margin_right = 666.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control26" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control27" type="Control" parent="ScrollContainer/GridContainer" index="26"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_top = 522.0
+margin_right = 800.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control27" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control28" type="Control" parent="ScrollContainer/GridContainer" index="27"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 804.0
+margin_top = 522.0
+margin_right = 934.0
+margin_bottom = 692.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control28" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control29" type="Control" parent="ScrollContainer/GridContainer" index="28"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 696.0
+margin_right = 130.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control29" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control30" type="Control" parent="ScrollContainer/GridContainer" index="29"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_top = 696.0
+margin_right = 264.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control30" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control31" type="Control" parent="ScrollContainer/GridContainer" index="30"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_top = 696.0
+margin_right = 398.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control31" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control32" type="Control" parent="ScrollContainer/GridContainer" index="31"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_top = 696.0
+margin_right = 532.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control32" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control33" type="Control" parent="ScrollContainer/GridContainer" index="32"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_top = 696.0
+margin_right = 666.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control33" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control34" type="Control" parent="ScrollContainer/GridContainer" index="33"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_top = 696.0
+margin_right = 800.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control34" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control35" type="Control" parent="ScrollContainer/GridContainer" index="34"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 804.0
+margin_top = 696.0
+margin_right = 934.0
+margin_bottom = 866.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control35" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control36" type="Control" parent="ScrollContainer/GridContainer" index="35"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 870.0
+margin_right = 130.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control36" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control37" type="Control" parent="ScrollContainer/GridContainer" index="36"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_top = 870.0
+margin_right = 264.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control37" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control38" type="Control" parent="ScrollContainer/GridContainer" index="37"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_top = 870.0
+margin_right = 398.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control38" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control39" type="Control" parent="ScrollContainer/GridContainer" index="38"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_top = 870.0
+margin_right = 532.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control39" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control40" type="Control" parent="ScrollContainer/GridContainer" index="39"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 536.0
+margin_top = 870.0
+margin_right = 666.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control40" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control41" type="Control" parent="ScrollContainer/GridContainer" index="40"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 670.0
+margin_top = 870.0
+margin_right = 800.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control41" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control42" type="Control" parent="ScrollContainer/GridContainer" index="41"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 804.0
+margin_top = 870.0
+margin_right = 934.0
+margin_bottom = 1040.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control42" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control43" type="Control" parent="ScrollContainer/GridContainer" index="42"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 1044.0
+margin_right = 130.0
+margin_bottom = 1214.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control43" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control44" type="Control" parent="ScrollContainer/GridContainer" index="43"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 134.0
+margin_top = 1044.0
+margin_right = 264.0
+margin_bottom = 1214.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control44" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+[node name="Control45" type="Control" parent="ScrollContainer/GridContainer" index="44"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 268.0
+margin_top = 1044.0
+margin_right = 398.0
+margin_bottom = 1214.0
+rect_min_size = Vector2( 130, 170 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="Card" parent="ScrollContainer/GridContainer/Control45" index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 64, 83 )
+
+

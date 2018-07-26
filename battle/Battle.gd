@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var enemy_position = get_node("enemy_position")
+
 var turn = -1
 var Card = preload("res://cards/Card.tscn")
 
@@ -80,7 +82,10 @@ func update_cards():
 		c.update()
 
 func _ready():
-	for e in enemies:
+	if locs.elevate:
+		locs.current_location.spawn_position = enemy_position
+		locs.loc_generate()
+	for e in locs.enemies:
 		e.init()
 	initial_cards = global.cards.duplicate()
 	self.max_hp = 70
@@ -234,13 +239,15 @@ func enemy_dead():
 		show_warning("Victory!")
 		global.goto_scene(global.CardSelection)
 		#global.return_to_previous()
+	for e in enemies:
+		e.queue_free()
+	locs.enemies.clear()
 
 func _on_Timer_timeout():
 	$Warning.get_node("AnimationPlayer").play("fade_out")
 
 func _on_EndTurnButton_pressed():
 	end_turn()
-
 
 func _on_PauseButton_pressed():
 	$PauseButton.selected = false

@@ -23,8 +23,12 @@ func draw_card():
 	reposition_cards()
 
 func card_selected(id):
-	print(id)
-	global.return_to_previous()
+	#print(id)
+	if locs.step < locs.current_location.size:
+		global.goto_scene(global.Battle)
+	else:
+		global.return_to_previous()
+		locs.step = 0
 
 func _ready():
 	for i in N:

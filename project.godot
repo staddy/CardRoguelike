@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 global="*res://global.gd"
 Console="*res://thirdparty/godot-console/src/Console.tscn"
 Effects="*res://effects/Effects.gd"
+locs="*res://locations.gd"
 
 [display]
 

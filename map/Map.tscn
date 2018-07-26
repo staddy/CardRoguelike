@@ -69,6 +69,7 @@ __meta__ = {
 
 [node name="Button" parent="." index="1" instance=ExtResource( 3 )]
 
+editor/display_folded = true
 margin_left = 43.0
 margin_top = 194.0
 margin_right = 143.0

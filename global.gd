@@ -14,6 +14,7 @@ var locked = false
 
 var step = 0
 
+var chest = preload("res://enemies/Chest.tscn")
 var bats = preload("res://enemies/Bats.tscn")
 var enemy = preload("res://enemies/Enemy.tscn")
 var insect = preload("res://enemies/Insect.tscn")
@@ -362,13 +363,17 @@ func set_location(loc):
 		return locations.loc_0
 
 func generate_enemys():
-	var enemys_positions = [current_scene.point1, current_scene.point2, current_scene.point3, current_scene.point4] 
-	var enemy = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
-	enemy.position = enemys_positions[0].position
-	current_scene.add_child(enemy)
-	current_scene.enemies.append(enemy)
+	var enemys_positions = [current_scene.point1, current_scene.point2, current_scene.point3, current_scene.point4]
+	if step == current_loc.size/2:
+		var c = chest.instance()
+		c.position = enemys_positions[0].position
+		current_scene.add_child(c)
+	else: 
+		var enemy = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
+		enemy.position = enemys_positions[0].position
+		current_scene.add_child(enemy)
+		current_scene.enemies.append(enemy)
 	step += 1
-	pass
 
 func goto_scene(scene):
     call_deferred("_deferred_goto_scene", scene)

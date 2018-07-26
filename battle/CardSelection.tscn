@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://battle/CardSelection.gd" type="Script" id=1]
+[ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=2]
 
-[node name="CardSelection" type="Node2D" groups=[
+[node name="CardSelection" type="Node2D" index="0" groups=[
 "card_container",
 ]]
 
@@ -21,5 +22,9 @@ position = Vector2( 703, 214 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="FakeModifiersContainer" parent="." index="2" instance=ExtResource( 2 )]
+
+visible = false
 
 

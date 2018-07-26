@@ -54,7 +54,7 @@ func set_description(value_):
 	description = value_
 	var parent = get_parent()
 	var d = description
-	if parent.is_in_group("battle"):
+	if parent.is_in_group("card_container"):
 		var dmg = global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers, self.get("strength_multiplier"))
 		var block = global.get_block_player(value2, parent.modifiers)
 		var color1 = "#FFFFFF"

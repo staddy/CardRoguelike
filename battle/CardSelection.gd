@@ -4,6 +4,8 @@ var N = 3
 var cards = []
 var Card = preload("res://cards/Card.tscn")
 
+onready var modifiers = get_node("FakeModifiersContainer")
+
 func reposition_cards():
 	var offset = ($CardsEnd.position.x - $CardsStart.position.x) / (cards.size() + 1)
 	var i = 1

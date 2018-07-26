@@ -1,6 +1,7 @@
 extends Node
 
 var current_scene = null
+var current_loc = null
 var previous_scene = null
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
@@ -10,6 +11,13 @@ var CardSelection = preload("res://battle/CardSelection.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
+
+var step = 0
+
+var bats = preload("res://enemies/Bats.tscn")
+var enemy = preload("res://enemies/Enemy.tscn")
+var insect = preload("res://enemies/Insect.tscn")
+var slime = preload("res://enemies/Slime.tscn")
 
 var material_ = preload("res://material.tres")
 var outlined_material = preload("res://outlined_material.tres")
@@ -257,6 +265,15 @@ var cards = {
 				}
 			}
 
+var locations = {
+	loc_0 = {
+		access = 0,
+		size = int(round(rand_range(10, 12))),
+		enemys = [bats, enemy, insect, slime],
+		boss = null
+	}
+}
+
 var default_draw_size = 10
 var max_hand_size = 10
 var max_mana = 9
@@ -339,6 +356,19 @@ func _ready():
 	randomize()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+
+func set_location(loc):
+	if loc == 0:
+		return locations.loc_0
+
+func generate_enemys():
+	var enemys_positions = [current_scene.point1, current_scene.point2, current_scene.point3, current_scene.point4] 
+	var enemy = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
+	enemy.position = enemys_positions[0].position
+	current_scene.add_child(enemy)
+	current_scene.enemies.append(enemy)
+	step += 1
+	pass
 
 func goto_scene(scene):
     call_deferred("_deferred_goto_scene", scene)

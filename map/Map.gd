@@ -30,4 +30,5 @@ func _ready():
 
 func _on_Button_pressed():
 	#global.init_deck()
+	global.current_loc = global.set_location(0)
 	global.goto_subscene(global.Battle)

@@ -13,4 +13,8 @@ func check_loot():
 		finish()
 
 func finish():
-	global.return_to_previous()
+	if global.step >= global.current_loc.size:
+		global.return_to_previous()
+		global.step = 0
+	else:
+		global.goto_scene(global.Battle)

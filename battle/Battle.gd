@@ -3,6 +3,11 @@ extends Node2D
 var turn = -1
 var Card = preload("res://cards/Card.tscn")
 
+onready var point1 = get_node("enemy_spawn")
+onready var point2 = get_node("enemy_spawn2")
+onready var point3 = get_node("enemy_spawn3")
+onready var point4 = get_node("enemy_spawn4")
+
 var initial_cards = []
 
 # holds cards ids
@@ -82,6 +87,7 @@ func update_cards():
 		c.update()
 
 func _ready():
+	global.generate_enemys()
 	for e in enemies:
 		e.init()
 	initial_cards = global.cards.duplicate()
@@ -232,6 +238,9 @@ func show_warning(message):
 	$Warning.get_node("Timer").start()
 
 func enemy_dead():
+	for e in enemies:
+		e.queue_free()
+	enemies.clear()
 	if enemies.size() == 0:
 		show_warning("Victory!")
 		#global.goto_scene(global.CardSelection)

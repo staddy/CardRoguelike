@@ -1,31 +1,33 @@
 extends Node2D
 
+var N = 3
+var cards = []
 var Card = preload("res://cards/Card.tscn")
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+func reposition_cards():
+	var offset = ($CardsEnd.position.x - $CardsStart.position.x) / (cards.size() + 1)
+	var i = 1
+	for c in cards:
+		c.initial_position = Vector2($CardsStart.position.x + i * offset, $CardsStart.position.y)
+		c.z_index = -i
+		i += 1
 
 func draw_card():
-	if cards.size() == global.max_hand_size:
-		show_warning("Your hand is full")
-		return
-	if draw_pile.size() == 0:
-		reshuffle()
-	if draw_pile.size() == 0:
-		show_warning("No more cards to draw")
-		return
 	var card = Card.instance()
 	card.position = Vector2(0, 0)
-	var id = draw_pile.pop_back()
+	var id = 0#draw_pile.pop_back()
 	add_child(card)
-	card.init(id, initial_cards[id])
+	card.init(id)
+	card.play_mode = false
+	card.connect("clicked", self, "card_selected")
 	reposition_cards()
 
+func card_selected(id):
+	global.return_to_previous()
+
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	for i in N:
+		draw_card()
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

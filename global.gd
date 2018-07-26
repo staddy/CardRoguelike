@@ -5,6 +5,8 @@ var previous_scene = null
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
+var LootWindow = preload("res://battle/LootWindow.tscn")
+var CardSelection = preload("res://battle/CardSelection.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
@@ -259,9 +261,40 @@ var default_draw_size = 10
 var max_hand_size = 10
 var max_mana = 9
 
-var current_max_mana = 3
+var current_reward = [ {}, {}, {} ]
 
+# Player state
 var deck = []
+var max_hp setget set_max_hp
+var current_hp setget set_current_hp
+var max_energy setget set_max_energy
+var strength setget set_strength
+var dexterity setget set_dexterity
+
+signal max_hp_changed()
+func set_max_hp(value):
+	max_hp = value
+	emit_signal("max_hp_changed")
+
+signal current_hp_changed()
+func set_current_hp(value):
+	current_hp = value
+	emit_signal("current_hp_changed")
+
+signal max_energy_changed()
+func set_max_energy(value):
+	max_energy = value
+	emit_signal("max_energy_changed")
+
+signal strength_changed()
+func set_strength(value):
+	strength = value
+	emit_signal("strength_changed")
+
+signal dexterity_changed()
+func set_dexterity(value):
+	dexterity = value
+	emit_signal("dexterity_changed")
 
 func shuffle_list(list):
 	var shuffledList = [] 
@@ -271,6 +304,13 @@ func shuffle_list(list):
 		shuffledList.append(list[indexList[x]])
 		indexList.remove(x)
 	return shuffledList
+
+func init_player():
+	self.max_hp = 100
+	self.current_hp = 100
+	self.max_energy = 5
+	self.strength = 1
+	self.dexterity = 1
 
 func init_deck():
 	deck.clear()

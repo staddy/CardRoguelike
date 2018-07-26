@@ -25,12 +25,14 @@ var current_enemy = 0
 var hp = 10 setget set_hp
 func set_hp(value):
 	hp = value
+	global.current_hp = hp
 	$HP/TextureProgress.value = value
 	$HP/Label.text = str(hp) + "  " + str(max_hp)
 
 var max_hp = 10 setget set_max_hp
 func set_max_hp(value):
 	max_hp = value
+	global.max_hp = max_hp
 	$HP/TextureProgress.max_value = value
 	$HP/Label.text = str(hp) + "  " + str(max_hp)
 
@@ -83,9 +85,9 @@ func _ready():
 	for e in enemies:
 		e.init()
 	initial_cards = global.cards.duplicate()
-	self.max_hp = 70
-	self.hp = 70
-	self.max_mana = global.current_max_mana
+	self.max_hp = global.max_hp
+	self.hp = global.current_hp
+	self.max_mana = global.max_energy
 	draw_pile = global.shuffle_list(global.deck)
 	new_turn()
 	pass
@@ -232,10 +234,19 @@ func show_warning(message):
 func enemy_dead():
 	if enemies.size() == 0:
 		show_warning("Victory!")
-		global.return_to_previous()
+		#global.goto_scene(global.CardSelection)
+		global.goto_scene(global.LootWindow)
+		#global.return_to_previous()
 
 func _on_Timer_timeout():
 	$Warning.get_node("AnimationPlayer").play("fade_out")
 
 func _on_EndTurnButton_pressed():
 	end_turn()
+
+
+func _on_PauseButton_pressed():
+	$PauseButton.selected = false
+	global.unlock()
+	$PauseMenu.visible = true
+	get_tree().paused = true

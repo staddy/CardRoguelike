@@ -13,6 +13,7 @@ var locations = {
 		difficulty_level = "easy",
 		size = int(round(rand_range(8, 12))),
 		monsters = [bats, enemy, insect, slime],
+		bosses = [],
 		spawn_position = null
 	}
 }

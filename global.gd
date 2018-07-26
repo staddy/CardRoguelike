@@ -1,7 +1,7 @@
 extends Node
 
 var current_scene = null
-var previous_scene = null
+var previous_scenes = []
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
@@ -262,6 +262,8 @@ var max_hand_size = 10
 var max_mana = 9
 
 var current_reward = [ {}, {}, {} ]
+var current_card_item = null
+var current_cards_to_pick = [ 0, 1, 2 ]
 
 # Player state
 var deck = []
@@ -344,7 +346,7 @@ func goto_scene(scene):
     call_deferred("_deferred_goto_scene", scene)
 
 func goto_subscene(scene):
-	previous_scene = current_scene
+	previous_scenes.push_back(current_scene)
 	current_scene.visible = false
 	
 	# Instance the new scene
@@ -360,9 +362,9 @@ func return_to_previous():
 	call_deferred("_deferred_return_to_previous")
 
 func _deferred_return_to_previous():
-	if previous_scene != null:
+	if previous_scenes.size() != 0:
 		current_scene.free()
-		current_scene = previous_scene
+		current_scene = previous_scenes.pop_back()
 		current_scene.visible = true
 		get_tree().set_current_scene(current_scene)
 	

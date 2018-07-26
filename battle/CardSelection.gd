@@ -12,10 +12,9 @@ func reposition_cards():
 		c.z_index = -i
 		i += 1
 
-func draw_card():
+func draw_card(id):
 	var card = Card.instance()
 	card.position = Vector2(0, 0)
-	var id = 0#draw_pile.pop_back()
 	add_child(card)
 	card.init(id)
 	card.play_mode = false
@@ -24,10 +23,13 @@ func draw_card():
 
 func card_selected(id):
 	global.return_to_previous()
+	if global.current_card_item != null:
+		global.current_card_item.remove()
+		global.current_card_item = null
 
 func _ready():
-	for i in N:
-		draw_card()
+	for id in global.current_cards_to_pick:
+		draw_card(id)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

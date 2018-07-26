@@ -6,7 +6,9 @@ func _ready():
 	pass
 
 func _on_ItemButton_pressed():
-	remove()
+	global.current_card_item = self
+	global.goto_subscene(global.CardSelection)
+	#remove()
 
 func remove():
 	get_parent().remove_child(self)

@@ -234,7 +234,8 @@ func show_warning(message):
 func enemy_dead():
 	if enemies.size() == 0:
 		show_warning("Victory!")
-		global.goto_scene(global.CardSelection)
+		#global.goto_scene(global.CardSelection)
+		global.goto_scene(global.LootWindow)
 		#global.return_to_previous()
 
 func _on_Timer_timeout():

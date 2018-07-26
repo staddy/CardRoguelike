@@ -23,22 +23,23 @@ func unselect():
 	self.selected = false
 
 func _ready():
-	if(!Engine.editor_hint):
-		get_node("/root/global").connect("unselect_all", self, "unselect")
+	#if(!Engine.editor_hint):
+	#	get_node("/root/global").connect("unselect_all", self, "unselect")
+	pass
 
 func _on_Button_mouse_entered():
-	if !get_node("/root/global").locked:
-		get_node("/root/global").emit_signal("unselect_all")
-		self.selected = true
+	#if !get_node("/root/global").locked:
+	#	get_node("/root/global").emit_signal("unselect_all")
+	self.selected = true
 
 
 func _on_Button_mouse_exited():
-	if !get_node("/root/global").locked:
-		self.selected = false
+	#if !get_node("/root/global").locked:
+	self.selected = false
 
 
 func _on_Button_gui_input(event):
-	if get_node("/root/global").lock():
-		if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
-			emit_signal("pressed")
-		get_node("/root/global").unlock()
+	#if get_node("/root/global").lock():
+	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
+		emit_signal("pressed")
+	#	get_node("/root/global").unlock()

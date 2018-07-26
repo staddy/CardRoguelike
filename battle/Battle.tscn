@@ -122,7 +122,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Battle" type="Node2D" index="0" groups=[
+[node name="Battle" type="Node2D" groups=[
 "battle",
 "card_container",
 ]]

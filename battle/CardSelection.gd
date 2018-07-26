@@ -23,7 +23,6 @@ func draw_card():
 	reposition_cards()
 
 func card_selected(id):
-	print(id)
 	global.return_to_previous()
 
 func _ready():

@@ -5,6 +5,7 @@ var previous_scene = null
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
+var LootWindow = preload("res://battle/LootWindow.tscn")
 var CardSelection = preload("res://battle/CardSelection.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
@@ -260,7 +261,7 @@ var default_draw_size = 10
 var max_hand_size = 10
 var max_mana = 9
 
-var current_max_mana = 3
+var current_reward = [ {}, {}, {} ]
 
 # Player state
 var deck = []
@@ -307,7 +308,7 @@ func shuffle_list(list):
 func init_player():
 	self.max_hp = 100
 	self.current_hp = 100
-	self.max_energy = 3
+	self.max_energy = 5
 	self.strength = 1
 	self.dexterity = 1
 

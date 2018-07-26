@@ -1,12 +1,9 @@
 extends Node
 
 var current_scene = null
-<<<<<<< HEAD
 var current_loc = null
 var previous_scene = null
-=======
 var previous_scenes = []
->>>>>>> master
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
@@ -19,6 +16,7 @@ var locked = false
 var step = 0
 
 var chest = preload("res://enemies/Chest.tscn")
+var camp = preload("res://enemies/Camp.tscn")
 var bats = preload("res://enemies/Bats.tscn")
 var enemy = preload("res://enemies/Enemy.tscn")
 var insect = preload("res://enemies/Insect.tscn")
@@ -273,9 +271,10 @@ var cards = {
 var locations = {
 	loc_0 = {
 		access = 0,
-		size = int(round(rand_range(10, 12))),
-		enemys = [bats, enemy, insect, slime],
-		boss = null
+		size = int(round(rand_range(6, 8))),
+		room = null,
+		enemys = [bats, insect, slime],
+		boss = enemy
 	}
 }
 
@@ -374,11 +373,21 @@ func generate_enemys():
 		var c = chest.instance()
 		c.position = enemys_positions[0].position
 		current_scene.add_child(c)
-	else: 
+	elif step >= 0 and step < current_loc.size-1: 
 		var enemy = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
 		enemy.position = enemys_positions[0].position
 		current_scene.add_child(enemy)
 		current_scene.enemies.append(enemy)
+	elif step == current_loc.size-1:
+		print(1)
+		var c = camp.instance()
+		c.position = enemys_positions[0].position
+		current_scene.add_child(c)
+	elif step == current_loc.size:
+		var b = current_loc.boss.instance()
+		b.position = enemys_positions[0].position
+		current_scene.add_child(b)
+		current_scene.enemies.append(b)
 	step += 1
 
 func goto_scene(scene):

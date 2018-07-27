@@ -13,7 +13,6 @@ func _ready():
 	pass
 
 func collision_check(mouse_pos):
-	print(card_selected)
 	for c in box.get_children():
 		if !c.is_in_group("fuck") and c.get_child(0):
 			var card = c.get_child(0)

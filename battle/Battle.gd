@@ -250,3 +250,15 @@ func _on_PauseButton_pressed():
 	global.unlock()
 	$PauseMenu.visible = true
 	get_tree().paused = true
+
+
+func _on_Draw_pressed():
+	global.cards_viewer_ids = draw_pile
+	global.cards_viewer_cards = initial_cards
+	global.goto_subscene(global.CardsViewer)
+
+
+func _on_Discard_pressed():
+	global.cards_viewer_ids = discard_pile
+	global.cards_viewer_cards = initial_cards
+	global.goto_subscene(global.CardsViewer)

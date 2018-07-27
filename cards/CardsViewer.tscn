@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://cards/CardsViewer.gd" type="Script" id=1]
 [ext_resource path="res://cards/cards_container.png" type="Texture" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://cards/CardsContainer.gd" type="Script" id=4]
 [ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://cards/control_limiter.png" type="Texture" id=6]
+[ext_resource path="res://ui/Button.tscn" type="PackedScene" id=7]
 
-[node name="CardsViewer" type="Node2D" index="0"]
+[node name="CardsViewer" type="Node2D"]
 
 script = ExtResource( 1 )
 __meta__ = {
@@ -206,5 +207,15 @@ size_flags_vertical = 1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Back" parent="." index="5" instance=ExtResource( 7 )]
+
+margin_left = 753.0
+margin_top = 478.0
+margin_right = 813.0
+margin_bottom = 493.0
+text = "BACK"
+
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
 
 

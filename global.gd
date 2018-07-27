@@ -7,6 +7,7 @@ var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
 var LootWindow = preload("res://battle/LootWindow.tscn")
 var CardSelection = preload("res://battle/CardSelection.tscn")
+var CardsViewer = preload("res://cards/CardsViewer.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
@@ -257,7 +258,7 @@ var cards = {
 				}
 			}
 
-var default_draw_size = 10
+var default_draw_size = 3
 var max_hand_size = 10
 var max_mana = 9
 
@@ -332,8 +333,10 @@ func init_deck():
 	deck.clear()
 	#for i in range(5):
 		#deck.append(0)
-	for i in range(4):
+	for i in range(9):
 		deck.append(0)
+	for i in range(9):
+		deck.append(3)
 	#deck.append(2)
 	#deck.append(3)
 	#deck.append(4)

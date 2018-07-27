@@ -122,7 +122,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Battle" type="Node2D" groups=[
+[node name="Battle" type="Node2D" index="0" groups=[
 "battle",
 "card_container",
 ]]
@@ -439,10 +439,30 @@ pause_mode = 2
 visible = false
 position = Vector2( 398, 209 )
 
+[node name="Draw" parent="." index="20" instance=ExtResource( 13 )]
+
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 67.0
+margin_bottom = 22.0
+text = "DRAW"
+
+[node name="Discard" parent="." index="21" instance=ExtResource( 13 )]
+
+margin_left = 195.0
+margin_top = 6.0
+margin_right = 255.0
+margin_bottom = 21.0
+text = "DISCARD"
+
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_EndTurnButton_pressed"]
 
 [connection signal="timeout" from="Warning/Timer" to="." method="_on_Timer_timeout"]
 
 [connection signal="pressed" from="PauseButton" to="." method="_on_PauseButton_pressed"]
+
+[connection signal="pressed" from="Draw" to="." method="_on_Draw_pressed"]
+
+[connection signal="pressed" from="Discard" to="." method="_on_Discard_pressed"]
 
 

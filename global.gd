@@ -261,9 +261,16 @@ var default_draw_size = 10
 var max_hand_size = 10
 var max_mana = 9
 
+# LootWindow init
 var current_reward = [ {"type" : "money", "ammount" : 10}, {"type" : "card"}, {"type" : "card"} ]
 var current_card_item = null
+#CardSelection init
 var current_cards_to_pick = [ 0, 1, 2 ]
+
+# CardsViewer init
+var cards_viewer_ids = [ 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 ]
+var cards_viewer_cards = cards
+var cards_viewer_ordered = true
 
 # Player state
 var deck = []

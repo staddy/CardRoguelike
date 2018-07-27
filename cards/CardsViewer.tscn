@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://cards/CardsViewer.gd" type="Script" id=1]
 [ext_resource path="res://cards/cards_container.png" type="Texture" id=2]
 [ext_resource path="res://cards/CardsArea.gd" type="Script" id=3]
-[ext_resource path="res://cards/Card.tscn" type="PackedScene" id=4]
-[ext_resource path="res://cards/control_limiter.png" type="Texture" id=5]
+[ext_resource path="res://cards/CardsContainer.gd" type="Script" id=4]
+[ext_resource path="res://modifiers/ModifiersContainer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://cards/control_limiter.png" type="Texture" id=6]
 
 [node name="CardsViewer" type="Node2D" index="0"]
 
@@ -23,13 +24,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CardsContainer" type="Node2D" parent="CardsArea" index="0"]
+[node name="CardsContainer" type="Node2D" parent="CardsArea" index="0" groups=[
+"card_container",
+]]
 
 show_behind_parent = true
 position = Vector2( -363, -198 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="Card" parent="CardsArea/CardsContainer" index="0" instance=ExtResource( 4 )]
+[node name="ModifiersContainer" parent="CardsArea/CardsContainer" index="0" instance=ExtResource( 5 )]
 
 [node name="Control" type="Control" parent="." index="1"]
 
@@ -53,55 +57,55 @@ __meta__ = {
 
 position = Vector2( 90.4983, 16.0781 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter7" type="Sprite" parent="Control" index="1"]
 
 position = Vector2( 199.298, 16.7415 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter8" type="Sprite" parent="Control" index="2"]
 
 position = Vector2( 296.82, 17.4049 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter9" type="Sprite" parent="Control" index="3"]
 
 position = Vector2( 391.688, 21.3854 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter10" type="Sprite" parent="Control" index="4"]
 
 position = Vector2( 490.536, 17.4049 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter11" type="Sprite" parent="Control" index="5"]
 
 position = Vector2( 590.711, 16.7415 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter12" type="Sprite" parent="Control" index="6"]
 
 position = Vector2( 686.906, 18.0683 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter13" type="Sprite" parent="Control" index="7"]
 
 position = Vector2( 783.101, 15.4147 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="control_limiter14" type="Sprite" parent="Control" index="8"]
 
 position = Vector2( 878.632, 16.0781 )
 rotation = 1.58184
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Control2" type="Control" parent="." index="2"]
 
@@ -126,7 +130,7 @@ __meta__ = {
 [node name="control_limiter" type="Sprite" parent="Control2" index="0"]
 
 position = Vector2( 22, 42 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -134,7 +138,7 @@ __meta__ = {
 [node name="control_limiter2" type="Sprite" parent="Control2" index="1"]
 
 position = Vector2( 21, 140 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -142,7 +146,7 @@ __meta__ = {
 [node name="control_limiter3" type="Sprite" parent="Control2" index="2"]
 
 position = Vector2( 20, 235 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -150,7 +154,7 @@ __meta__ = {
 [node name="control_limiter4" type="Sprite" parent="Control2" index="3"]
 
 position = Vector2( 21, 334 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -158,7 +162,7 @@ __meta__ = {
 [node name="control_limiter5" type="Sprite" parent="Control2" index="4"]
 
 position = Vector2( 19, 432 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }

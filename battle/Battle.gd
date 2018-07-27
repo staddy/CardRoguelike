@@ -206,7 +206,7 @@ func damage_player(value):
 
 func enemy_finished():
 	# ATTENTION! (enemy can die during his turn)
-	if current_enemy < enemies.size():
+	if current_enemy < enemies.size()-1:
 		current_enemy += 1
 		enemies[current_enemy - 1].turn()
 	else:

@@ -37,7 +37,10 @@ func _on_ScrollContainer_gui_input(ev):
 func _on_ScrollContainer_mouse_entered():
 	selectble = true
 func _on_ScrollContainer_mouse_exited():
-	if card_selected != null:
-		selectble = false
-		card_selected.selectble = false
-		card_selected = null
+	selectble = false
+	for c in box.get_children():
+		if !c.is_in_group("fuck") and c.get_child(0):
+			var card = c.get_child(0)
+			if !selectble:
+				card.selectble = false
+				card_selected = null

@@ -3,16 +3,24 @@ extends Node2D
 var Item = preload("res://battle/ItemButton.tscn")
 
 func _ready():
+	var y = 0
 	for item in global.current_reward:
 		var newItem = Item.instance()
 		newItem.type = item["type"]
 		newItem.ammount = null if not item.has("ammount") else item["ammount"]
 		newItem.connect("picked", self, "check_loot")
-		$VBoxContainer.add_child(newItem)
+		newItem.rect_position.y = y
+		$Container.add_child(newItem)
+		y += (newItem.rect_size.y * newItem.rect_scale.y + 10)
 
 func check_loot():
-	if $VBoxContainer.get_child_count() == 0:
+	if $Container.get_child_count() == 0:
 		finish()
+	else:
+		var y = 0
+		for child in $Container.get_children():
+			child.rect_position.y = y
+			y += (child.rect_size.y * child.rect_scale.y + 10)
 
 func finish():
 	global.return_to_previous()

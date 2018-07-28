@@ -1,44 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://battle/LootWindow.gd" type="Script" id=1]
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://battle/arrow.png" type="Texture" id=3]
-[ext_resource path="res://battle/arrow_pressed.png" type="Texture" id=4]
-[ext_resource path="res://battle/arrow_hover.png" type="Texture" id=5]
+[ext_resource path="res://battle/arrow_hover.png" type="Texture" id=4]
 
 [node name="LootWindow" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 329.0
-margin_top = 77.0
-margin_right = 369.0
-margin_bottom = 117.0
-rect_scale = Vector2( 3, 3 )
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Rect" ]
-
-[node name="Continue" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Continue" parent="." index="0" instance=ExtResource( 2 )]
 
 margin_left = 698.0
 margin_top = 289.0
 margin_right = 728.0
 margin_bottom = 309.0
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 4 )
-texture_hover = ExtResource( 5 )
+texture = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+
+[node name="Container" type="Node2D" parent="." index="1"]
+
+position = Vector2( 379, 107 )
 
 [connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
 

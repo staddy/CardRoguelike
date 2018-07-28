@@ -7,9 +7,9 @@ signal picked()
 
 func _ready():
 	if type == "card":
-		$Sprite.texture = load("res://battle/items/card.png")
+		$Icon.texture = load("res://battle/items/card.png")
 	elif type == "money":
-		$Sprite.texture = load("res://battle/items/coin.png")
+		$Icon.texture = load("res://battle/items/coin.png")
 		$Label.text = str(ammount)
 
 func _on_ItemButton_pressed():

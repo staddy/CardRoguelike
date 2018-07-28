@@ -529,16 +529,6 @@ margin_right = 450.0
 margin_bottom = 185.0
 text = "ELEVATE"
 
-[node name="Start" parent="." index="14" instance=ExtResource( 7 )]
-
-margin_left = 390.0
-margin_top = 230.0
-margin_right = 450.0
-margin_bottom = 245.0
-text = "START"
-
 [connection signal="pressed" from="Elevate" to="." method="_on_Elevate_pressed"]
-
-[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 
 

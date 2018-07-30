@@ -9,11 +9,13 @@ signal picked()
 func _ready():
 	if type == "card":
 		$Icon.texture = load("res://battle/items/card.png")
+		$Label.text = "Card"
 	elif type == "money":
 		$Icon.texture = load("res://battle/items/coin.png")
 		$Label.text = str(ammount)
 	elif type == "artifact":
 		$Icon.texture = load(global.artifacts[artifact_id].small_image)
+		hint_tooltip = global.artifacts[artifact_id].description
 		$Label.text = global.artifacts[artifact_id].name
 
 func _on_ItemButton_pressed():

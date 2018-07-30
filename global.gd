@@ -268,6 +268,7 @@ var artifacts = {
 				  name = "Healer",
 				  image = "res://artifacts/healer.png",
 				  small_image = "res://artifacts/healer_small.png",
+				  description = "Heals you after combat\nby 6 hp",
 				  price = 100,
 				  action = funcref(self, "healer_action"),
 				  type = "after_battle"

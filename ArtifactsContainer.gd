@@ -11,6 +11,7 @@ func update_artifacts():
 	for artifact in global.inventory:
 		var newArtifact = Artifact.instance()
 		newArtifact.image = global.artifacts[artifact].image
+		newArtifact.description = global.artifacts[artifact].description
 		newArtifact.rect_position.x = x
 		add_child(newArtifact)
 		x += (newArtifact.rect_size.x * newArtifact.rect_scale.x + 10)

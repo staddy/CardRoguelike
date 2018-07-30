@@ -89,6 +89,7 @@ func _ready():
 	self.hp = global.current_hp
 	self.max_mana = global.max_energy
 	draw_pile = global.shuffle_list(global.deck)
+	global.before_battle()
 	new_turn()
 	pass
 
@@ -208,6 +209,7 @@ func enemy_finished():
 	pass
 
 func end_turn():
+	global.after_turn()
 	modifiers.process()
 	# TODO: disable button and cards
 	if enemy_turn:
@@ -220,6 +222,7 @@ func end_turn():
 	pass
 
 func new_turn():
+	global.before_turn()
 	enemy_turn = false
 	turn += 1
 	self.block = 0
@@ -234,6 +237,7 @@ func show_warning(message):
 func enemy_dead():
 	if enemies.size() == 0:
 		show_warning("Victory!")
+		global.after_battle()
 		#global.goto_scene(global.CardSelection)
 		global.goto_scene(global.LootWindow)
 		#global.return_to_previous()

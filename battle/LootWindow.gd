@@ -8,6 +8,7 @@ func _ready():
 		var newItem = Item.instance()
 		newItem.type = item["type"]
 		newItem.ammount = null if not item.has("ammount") else item["ammount"]
+		newItem.artifact_id = null if not item.has("artifact_id") else item["artifact_id"]
 		newItem.connect("picked", self, "check_loot")
 		newItem.rect_position.y = y
 		$Container.add_child(newItem)

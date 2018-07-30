@@ -2,6 +2,7 @@ extends "res://ui/Button.gd"
 
 var type
 var ammount
+var artifact_id
 
 signal picked()
 
@@ -11,6 +12,9 @@ func _ready():
 	elif type == "money":
 		$Icon.texture = load("res://battle/items/coin.png")
 		$Label.text = str(ammount)
+	elif type == "artifact":
+		$Icon.texture = load(global.artifacts[artifact_id].small_image)
+		$Label.text = global.artifacts[artifact_id].name
 
 func _on_ItemButton_pressed():
 	if type == "card":
@@ -18,6 +22,9 @@ func _on_ItemButton_pressed():
 		global.goto_subscene(global.CardSelection)
 	elif type == "money":
 		global.money += ammount
+		remove()
+	elif type == "artifact":
+		global.add_artifact(artifact_id)
 		remove()
 
 func remove():

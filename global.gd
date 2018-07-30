@@ -258,12 +258,27 @@ var cards = {
 				}
 			}
 
+func healer_action():
+	global.current_hp += 6
+	if global.current_hp > global.max_hp:
+		global.current_hp = global.max_hp
+
+var artifacts = {
+			0: {
+				  name = "Healer",
+				  image = "res://artifacts/healer.png",
+				  small_image = "res://artifacts/healer_small.png",
+				  price = 100,
+				  action = funcref(self, "healer_action"),
+				  type = "after_battle"
+			   }
+			}
+
 var default_draw_size = 3
 var max_hand_size = 10
-var max_mana = 9
 
 # LootWindow init
-var current_reward = [ {"type" : "money", "ammount" : 10}, {"type" : "card"}, {"type" : "card"} ]
+var current_reward = [ {"type" : "money", "ammount" : 10}, {"type" : "card"}, {"type" : "card"}, {"type" : "artifact", "artifact_id" : 0 } ]
 var current_card_item = null
 #CardSelection init
 var current_cards_to_pick = [ 0, 1, 2 ]
@@ -275,6 +290,7 @@ var cards_viewer_ordered = true
 
 # Player state
 var deck = []
+var inventory = [ 0 ]
 var max_hp setget set_max_hp
 var current_hp setget set_current_hp
 var max_energy setget set_max_energy
@@ -311,6 +327,18 @@ signal money_changed()
 func set_money(value):
 	money = value
 	emit_signal("money_changed")
+
+signal artifacts_changed()
+func add_artifact(id):
+	inventory.append(id)
+	emit_signal("artifacts_changed")
+	pass
+
+func remove_artifact(id):
+	# TODO: implement
+	#inventory.remove(id)
+	emit_signal("artifacts_changed")
+	pass
 
 func shuffle_list(list):
 	var shuffledList = [] 
@@ -351,6 +379,22 @@ func init_deck():
 	#deck.append(13)
 	#deck.append(14)
 	#deck.append(15)
+
+func before_battle():
+	pass
+
+func after_battle():
+	for a in inventory:
+		var artifact = global.artifacts[a]
+		if artifact.type == "after_battle":
+			artifact.action.call_func()
+	pass
+
+func before_turn():
+	pass
+
+func after_turn():
+	pass
 
 signal unselect_all()
 

@@ -5,6 +5,7 @@ signal pressed()
 
 export (Texture) var texture = null setget set_texture
 export (Texture) var texture_hover = null setget set_texture_hover
+var enabled = true
 
 func set_texture(t):
 	texture = t
@@ -71,7 +72,7 @@ func _on_Button_mouse_exited():
 
 func _on_Button_gui_input(event):
 	#if get_node("/root/global").lock():
-	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
+	if enabled and (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
 		self.selected = false
 		emit_signal("pressed")
 	#	get_node("/root/global").unlock()

@@ -4,8 +4,9 @@ extends "res://ui/Button.gd"
 export(int) var level = null
 export(String) var type = null
 export(bool) var visited = false setget set_visited
+var connections = []
 
-signal start_battle(level)
+signal node_clicked(node)
 
 func get_offset():
 	if(texture != null):
@@ -19,10 +20,12 @@ func set_visited(value):
 		$Visited.visible = visited
 
 func _ready():
+	if(!Engine.editor_hint):
+		if get_parent().is_in_group("map"):
+			get_parent().nodes.append(self)
 	pass
 
 
 func _on_MapNode_pressed():
-	if type == "battle":
-		emit_signal("start_battle", self.level)
+	emit_signal("node_clicked", self)
 	self.visited = true

@@ -429,6 +429,8 @@ func _deferred_return_to_previous():
 		current_scene = previous_scenes.pop_back()
 		current_scene.visible = true
 		get_tree().set_current_scene(current_scene)
+		if current_scene.is_in_group("map"):
+			current_scene.can_drag = true
 	
 
 func _deferred_goto_scene(scene):

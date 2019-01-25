@@ -90,8 +90,10 @@ func node_clicked(node):
 func end_level():
 	for c in get_tree().get_nodes_in_group("icon"):
 		c.queue_free()
+		remove_child(c)
 	for c in get_tree().get_nodes_in_group("icon_line"):
 		c.queue_free()
+		remove_child(c)
 	for c in get_tree().get_nodes_in_group("city"):
 		c.visible = true
 	for c in get_tree().get_nodes_in_group("line"):
@@ -429,3 +431,22 @@ func bool_rand():
 		return true
 
 
+
+
+func _on_Generate_pressed():
+	end_level()
+	for c in get_tree().get_nodes_in_group("city"):
+		c.visible = false
+	for c in get_tree().get_nodes_in_group("line"):
+		c.visible = false
+	can_drag = true
+	for c in get_tree().get_nodes_in_group("rect"):
+		c.queue_free()
+		remove_child(c)
+	gen_tree()
+	for c in get_tree().get_nodes_in_group("icon"):
+		var cr = ColorRect.new()
+		cr.rect_size = Vector2(16, 16)
+		cr.rect_position = c.rect_position
+		cr.add_to_group("rect")
+		add_child(cr)

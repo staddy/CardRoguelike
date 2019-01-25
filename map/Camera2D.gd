@@ -9,6 +9,10 @@ func _ready():
 	position = Vector2(360, 0)
 
 func _input(event):
+	if Input.is_action_just_pressed("ui_up"):
+		zoom += Vector2(0.1, 0.1)
+	if Input.is_action_just_pressed("ui_down"):
+		zoom -= Vector2(0.1, 0.1)
 	if get_parent().can_drag:
 		if event is InputEventMouseMotion or event is InputEventScreenDrag:
 			if pressed:

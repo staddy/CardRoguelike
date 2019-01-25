@@ -18,4 +18,5 @@ func _on_Icon_pressed():
 func visited():
 	modulate = Color("#a5adff")
 	print("You visited ", self)
+	#global.goto_subscene(global.Battle)
 	pass

@@ -5,7 +5,7 @@
 [ext_resource path="res://battle/arrow.png" type="Texture" id=3]
 [ext_resource path="res://battle/arrow_hover.png" type="Texture" id=4]
 
-[node name="LootWindow" type="Node2D" index="0"]
+[node name="LootWindow" type="Node2D"]
 
 script = ExtResource( 1 )
 __meta__ = {

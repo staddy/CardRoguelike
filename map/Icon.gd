@@ -1,12 +1,30 @@
 extends "res://ui/Button.gd"
 
+var can_move_to = []
+var visited = false
+
 func _ready():
 	pass
 
-
 func _on_Icon_pressed():
-	pass # replace with function body
+	if global.current_scene.current_icon == null:
+		if global.current_scene.start_icons.has(self):
+			global.current_scene.current_icon = self
+			visited()
+			visited = true
+		else:
+			print("You can`t go there")
+	else:
+		if global.current_scene.current_icon.can_move_to.has(self):
+			global.current_scene.current_icon = self
+			visited()
+			visited = true
+		else:
+			print("You can`t go there")
 
-
-func _on_Icon_gui_input(ev):
-	pass # replace with function body
+func visited():
+	modulate = Color("#a5adff")
+	print("You visited ", self)
+	#get_parent().can_drag = false
+	#global.goto_subscene(global.Battle)
+	pass

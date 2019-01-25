@@ -1,26 +1,16 @@
 extends Node
 
 var current_scene = null
-var current_loc = null
-var previous_scene = null
 var previous_scenes = []
 var Main = preload("res://main.tscn")
 var Battle = preload("res://battle/Battle.tscn")
 var Map = preload("res://map/Map.tscn")
 var LootWindow = preload("res://battle/LootWindow.tscn")
 var CardSelection = preload("res://battle/CardSelection.tscn")
+var CardsViewer = preload("res://cards/CardsViewer.tscn")
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
-
-var step = 0
-
-var chest = preload("res://enemies/Chest.tscn")
-var camp = preload("res://enemies/Camp.tscn")
-var bats = preload("res://enemies/Bats.tscn")
-var enemy = preload("res://enemies/Enemy.tscn")
-var insect = preload("res://enemies/Insect.tscn")
-var slime = preload("res://enemies/Slime.tscn")
 
 var material_ = preload("res://material.tres")
 var outlined_material = preload("res://outlined_material.tres")
@@ -268,31 +258,46 @@ var cards = {
 				}
 			}
 
-var locations = {
-	loc_0 = {
-		access = 0,
-		size = int(round(rand_range(6, 8))),
-		room = null,
-		enemys = [bats, insect, slime],
-		boss = enemy
-	}
-}
+func healer_action():
+	global.current_hp += 6
+	if global.current_hp > global.max_hp:
+		global.current_hp = global.max_hp
 
-var default_draw_size = 10
+var artifacts = {
+			0: {
+				  name = "Healer",
+				  image = "res://artifacts/healer.png",
+				  small_image = "res://artifacts/healer_small.png",
+				  description = "Heals you after combat\nby 6 hp",
+				  price = 100,
+				  action = funcref(self, "healer_action"),
+				  type = "after_battle"
+			   }
+			}
+
+var default_draw_size = 3
 var max_hand_size = 10
-var max_mana = 9
 
-var current_reward = [ {"type" : "money", "ammount" : 10}, {"type" : "card"}, {"type" : "card"} ]
+# LootWindow init
+var current_reward = [ {"type" : "money", "ammount" : 10}, {"type" : "card"}, {"type" : "card"}, {"type" : "artifact", "artifact_id" : 0 } ]
 var current_card_item = null
+#CardSelection init
 var current_cards_to_pick = [ 0, 1, 2 ]
+
+# CardsViewer init
+var cards_viewer_ids = [ 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4 ]
+var cards_viewer_cards = cards
+var cards_viewer_ordered = true
 
 # Player state
 var deck = []
+var inventory = [ 0 ]
 var max_hp setget set_max_hp
 var current_hp setget set_current_hp
 var max_energy setget set_max_energy
 var strength setget set_strength
 var dexterity setget set_dexterity
+var money setget set_money
 
 signal max_hp_changed()
 func set_max_hp(value):
@@ -319,6 +324,23 @@ func set_dexterity(value):
 	dexterity = value
 	emit_signal("dexterity_changed")
 
+signal money_changed()
+func set_money(value):
+	money = value
+	emit_signal("money_changed")
+
+signal artifacts_changed()
+func add_artifact(id):
+	inventory.append(id)
+	emit_signal("artifacts_changed")
+	pass
+
+func remove_artifact(id):
+	# TODO: implement
+	#inventory.remove(id)
+	emit_signal("artifacts_changed")
+	pass
+
 func shuffle_list(list):
 	var shuffledList = [] 
 	var indexList = range(list.size())
@@ -334,27 +356,46 @@ func init_player():
 	self.max_energy = 5
 	self.strength = 1
 	self.dexterity = 1
+	self.money = 0
 
 func init_deck():
 	deck.clear()
 	#for i in range(5):
 		#deck.append(0)
-	for i in range(5):
+	for i in range(9):
 		deck.append(0)
+	for i in range(9):
+		deck.append(3)
 	#deck.append(2)
-	deck.append(3)
+	#deck.append(3)
 	#deck.append(4)
 	#deck.append(5)
 	#deck.append(6)
-	deck.append(7)
+	#deck.append(7)
 	#deck.append(8)
 	#deck.append(9)
 	#deck.append(10)
 	#deck.append(11)
-	deck.append(12)
+	#deck.append(12)
 	#deck.append(13)
 	#deck.append(14)
-	deck.append(15)
+	#deck.append(15)
+
+func before_battle():
+	pass
+
+func after_battle():
+	for a in inventory:
+		var artifact = global.artifacts[a]
+		if artifact.type == "after_battle":
+			artifact.action.call_func()
+	pass
+
+func before_turn():
+	pass
+
+func after_turn():
+	pass
 
 signal unselect_all()
 
@@ -362,40 +403,6 @@ func _ready():
 	randomize()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
-
-func set_location(loc):
-	if loc == 0:
-		return locations.loc_0
-
-func generate_enemys():
-	var enemys_positions = [current_scene.point1, current_scene.point2, current_scene.point3, current_scene.point4]
-	if current_loc == null:
-		var e = enemy.instance()
-		e.position = enemys_positions[0].position
-		current_scene.add_child(e)
-		current_scene.enemies.append(e)
-		step += 1
-		return
-	if step == current_loc.size/2:
-		var c = chest.instance()
-		c.position = enemys_positions[0].position
-		current_scene.add_child(c)
-	elif step >= 0 and step < current_loc.size-1: 
-		var e = current_loc.enemys[int(round((rand_range(0, current_loc.enemys.size()-1))))].instance()
-		e.position = enemys_positions[0].position
-		current_scene.add_child(e)
-		current_scene.enemies.append(e)
-	elif step == current_loc.size-1:
-		print(1)
-		var c = camp.instance()
-		c.position = enemys_positions[0].position
-		current_scene.add_child(c)
-	elif step == current_loc.size:
-		var b = current_loc.boss.instance()
-		b.position = enemys_positions[0].position
-		current_scene.add_child(b)
-		current_scene.enemies.append(b)
-	step += 1
 
 func goto_scene(scene):
     call_deferred("_deferred_goto_scene", scene)

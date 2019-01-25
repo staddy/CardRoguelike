@@ -3,11 +3,6 @@ extends Node2D
 var turn = -1
 var Card = preload("res://cards/Card.tscn")
 
-onready var point1 = get_node("enemy_spawn")
-onready var point2 = get_node("enemy_spawn2")
-onready var point3 = get_node("enemy_spawn3")
-onready var point4 = get_node("enemy_spawn4")
-
 var initial_cards = []
 
 # holds cards ids
@@ -87,7 +82,6 @@ func update_cards():
 		c.update()
 
 func _ready():
-	global.generate_enemys()
 	for e in enemies:
 		e.init()
 	initial_cards = global.cards.duplicate()
@@ -95,6 +89,7 @@ func _ready():
 	self.hp = global.current_hp
 	self.max_mana = global.max_energy
 	draw_pile = global.shuffle_list(global.deck)
+	global.before_battle()
 	new_turn()
 	pass
 
@@ -206,7 +201,7 @@ func damage_player(value):
 
 func enemy_finished():
 	# ATTENTION! (enemy can die during his turn)
-	if current_enemy < enemies.size()-1:
+	if current_enemy < enemies.size():
 		current_enemy += 1
 		enemies[current_enemy - 1].turn()
 	else:
@@ -214,6 +209,7 @@ func enemy_finished():
 	pass
 
 func end_turn():
+	global.after_turn()
 	modifiers.process()
 	# TODO: disable button and cards
 	if enemy_turn:
@@ -226,6 +222,7 @@ func end_turn():
 	pass
 
 func new_turn():
+	global.before_turn()
 	enemy_turn = false
 	turn += 1
 	self.block = 0
@@ -238,11 +235,9 @@ func show_warning(message):
 	$Warning.get_node("Timer").start()
 
 func enemy_dead():
-	for e in enemies:
-		e.queue_free()
-	enemies.clear()
 	if enemies.size() == 0:
 		show_warning("Victory!")
+		global.after_battle()
 		#global.goto_scene(global.CardSelection)
 		global.goto_scene(global.LootWindow)
 		#global.return_to_previous()
@@ -259,3 +254,15 @@ func _on_PauseButton_pressed():
 	global.unlock()
 	$PauseMenu.visible = true
 	get_tree().paused = true
+
+
+func _on_Draw_pressed():
+	global.cards_viewer_ids = draw_pile
+	global.cards_viewer_cards = initial_cards
+	global.goto_subscene(global.CardsViewer)
+
+
+func _on_Discard_pressed():
+	global.cards_viewer_ids = discard_pile
+	global.cards_viewer_cards = initial_cards
+	global.goto_subscene(global.CardsViewer)

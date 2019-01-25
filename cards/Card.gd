@@ -1,7 +1,5 @@
 extends Node2D
 
-var selectble = true
-
 var card_id
 var initial
 var card_name setget set_card_name
@@ -56,7 +54,7 @@ func set_description(value_):
 	description = value_
 	var parent = get_parent()
 	var d = description
-	if parent.is_in_group("battle"):
+	if parent.is_in_group("card_container"):
 		var dmg = global.get_damage_to_enemy(value, parent.modifiers, null if enemy == null else enemy.modifiers, self.get("strength_multiplier"))
 		var block = global.get_block_player(value2, parent.modifiers)
 		var color1 = "#FFFFFF"
@@ -136,8 +134,6 @@ func _process(delta):
 		position += (initial_position - position) * speed * delta
 
 func _input(event):
-	if !selectble:
-		return
 	if selected:
 		var parent = get_parent()
 		if parent.is_in_group("battle"):
@@ -186,8 +182,6 @@ func remove():
 
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	if !selectble:
-		return
 	if (event is InputEventMouseButton or event is InputEventScreenTouch) and event.is_pressed():
 		if not play_mode:
 			emit_signal("clicked", card_id)
@@ -201,12 +195,8 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 					get_parent().selected_card = self
 			
 
-func test_click():
-	print("CLICKED! ", get_name())
 
 func _on_Area2D_mouse_entered():
-	if !selectble:
-		return
 	if get_parent().is_in_group("battle"):
 		if get_parent().selected_card != null:
 			return

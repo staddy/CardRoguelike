@@ -4,6 +4,8 @@ var N = 3
 var cards = []
 var Card = preload("res://cards/Card.tscn")
 
+onready var modifiers = get_node("FakeModifiersContainer")
+
 func reposition_cards():
 	var offset = ($CardsEnd.position.x - $CardsStart.position.x) / (cards.size() + 1)
 	var i = 1
@@ -22,6 +24,7 @@ func draw_card(id):
 	reposition_cards()
 
 func card_selected(id):
+	global.deck.append(id)
 	global.return_to_previous()
 	if global.current_card_item != null:
 		global.current_card_item.remove()

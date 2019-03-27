@@ -2,12 +2,7 @@ extends Node
 
 var current_scene = null
 var previous_scenes = []
-var Main = preload("res://main.tscn")
-var Battle = preload("res://battle/Battle.tscn")
-var Map = preload("res://map/Map.tscn")
-var LootWindow = preload("res://battle/LootWindow.tscn")
-var CardSelection = preload("res://battle/CardSelection.tscn")
-var CardsViewer = preload("res://cards/CardsViewer.tscn")
+
 var mutex = Mutex.new()
 var mutex_selection = Mutex.new()
 var locked = false
@@ -16,7 +11,7 @@ var material_ = preload("res://material.tres")
 var outlined_material = preload("res://outlined_material.tres")
 
 enum Modifiers {DEXTERITY, STRENGTH, WEAKNESS, VULNERABILITY}
-var decrease_every_turn = [WEAKNESS, VULNERABILITY]
+var decrease_every_turn = [Modifiers.WEAKNESS, Modifiers.VULNERABILITY]
 
 func does_decrease(modifier):
 	if modifier in decrease_every_turn:
@@ -37,45 +32,45 @@ func weakness_damage_to_player():
 	return 0.75
 
 func get_damage_to_enemy(base, modifiers, enemy_modifiers, strength_multiplier = null):
-	var strength = modifiers.get(STRENGTH)
+	var strength = modifiers.get(Modifiers.STRENGTH)
 	if strength_multiplier != null:
 		strength *= strength_multiplier
 	var value = (base + strength)
 	if value <= 0:
 		return 0
-	if modifiers.has(WEAKNESS):
+	if modifiers.has(Modifiers.WEAKNESS):
 		value *= weakness_damage_to_enemies()
-	if enemy_modifiers != null and enemy_modifiers.has(VULNERABILITY):
+	if enemy_modifiers != null and enemy_modifiers.has(Modifiers.VULNERABILITY):
 		value *= vulnerability_damage_to_enemies()
 	return int(value)
 
 func get_damage_to_player(base, modifiers, player_modifiers):
-	var value = (base + modifiers.get(STRENGTH))
+	var value = (base + modifiers.get(Modifiers.STRENGTH))
 	if value <= 0:
 		return 0
-	if modifiers.has(WEAKNESS):
+	if modifiers.has(Modifiers.WEAKNESS):
 		value *= weakness_damage_to_player()
-	if player_modifiers.has(VULNERABILITY):
+	if player_modifiers.has(Modifiers.VULNERABILITY):
 		value *= vulnerability_damage_to_player()
 	return int(value)
 
 func get_block_player(base, modifiers):
-	var value = (base + modifiers.get(DEXTERITY))
+	var value = (base + modifiers.get(Modifiers.DEXTERITY))
 	if value <= 0:
 		return 0
 	return value
 
 func get_block_enemy(base, modifiers):
-	var value = (base + modifiers.get(DEXTERITY))
+	var value = (base + modifiers.get(Modifiers.DEXTERITY))
 	if value <= 0:
 		return 0
 	return value
 
 onready var modifier_textures = {
-								 DEXTERITY: "res://modifiers/images/dexterity.png",
-								 STRENGTH: "res://modifiers/images/strength.png",
-								 WEAKNESS: "res://modifiers/images/weakness.png",
-								 VULNERABILITY: "res://modifiers/images/vulnerability.png"
+								 Modifiers.DEXTERITY: "res://modifiers/images/dexterity.png",
+								 Modifiers.STRENGTH: "res://modifiers/images/strength.png",
+								 Modifiers.WEAKNESS: "res://modifiers/images/weakness.png",
+								 Modifiers.VULNERABILITY: "res://modifiers/images/vulnerability.png"
 								}
 
 var cards = {
@@ -121,7 +116,7 @@ var cards = {
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "",
-				   "modifiers": [STRENGTH, "self", +2]
+				   "modifiers": [Modifiers.STRENGTH, "self", +2]
 				  },
 			  4 : {
 				   "name" : "Disabling attack",
@@ -132,7 +127,7 @@ var cards = {
 				   "value" : 10,
 				   "value2" : 0,
 				   "effect" : "",
-				   "modifiers": [WEAKNESS, "target", 2]
+				   "modifiers": [Modifiers.WEAKNESS, "target", 2]
 				  },
 			  5 : {
 				   "name" : "Vulnerability",
@@ -143,7 +138,7 @@ var cards = {
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "",
-				   "modifiers": [VULNERABILITY, "all", 1]
+				   "modifiers": [Modifiers.VULNERABILITY, "all", 1]
 				  },
 			  6 : {
 				   "name" : "Break",
@@ -154,7 +149,7 @@ var cards = {
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "target",
-				   "modifiers": [STRENGTH, "target", -5]
+				   "modifiers": [Modifiers.STRENGTH, "target", -5]
 				  },
 			  7 : {
 				   "name" : "Dexter",
@@ -165,7 +160,7 @@ var cards = {
 				   "value" : 0,
 				   "value2" : 0,
 				   "effect" : "",
-				   "modifiers": [DEXTERITY, "self", 3]
+				   "modifiers": [Modifiers.DEXTERITY, "self", 3]
 				  },
 			8: {
 				   "name" : "Armor Strike",

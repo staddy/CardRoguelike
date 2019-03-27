@@ -144,7 +144,7 @@ func play_card(card, enemy):
 	if card.type == "attack":
 		if card.effect == "all":
 			for e in enemies:
-				Effects.add_effect(0, e.position)
+				#Effects.add_effect(0, e.position)
 				e.damage(global.get_damage_to_enemy(card.value, modifiers, e.modifiers, card.get("strength_multiplier")))
 		elif card.effect == "use_block":
 			enemy.damage(global.get_damage_to_enemy(self.block, modifiers, enemy.modifiers, card.get("strength_multiplier")))
@@ -158,7 +158,7 @@ func play_card(card, enemy):
 			else:
 				return
 		else:
-			Effects.add_effect(0, enemy.position)
+			#Effects.add_effect(0, enemy.position)
 			enemy.damage(global.get_damage_to_enemy(card.value, modifiers, enemy.modifiers, card.get("strength_multiplier")))
 	elif card.type == "skill":
 		if card.effect == "block":
@@ -239,7 +239,7 @@ func enemy_dead():
 		show_warning("Victory!")
 		global.after_battle()
 		#global.goto_scene(global.CardSelection)
-		global.goto_scene(global.LootWindow)
+		global.goto_scene(scenes.LootWindow)
 		#global.return_to_previous()
 
 func _on_Timer_timeout():
@@ -259,10 +259,10 @@ func _on_PauseButton_pressed():
 func _on_Draw_pressed():
 	global.cards_viewer_ids = draw_pile
 	global.cards_viewer_cards = initial_cards
-	global.goto_subscene(global.CardsViewer)
+	global.goto_subscene(scenes.CardsViewer)
 
 
 func _on_Discard_pressed():
 	global.cards_viewer_ids = discard_pile
 	global.cards_viewer_cards = initial_cards
-	global.goto_subscene(global.CardsViewer)
+	global.goto_subscene(scenes.CardsViewer)

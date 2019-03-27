@@ -44,9 +44,9 @@ func _ready():
 	for m in global.Modifiers:
 		var modifier = Modifier.instance()
 		$HBoxContainer.add_child(modifier)
-		modifier.type = global[m]
+		modifier.type = global.Modifiers[m]
 		modifier.value = 0
-		modifiers_instances[global[m]] = modifier
+		modifiers_instances[global.Modifiers[m]] = modifier
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

@@ -22,7 +22,9 @@ var enemy = null
 
 signal clicked(id)
 
-func init(id, i = global.cards[id]):
+func init(id, i = null):
+	if i == null:
+		i = global.cards[id]
 	self.card_id = id
 	self.initial = i
 	self.card_name = i.name

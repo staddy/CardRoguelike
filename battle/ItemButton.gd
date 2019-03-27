@@ -21,7 +21,7 @@ func _ready():
 func _on_ItemButton_pressed():
 	if type == "card":
 		global.current_card_item = self
-		global.goto_subscene(global.CardSelection)
+		global.goto_subscene(scenes.CardSelection)
 	elif type == "money":
 		global.money += ammount
 		remove()

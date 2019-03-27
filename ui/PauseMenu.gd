@@ -9,4 +9,4 @@ func _on_ResumeButton_pressed():
 
 func _on_ExitButton_pressed():
 	get_tree().paused = false
-	global.goto_scene(global.Main)
+	global.goto_scene(scenes.Main)

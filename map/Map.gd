@@ -71,5 +71,5 @@ func connect_nodes(node1, node2):
 
 func node_clicked(node):
 	self.current_node = node
-	global.goto_subscene(global.Battle)
+	global.goto_subscene(scenes.Battle)
 

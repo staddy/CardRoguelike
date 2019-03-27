@@ -15,4 +15,4 @@ func init():
 	self.hp = self.max_hp
 
 func cast(value):
-	modifiers.add(global.STRENGTH, 3)
+	modifiers.add(global.Modifiers.STRENGTH, 3)

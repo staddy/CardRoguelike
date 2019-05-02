@@ -12,6 +12,10 @@ func _ready():
 		'description': 'Toggle framerate meter',
 		'target': [global, 'toggle_fps'],
 	})
+	Console.register('toggle_fullscreen', {
+		'description': 'Toggle fullscreen',
+		'target': [global, 'toggle_fullscreen'],
+	})
 	#OS.set_window_maximized(true)
 	#OS.set_window_fullscreen(true)
 	pass

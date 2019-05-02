@@ -473,3 +473,6 @@ func toggle_fps():
 		else:
 			fps_meter = FpsMeter.instance()
 			current_scene.add_child(fps_meter)
+
+func toggle_fullscreen():
+	OS.window_fullscreen = !OS.window_fullscreen

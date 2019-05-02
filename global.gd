@@ -400,6 +400,20 @@ func _ready():
 	randomize()
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
+	Engine.target_fps = 60
+	Console.register('fps_max', {
+		'args': [TYPE_INT],
+		'description': 'The maximal framerate at which the application can run',
+		'target': [global, 'set_target_fps'],
+	})
+	Console.register('toggle_fps', {
+		'description': 'Toggle framerate meter',
+		'target': [global, 'toggle_fps'],
+	})
+	Console.register('toggle_fullscreen', {
+		'description': 'Toggle fullscreen',
+		'target': [global, 'toggle_fullscreen'],
+	})
 
 func goto_scene(scene):
     call_deferred("_deferred_goto_scene", scene)

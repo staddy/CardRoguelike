@@ -27,6 +27,7 @@ emission_sphere_radius = 4.0
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -2, 0 )
+angular_velocity = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
@@ -39,6 +40,7 @@ emission_sphere_radius = 4.0
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -2, 0 )
+angular_velocity = 1.50945e-019
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
@@ -284,5 +286,4 @@ margin_top = 170.0
 margin_right = 450.0
 margin_bottom = 185.0
 text = "ELEVATE"
-
 [connection signal="pressed" from="Elevate" to="." method="_on_Elevate_pressed"]

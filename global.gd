@@ -13,6 +13,8 @@ var outlined_material = preload("res://outlined_material.tres")
 enum Modifiers {DEXTERITY, STRENGTH, WEAKNESS, VULNERABILITY}
 var decrease_every_turn = [Modifiers.WEAKNESS, Modifiers.VULNERABILITY]
 
+var FpsMeter = preload("res://ui/FpsMeter.tscn")
+
 func does_decrease(modifier):
 	if modifier in decrease_every_turn:
 		return true
@@ -457,3 +459,17 @@ func unlock():
 	mutex.lock()
 	locked = false
 	mutex.unlock()
+
+func set_target_fps(fps):
+	if fps != null:
+		Engine.target_fps = fps
+
+func toggle_fps():
+	if current_scene != null:
+		var fps_meter = current_scene.get_node("FpsMeter")
+		if fps_meter != null:
+			current_scene.remove_child(fps_meter)
+			fps_meter.queue_free()
+		else:
+			fps_meter = FpsMeter.instance()
+			current_scene.add_child(fps_meter)

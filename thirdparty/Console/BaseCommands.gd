@@ -40,13 +40,6 @@ func _init():
 		'target': self
 	})
 
-	# Register built-in cvars
-	Console.register('fps_max', {
-		'args': [Console.IntRange.new(10, 1000)],
-		'description': 'The maximal framerate at which the application can run',
-		'target': [Engine, 'set_target_fps'],
-	})
-
 
 # @param  string|null  command
 static func help(command = null):

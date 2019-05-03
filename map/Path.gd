@@ -16,19 +16,23 @@ var max_connections = 3
 
 var floors = []
 var icons = []
+var symbols = []
 
 var pressed = false
 var old_position = 0
 
-var X = 960 / 2
+var X = 960 / 1.5
 var Y = 540
 
 var MIN_Y = 0
 var MAX_Y = 3000
 
-var FONT_SIZE = 10
-var FONT_SPACE = 10
+var FONT_SIZE = 15
+var FONT_SPACE = 15
 var DELTA = 5.0
+
+var TIME = 0.0
+var UPDATE = 0.1
 
 func init_font():
 	var data = DynamicFontData.new()
@@ -108,6 +112,7 @@ func _ready():
 func generate():
 	floors = []
 	icons = []
+	symbols = []
 	generate_floors()
 	generate_icons()
 	draw_connections()
@@ -165,30 +170,45 @@ func draw_dotted_line(p1, p2):
 		current += (v_normalized * ls)
 		line.width = 1
 		line.scale = Vector2(scale, scale)
-		line.z_index = -500
-		line.default_color = Color(0, 0, 0)
-		$ItemsContainer.add_child(line)
+		line.z_index = -1
+		line.default_color = Color(0, 0.2, 0)
+		$ItemsContainer/LabelsContainer.add_child(line)
 
-func draw_symbols_line(p1, p2):
+func draw_symbols_line(p1, p2, c = 59):
 	var v = p2 - p1
 	var v_normalized = v.normalized()
-	var n = v.length() / (FONT_SIZE + FONT_SPACE)
+	var n = ceil(v.length() / (FONT_SIZE + FONT_SPACE))
 	var current = p1
 	for i in range(n):
 		var label = Label.new()
 		label.add_font_override("font", font)
-		label.add_color_override("font_color", Color(0, 59, 0))
-		label.rect_position = current + Vector2(rand_range(-DELTA, DELTA), rand_range(-DELTA, DELTA))
+		label.add_color_override("font_color", Color(0, c, 0))
+		label.rect_position = current - Vector2(FONT_SIZE, FONT_SIZE) / 2 + Vector2(0, rand_range(-DELTA, DELTA))
+		label.rect_position.x = round(label.rect_position.x / (FONT_SIZE + FONT_SPACE)) * (FONT_SIZE + FONT_SPACE)
+		#label.rect_position.y = round(label.rect_position.y / (FONT_SIZE + FONT_SPACE)) * (FONT_SIZE + FONT_SPACE)
 		label.text = letters[randi() % letters.size()]
-		$ItemsContainer.add_child(label)
+		$ItemsContainer/LabelsContainer.add_child(label)
+		symbols.append(label)
 		current += (v_normalized * (FONT_SIZE + FONT_SPACE))
 
 func draw_connections():
 	for i in range(floors_number - 1):
 		var current = floors[i].size()
+		var r = randi()
+		var c = 1
 		for j in range(current):
 			for p in floors[i][j]:
-				draw_symbols_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
+				draw_symbols_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2, 0.45 + (r % c) * 0.3)
+				draw_dotted_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
+				c += 1
+
+func _process(delta):
+	TIME += delta
+	if TIME > UPDATE:
+		TIME = 0.0
+		for i in range(100):
+			var s = symbols[randi() % symbols.size()]
+			s.text = letters[randi() % letters.size()]
 
 
 

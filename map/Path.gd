@@ -9,6 +9,8 @@ var min_rooms = 2
 var max_rooms = 5
 var min_first_floor = 3
 
+var max_connections = 3
+
 var floors = []
 var icons = []
 
@@ -41,7 +43,11 @@ func generate_floors():
 			if last_connected == (next - 1):
 				floors[i][j].append(last_connected)
 				continue
-			var connections = 1 + (randi() % (next - last_connected))
+			var connections = 1
+			var delta = next - last_connected
+			if delta > max_connections:
+				delta = max_connections
+			connections += (randi() % delta)
 			
 			if connections > 1:
 				if (randi() % 2 == 0):
@@ -58,13 +64,13 @@ func generate_floors():
 			
 			if (j != 0) and ((connections == (next - last_connected)) or (randi() % 4 == 0)):
 				floors[i][j].append(last_connected)
-			if (j == (current - 1)) and (last_connected < (next - 1 - 1)):
-				connections = floors[i][j].size() + (next - 1 - 1 - last_connected)
+			if (j == (current - 1)) and (last_connected < (next - 1)):
+				connections = floors[i][j].size() + (next - 1 - last_connected)
 			while floors[i][j].size() < connections:
 				last_connected += 1
 				floors[i][j].append(last_connected)
-		if not floors[i][current - 1].has(next - 1):
-			floors[i][current - 1].append(next - 1)
+		#if not floors[i][current - 1].has(next - 1):
+		#	floors[i][current - 1].append(next - 1)
 	
 	for f in floors:
 		print(f)
@@ -74,7 +80,12 @@ func _ready():
 		randomize()
 	else:
 		seed(random_seed)
-	
+	generate()
+
+
+func generate():
+	floors = []
+	icons = []
 	generate_floors()
 	generate_icons()
 	draw_connections()
@@ -153,3 +164,15 @@ func draw_connections():
 #				$ItemsContainer.add_child(line)
 
 
+
+
+func _on_Button_pressed():
+	var tmp = $ItemsContainer
+	var pos = tmp.position
+	remove_child(tmp)
+	tmp.queue_free()
+	var node = Node2D.new()
+	node.position = pos
+	node.name = "ItemsContainer"
+	add_child(node)
+	generate()

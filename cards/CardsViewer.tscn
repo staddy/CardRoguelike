@@ -9,213 +9,146 @@
 [ext_resource path="res://ui/Button.tscn" type="PackedScene" id=7]
 
 [node name="CardsViewer" type="Node2D"]
-
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CardsArea" type="Sprite" parent="." index="0"]
-
+[node name="CardsArea" type="Sprite" parent="."]
 position = Vector2( 483, 278 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
-_sections_unfolded = [ "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CardsContainer" type="Node2D" parent="CardsArea" index="0" groups=[
+[node name="CardsContainer" type="Node2D" parent="CardsArea" groups=[
 "card_container",
 ]]
-
 show_behind_parent = true
 position = Vector2( -363, -198 )
 script = ExtResource( 4 )
-_sections_unfolded = [ "Visibility" ]
 
-[node name="ModifiersContainer" parent="CardsArea/CardsContainer" index="0" instance=ExtResource( 5 )]
+[node name="ModifiersContainer" parent="CardsArea/CardsContainer" instance=ExtResource( 5 )]
 
-[node name="Control" type="Control" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Control" type="Control" parent="."]
 margin_right = 961.0
 margin_bottom = 27.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="control_limiter6" type="Sprite" parent="Control" index="0"]
-
+[node name="control_limiter6" type="Sprite" parent="Control"]
 position = Vector2( 90.4983, 16.0781 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter7" type="Sprite" parent="Control" index="1"]
-
+[node name="control_limiter7" type="Sprite" parent="Control"]
 position = Vector2( 199.298, 16.7415 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter8" type="Sprite" parent="Control" index="2"]
-
+[node name="control_limiter8" type="Sprite" parent="Control"]
 position = Vector2( 296.82, 17.4049 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter9" type="Sprite" parent="Control" index="3"]
-
+[node name="control_limiter9" type="Sprite" parent="Control"]
 position = Vector2( 391.688, 21.3854 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter10" type="Sprite" parent="Control" index="4"]
-
+[node name="control_limiter10" type="Sprite" parent="Control"]
 position = Vector2( 490.536, 17.4049 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter11" type="Sprite" parent="Control" index="5"]
-
+[node name="control_limiter11" type="Sprite" parent="Control"]
 position = Vector2( 590.711, 16.7415 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter12" type="Sprite" parent="Control" index="6"]
-
+[node name="control_limiter12" type="Sprite" parent="Control"]
 position = Vector2( 686.906, 18.0683 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter13" type="Sprite" parent="Control" index="7"]
-
+[node name="control_limiter13" type="Sprite" parent="Control"]
 position = Vector2( 783.101, 15.4147 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="control_limiter14" type="Sprite" parent="Control" index="8"]
-
+[node name="control_limiter14" type="Sprite" parent="Control"]
 position = Vector2( 878.632, 16.0781 )
 rotation = 1.58184
 texture = ExtResource( 6 )
 
-[node name="Control2" type="Control" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Control2" type="Control" parent="."]
 margin_left = -3.0
 margin_top = 22.0
 margin_right = 35.0
 margin_bottom = 535.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="control_limiter" type="Sprite" parent="Control2" index="0"]
-
+[node name="control_limiter" type="Sprite" parent="Control2"]
 position = Vector2( 22, 42 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="control_limiter2" type="Sprite" parent="Control2" index="1"]
-
+[node name="control_limiter2" type="Sprite" parent="Control2"]
 position = Vector2( 21, 140 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="control_limiter3" type="Sprite" parent="Control2" index="2"]
-
+[node name="control_limiter3" type="Sprite" parent="Control2"]
 position = Vector2( 20, 235 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="control_limiter4" type="Sprite" parent="Control2" index="3"]
-
+[node name="control_limiter4" type="Sprite" parent="Control2"]
 position = Vector2( 21, 334 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="control_limiter5" type="Sprite" parent="Control2" index="4"]
-
+[node name="control_limiter5" type="Sprite" parent="Control2"]
 position = Vector2( 19, 432 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Control3" type="Control" parent="." index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Control3" type="Control" parent="."]
 margin_left = 932.0
 margin_top = 25.0
 margin_right = 970.0
 margin_bottom = 538.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Control4" type="Control" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Control4" type="Control" parent="."]
 margin_left = -35.0
 margin_top = 527.0
 margin_right = 970.0
 margin_bottom = 583.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Back" parent="." index="5" instance=ExtResource( 7 )]
-
+[node name="Back" parent="." instance=ExtResource( 7 )]
 margin_left = 753.0
 margin_top = 478.0
 margin_right = 813.0
 margin_bottom = 493.0
 text = "BACK"
-
 [connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
-
-

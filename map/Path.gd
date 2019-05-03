@@ -15,11 +15,11 @@ var icons = []
 var pressed = false
 var old_position = 0
 
-var X = 960 / 1.5
+var X = 960 / 2
 var Y = 540
 
 var MIN_Y = 0
-var MAX_Y = 2000
+var MAX_Y = 3000
 
 func generate_floors():
 	floors.resize(floors_number)
@@ -49,12 +49,12 @@ func generate_floors():
 			if connections > 1:
 				if (randi() % 2 == 0):
 					connections -= 1
-			if connections > 1:
-				if (randi() % 2 == 0):
-					connections -= 1
-			if connections > 1:
-				if (randi() % 2 == 0):
-					connections -= 1
+#			if connections > 1:
+#				if (randi() % 2 == 0):
+#					connections -= 1
+#			if connections > 1:
+#				if (randi() % 2 == 0):
+#					connections -= 1
 			
 			if (j != 0) and ((connections == (next - last_connected)) or (randi() % 4 == 0)):
 				floors[i][j].append(last_connected)
@@ -105,27 +105,51 @@ func generate_icons():
 			var icon = MapIcon.instance()
 			icon.rect_scale.x = 1
 			icon.rect_scale.y = 1
-			icon.rect_position.x = (counter + 1) * (X / f.size()) + (rand_range(-30, 30))
+			icon.rect_position.x = (counter + 1) * (X / f.size()) + (rand_range(-10, 10))
 			icon.rect_position.y = posY + (rand_range(-30, 30))
 			icon.texture = IconTexture
 			icon.texture_hover = IconTexture
 			$ItemsContainer.add_child(icon)
 			icons[i].append(icon)
 			counter += 1
-		posY -= 150
+		posY -= 200
 		i += 1
+
+func draw_dotted_line(p1, p2):
+	var scale = 4
+	var ll = 15.0
+	var ls = 5.0
+	var delta = 3.0
+	var v = p2 - p1
+	var v_normalized = v.normalized()
+	var n = v.length() / (ll + ls)
+	var current = p1
+	for i in range(n):
+		var line = Line2D.new()
+		line.add_point((current + Vector2(rand_range(-delta, delta), rand_range(-delta, delta))) / scale)
+		current += (v_normalized * ll)
+		line.add_point((current + Vector2(rand_range(-delta, delta), rand_range(-delta, delta))) / scale)
+		current += (v_normalized * ls)
+		line.width = 1
+		line.scale = Vector2(scale, scale)
+		line.z_index = -500
+		line.default_color = Color(0, 0, 0)
+		$ItemsContainer.add_child(line)
+	pass
 
 func draw_connections():
 	for i in range(floors_number - 1):
 		var current = floors[i].size()
 		for j in range(current):
 			for p in floors[i][j]:
-				var line = Line2D.new()
-				line.add_point(icons[i][j].rect_position + icons[i][j].rect_size / 2)
-				line.add_point(icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
-				line.width = 2
-				line.z_index = -500
-				line.default_color = Color(0, 0, 0)
-				$ItemsContainer.add_child(line)
+				draw_dotted_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
+#				var line = Line2D.new()
+#				line.add_point((icons[i][j].rect_position + icons[i][j].rect_size / 2) / 4)
+#				line.add_point((icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2) / 4)
+#				line.width = 1
+#				line.scale = Vector2(4, 4)
+#				line.z_index = -500
+#				line.default_color = Color(0, 0, 0)
+#				$ItemsContainer.add_child(line)
 
 

@@ -222,4 +222,7 @@ func _on_Button_pressed():
 	node.position = pos
 	node.name = "ItemsContainer"
 	add_child(node)
+	var tmp2 = Node2D.new()
+	tmp2.name = "LabelsContainer"
+	node.add_child(tmp2)
 	generate()

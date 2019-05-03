@@ -66,14 +66,22 @@ func generate_floors():
 				floors[i][j].append(last_connected)
 			if (j == (current - 1)) and (last_connected < (next - 1)):
 				connections = floors[i][j].size() + (next - 1 - last_connected)
+
 			while floors[i][j].size() < connections:
 				last_connected += 1
 				floors[i][j].append(last_connected)
-		#if not floors[i][current - 1].has(next - 1):
-		#	floors[i][current - 1].append(next - 1)
-	
-	for f in floors:
-		print(f)
+			
+			connections = floors[i][j].size()
+			if connections > max_connections:
+				var to_remove = []
+				var dc = connections - max_connections
+				for k in range(dc):
+					to_remove.append(floors[i][j][k])
+				for tr in to_remove:
+					if not floors[i][j - 1].has(tr):
+						floors[i][j - 1].append(tr)
+					floors[i][j].erase(tr)
+
 
 func _ready():
 	if random_seed == 0:

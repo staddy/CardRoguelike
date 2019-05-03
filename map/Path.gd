@@ -3,6 +3,9 @@ extends Node2D
 var MapIcon = preload("res://ui/Button.tscn")
 var IconTexture = preload("res://map/map_icons/chest.png")
 
+var letters = ["吧","爸","八","百","北","不","田","由","甲","申","甴","电","甶","男","甸","甹","町","画","甼","甽","甾","甿","畀","畁","畂","畃","畄","畅","畆","畇","畈","畉","畊","畋","界","畍","畎","畏","畐","畑"]
+var font = DynamicFont.new()
+
 var random_seed = 0
 var floors_number = 15
 var min_rooms = 2
@@ -22,6 +25,16 @@ var Y = 540
 
 var MIN_Y = 0
 var MAX_Y = 3000
+
+var FONT_SIZE = 10
+var FONT_SPACE = 10
+var DELTA = 5.0
+
+func init_font():
+	var data = DynamicFontData.new()
+	data.font_path = "res://Zpix.ttf"
+	font.font_data = data
+	font.size = FONT_SIZE
 
 func generate_floors():
 	floors.resize(floors_number)
@@ -84,6 +97,7 @@ func generate_floors():
 
 
 func _ready():
+	init_font()
 	if random_seed == 0:
 		randomize()
 	else:
@@ -154,22 +168,27 @@ func draw_dotted_line(p1, p2):
 		line.z_index = -500
 		line.default_color = Color(0, 0, 0)
 		$ItemsContainer.add_child(line)
-	pass
+
+func draw_symbols_line(p1, p2):
+	var v = p2 - p1
+	var v_normalized = v.normalized()
+	var n = v.length() / (FONT_SIZE + FONT_SPACE)
+	var current = p1
+	for i in range(n):
+		var label = Label.new()
+		label.add_font_override("font", font)
+		label.add_color_override("font_color", Color(0, 59, 0))
+		label.rect_position = current + Vector2(rand_range(-DELTA, DELTA), rand_range(-DELTA, DELTA))
+		label.text = letters[randi() % letters.size()]
+		$ItemsContainer.add_child(label)
+		current += (v_normalized * (FONT_SIZE + FONT_SPACE))
 
 func draw_connections():
 	for i in range(floors_number - 1):
 		var current = floors[i].size()
 		for j in range(current):
 			for p in floors[i][j]:
-				draw_dotted_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
-#				var line = Line2D.new()
-#				line.add_point((icons[i][j].rect_position + icons[i][j].rect_size / 2) / 4)
-#				line.add_point((icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2) / 4)
-#				line.width = 1
-#				line.scale = Vector2(4, 4)
-#				line.z_index = -500
-#				line.default_color = Color(0, 0, 0)
-#				$ItemsContainer.add_child(line)
+				draw_symbols_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
 
 
 

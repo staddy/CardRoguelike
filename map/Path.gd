@@ -21,13 +21,16 @@ var symbols = []
 var pressed = false
 var old_position = 0
 
-var X = 960 / 1.5
+var X_OFFSET = 960 / 8
+var X = 960
 var Y = 540
+var FLOOR_HEIGHT = 200
+var FIRST_FLOOR_HEIGHT = 100
 
 var MIN_Y = 0
 var MAX_Y = 3000
 
-var FONT_SIZE = 15
+var FONT_SIZE = 20
 var FONT_SPACE = 15
 var DELTA = 5.0
 
@@ -134,8 +137,9 @@ func _input(event):
 			pressed = false
 
 func generate_icons():
-	var posY = Y - 100
+	var posY = Y - FIRST_FLOOR_HEIGHT
 	var i = 0
+	var path_width = (X - X_OFFSET * 2)
 	for f in floors:
 		var counter = 0
 		icons.append([])
@@ -143,14 +147,14 @@ func generate_icons():
 			var icon = MapIcon.instance()
 			icon.rect_scale.x = 1
 			icon.rect_scale.y = 1
-			icon.rect_position.x = (counter + 1) * (X / f.size()) + (rand_range(-10, 10))
-			icon.rect_position.y = posY + (rand_range(-30, 30))
+			icon.rect_position.x = X_OFFSET + (counter + 1) * (path_width / (f.size() + 1)) + (rand_range(-10, 10)) - icon.rect_size.x / 2
+			icon.rect_position.y = posY + (rand_range(-30, 30)) - icon.rect_size.y / 2
 			icon.texture = IconTexture
 			icon.texture_hover = IconTexture
 			$ItemsContainer.add_child(icon)
 			icons[i].append(icon)
 			counter += 1
-		posY -= 200
+		posY -= FLOOR_HEIGHT
 		i += 1
 
 func draw_dotted_line(p1, p2):
@@ -174,7 +178,7 @@ func draw_dotted_line(p1, p2):
 		line.default_color = Color(0, 0.2, 0)
 		$ItemsContainer/LabelsContainer.add_child(line)
 
-func draw_symbols_line(p1, p2, c = 59):
+func draw_symbols_line(p1, p2):
 	var v = p2 - p1
 	var v_normalized = v.normalized()
 	var n = ceil(v.length() / (FONT_SIZE + FONT_SPACE))
@@ -182,7 +186,7 @@ func draw_symbols_line(p1, p2, c = 59):
 	for i in range(n):
 		var label = Label.new()
 		label.add_font_override("font", font)
-		label.add_color_override("font_color", Color(0, c, 0))
+		label.add_color_override("font_color", Color(0, 0.3 + rand_range(0.0, 0.7), 0))
 		label.rect_position = current - Vector2(FONT_SIZE, FONT_SIZE) / 2 + Vector2(0, rand_range(-DELTA, DELTA))
 		label.rect_position.x = round(label.rect_position.x / (FONT_SIZE + FONT_SPACE)) * (FONT_SIZE + FONT_SPACE)
 		#label.rect_position.y = round(label.rect_position.y / (FONT_SIZE + FONT_SPACE)) * (FONT_SIZE + FONT_SPACE)
@@ -194,13 +198,13 @@ func draw_symbols_line(p1, p2, c = 59):
 func draw_connections():
 	for i in range(floors_number - 1):
 		var current = floors[i].size()
-		var r = randi()
-		var c = 1
+		#var r = randi()
+		#var c = 1
 		for j in range(current):
 			for p in floors[i][j]:
-				draw_symbols_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2, 0.45 + (r % c) * 0.3)
+				draw_symbols_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)#, 0.45 + (r % c) * 0.3)
 				draw_dotted_line(icons[i][j].rect_position + icons[i][j].rect_size / 2, icons[i + 1][p].rect_position + icons[i + 1][p].rect_size / 2)
-				c += 1
+				#c += 1
 
 func _process(delta):
 	TIME += delta
@@ -209,6 +213,9 @@ func _process(delta):
 		for i in range(100):
 			var s = symbols[randi() % symbols.size()]
 			s.text = letters[randi() % letters.size()]
+		for i in range(100):
+			var s = symbols[randi() % symbols.size()]
+			s.add_color_override("font_color", Color(0, 0.3 + rand_range(0.0, 0.7), 0))
 
 
 

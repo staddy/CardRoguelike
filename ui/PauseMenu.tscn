@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/PauseMenu.gd" type="Script" id=1]
+[ext_resource path="res://ui/Button.tscn" type="PackedScene" id=2]
+
+[node name="PauseMenu" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="ResumeButton" parent="." index="0" instance=ExtResource( 2 )]
+
+text = "RESUME"
+
+[node name="ExitButton" parent="." index="1" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+margin_top = 50.0
+margin_bottom = 65.0
+text = "EXIT"
+
+[connection signal="pressed" from="ResumeButton" to="." method="_on_ResumeButton_pressed"]
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+
+

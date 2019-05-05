@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://battle/LootWindow.gd" type="Script" id=1]
+[ext_resource path="res://ui/Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://battle/arrow.png" type="Texture" id=3]
+[ext_resource path="res://battle/arrow_hover.png" type="Texture" id=4]
+
+[node name="LootWindow" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Continue" parent="." index="0" instance=ExtResource( 2 )]
+
+margin_left = 698.0
+margin_top = 289.0
+margin_right = 728.0
+margin_bottom = 309.0
+texture = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+
+[node name="Container" type="Node2D" parent="." index="1"]
+
+position = Vector2( 379, 107 )
+
+[connection signal="pressed" from="Continue" to="." method="_on_Continue_pressed"]
+
+

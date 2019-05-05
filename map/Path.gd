@@ -101,6 +101,23 @@ func generate_floors():
 					if not floors[i][j - 1].has(tr):
 						floors[i][j - 1].append(tr)
 					floors[i][j].erase(tr)
+		
+		var node_connections = []
+		for j in range(next):
+			node_connections.append(0)
+		for j in range(current):
+			for k in floors[i][j]:
+				node_connections[k] += 1
+		for k in range(next):
+			while node_connections[k] > max_connections:
+				for j in range(current):
+					if floors[i][j].has(k) and (floors[i][j].size() != 0 or k != 1):
+						floors[i][j].erase(k)
+						node_connections[k] -= 1
+						if floors[i][j].size() == 0:
+							floors[i][j].append(k - 1)
+						if node_connections[k] <= max_connections:
+							break
 
 
 func _ready():
